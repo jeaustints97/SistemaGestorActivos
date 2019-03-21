@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19-mar-2019 19:56:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="SistemaGestorActivos.Logic.Bien" table="bien" catalog="proyecto" optimistic-lock="version">
+        <id name="codigo" type="java.lang.Integer">
+            <column name="codigo" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="solicitud" class="SistemaGestorActivos.Logic.Solicitud" fetch="select">
+            <column name="solicitud" />
+        </many-to-one>
+        <property name="marca" type="string">
+            <column name="marca" length="30" not-null="true" />
+        </property>
+        <property name="precio" type="double">
+            <column name="precio" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="30" not-null="true" />
+        </property>
+        <property name="modelo" type="string">
+            <column name="modelo" length="30" not-null="true" />
+        </property>
+        <set name="activos" table="activo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="bien" />
+            </key>
+            <one-to-many class="SistemaGestorActivos.Logic.Activo" />
+        </set>
+    </class>
+</hibernate-mapping>

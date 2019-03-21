@@ -13,14 +13,17 @@
         <link href="css/loginCss.css" rel="stylesheet" type="text/css"/>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="presentation/js/login.js" type="text/javascript"></script>
     </head>
-    <body>
+    <body onLoad="camposLogin()">
 
         <%@ include file="/presentation/header.jsp" %>
 
         <% Usuario model = (Usuario) request.getAttribute("model"); %>
         <% Map<String, String> errors = (Map<String, String>) request.getAttribute("errors");%>
         <% Map<String, String[]> values = (errors == null) ? this.getValues(model) : request.getParameterMap();%>
+
+        <script type="text/javascript" language="JavaScript">camposLogin();</script>
 
         <div class="wrapper fadeInDown">
             <div id="formContent">
@@ -52,15 +55,6 @@
         <%@ include file="/presentation/footer.jsp" %>
     </body>
 </html>
-
-<script type="text/javascript">
-if(document.getElementById("idUsuario").value === "null"){
-document.getElementById("idUsuario").value="";
-}
-if(document.getElementById("clave").value === "null"){
-document.getElementById("clave").value="";
-}
-</script>
 
 
 <%!

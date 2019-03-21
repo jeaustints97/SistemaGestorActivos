@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19-mar-2019 19:56:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="SistemaGestorActivos.Logic.Labora" table="labora" catalog="proyecto" optimistic-lock="version">
+        <id name="codigoLab" type="java.lang.Integer">
+            <column name="codigoLab" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="dependencia" class="SistemaGestorActivos.Logic.Dependencia" fetch="select">
+            <column name="dependencia" length="30" />
+        </many-to-one>
+        <many-to-one name="funcionario" class="SistemaGestorActivos.Logic.Funcionario" fetch="select">
+            <column name="funcionario" length="30" />
+        </many-to-one>
+        <property name="puesto" type="string">
+            <column name="puesto" length="30" not-null="true" />
+        </property>
+        <set name="activos" table="activo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="labora" />
+            </key>
+            <one-to-many class="SistemaGestorActivos.Logic.Activo" />
+        </set>
+    </class>
+</hibernate-mapping>
