@@ -4,6 +4,8 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import SistemaGestorActivos.Logic.Usuario;
 import SistemaGestorActivos.Utils.HibernateUtil;
+import SistemaGestorActivos.Logic.Funcionario;
+import org.hibernate.Query;
 
 public class UsuarioDAO extends HibernateUtil implements IBaseDao<Usuario, String> {
 
@@ -76,6 +78,17 @@ public class UsuarioDAO extends HibernateUtil implements IBaseDao<Usuario, Strin
             return usuarios.get(0);
         } else {
             return null;
+        }
+    }
+
+    public String busquedaNombre(String id) {
+        String hql = "select distinct f.nombre from Usuario u, Funcionario f where '" + id + "' =f.id";
+        try {
+            iniciaOperacion();
+            String nombreFinal = (String) getSesion().createQuery(hql).uniqueResult();
+            return nombreFinal;
+        } finally {
+            getSesion().close();
         }
     }
 
