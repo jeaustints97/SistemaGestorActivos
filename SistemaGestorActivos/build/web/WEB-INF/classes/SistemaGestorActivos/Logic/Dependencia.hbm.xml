@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19-mar-2019 19:56:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="SistemaGestorActivos.Logic.Dependencia" table="dependencia" catalog="proyecto" optimistic-lock="version">
+        <id name="codigo" type="string">
+            <column name="codigo" length="30" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="funcionario" class="SistemaGestorActivos.Logic.Funcionario" fetch="select">
+            <column name="administrador" length="30" />
+        </many-to-one>
+        <property name="nombreDep" type="string">
+            <column name="nombreDep" length="30" not-null="true" />
+        </property>
+        <set name="laboras" table="labora" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="dependencia" length="30" />
+            </key>
+            <one-to-many class="SistemaGestorActivos.Logic.Labora" />
+        </set>
+        <set name="solicituds" table="solicitud" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="dependencia" length="30" />
+            </key>
+            <one-to-many class="SistemaGestorActivos.Logic.Solicitud" />
+        </set>
+    </class>
+</hibernate-mapping>
