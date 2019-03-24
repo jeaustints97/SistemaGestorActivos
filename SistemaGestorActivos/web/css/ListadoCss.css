@@ -1,0 +1,29 @@
+.boxed {
+    box-sizing: border-box;
+}
+
+.form-control-borderless {
+    border: none;
+}
+
+.form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+
+table,th,td{
+    border: 1px solid lightblue;
+}
+.hola{
+    border-collapse: collapse;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 10px;
+    text-align: center;
+    alignment-adjust: middle;
+}
+
+
+

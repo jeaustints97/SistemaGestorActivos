@@ -29,7 +29,6 @@ public class Controller extends HttpServlet {
         }
 
         if (request.getServletPath().equals("/presentation/login")) {
-//            this.auntentificacion(request, response);
             this.login(request, response);
         }
 
@@ -37,39 +36,6 @@ public class Controller extends HttpServlet {
             this.logout(request, response);
         }
     }
-
-    /*protected void auntentificacion(HttpServletRequest request,
-            HttpServletResponse response)
-            throws ServletException, IOException {
-        Usuario model = new Usuario();
-        updateModel(model, request);
-        try {
-            Usuario existe = null;
-            existe = Model.instance().getUsuarioDAO().auntenticar(model.getId(), model.getClave());
-            if (existe != null) {
-                switch (existe.getRol()) {
-                    case "Admin":
-                        request.getRequestDispatcher("/presentation/users/Admin.jsp").forward(request, response);
-                        break;
-                    case "JefeRH":
-                        request.getRequestDispatcher("/presentation/users/JefeRH.jsp").forward(request, response);
-                        break;
-                    case "Secretaria":
-                        request.getRequestDispatcher("/presentation/users/Secretaria.jsp").forward(request, response);
-                        break;
-                    case "Jefe":
-                        request.getRequestDispatcher("/presentation/users/Jefe.jsp").forward(request, response);
-                        break;
-                    case "Registrador":
-                        request.getRequestDispatcher("/presentation/users/Registrador.jsp").forward(request, response);
-                        break;
-                }
-            } else {
-                request.getRequestDispatcher("/presentation/login/login.jsp").forward(request, response);
-            }
-        } catch (ServletException | IOException ex) {
-        }
-    }*/
 
     private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (this.verificar(request)) {
@@ -84,19 +50,19 @@ public class Controller extends HttpServlet {
                     request.getSession(true).setAttribute("logged", logged);
                     switch (logged.getRol()) {
                         case "Admin":
-                            request.getRequestDispatcher("/presentation/users/Admin.jsp").forward(request, response);
+                            request.getRequestDispatcher("/presentation/users/Admin/Admin.jsp").forward(request, response);
                             break;
                         case "JefeRH":
-                            request.getRequestDispatcher("/presentation/users/JefeRH.jsp").forward(request, response);
+                            request.getRequestDispatcher("/presentation/users/JefeRH/JefeRH.jsp").forward(request, response);
                             break;
                         case "Secretaria":
-                            request.getRequestDispatcher("/presentation/users/Secretaria.jsp").forward(request, response);
+                            request.getRequestDispatcher("/presentation/users/Secretaria/Secretaria.jsp").forward(request, response);
                             break;
                         case "Jefe":
-                            request.getRequestDispatcher("/presentation/users/Jefe.jsp").forward(request, response);
+                            request.getRequestDispatcher("/presentation/users/Jefe/Jefe.jsp").forward(request, response);
                             break;
                         case "Registrador":
-                            request.getRequestDispatcher("/presentation/users/Registrador.jsp").forward(request, response);
+                            request.getRequestDispatcher("/presentation/users/Registrador/Registrador.jsp").forward(request, response);
                             break;
                     }
                 } catch (Exception ex) {
@@ -107,7 +73,6 @@ public class Controller extends HttpServlet {
                 request.getRequestDispatcher("/presentation/login/login.jsp").forward(request, response);
             }
         } else {
-            // request.getRequestDispatcher("/presentation/Error.jsp").forward(request, response);
             request.getRequestDispatcher("/presentation/login/login.jsp").forward(request, response);
         }
     }
