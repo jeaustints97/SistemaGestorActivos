@@ -8,10 +8,15 @@
 <!DOCTYPE html>
 <html>
    <head>
+    <link href="css/Estilos.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <title>Administración de Solicitudes</title>
    </head>
     <body>
-
+        <%@ include file="/presentation/header.jsp" %>
         <!-- ********************************************************** -->
         <!-- ********************************************************** -->
         <!-- Modal del BootsTrap para mostrar mensajes                  -->
@@ -37,8 +42,8 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
+                        <h4 class="modal-title" id="myModalTitle">Crear una solicitud </h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title" id="myModalTitle">Insertar / Modificar Solicitudes </h4>
                     </div>
                     <div class="modal-body" id="myModalMessage">
                         <form role="form" onsubmit="return false;" id="formConductores">
@@ -57,29 +62,118 @@
                                 <label for="apellidos">Fecha:</label>
                                 <input type="text" class="form-control" id="fecha" placeholder="Fecha">
                             </div>
-
-                            <div class="form-group" id="groupCantidad">
-                                <label for="TA">Cantidad:</label>
+                            
+                            <div class="form-group" id="groupTipo">
+                                <label for="Tipo">Tipo:</label>
+                                <select class="form-control" >
+                                    <option value="donacion" name="donacion" selected="donacion">Donación</option>
+                                    <option value="compra" name="compra">Compra</option>
+                                    <option value="produccion" name="produccion">Producción</option>
+                                </select>
+                            
+                            </div>
+                            
+                            
+                            <div class="form-group row"> 
+                           &nbsp
+                           <div class="col-xs-1" id="groupDescripcion">
+                                <label for="TA">Descripción:</label>
+                                <input type="text" class="form-control" id="descripcion" placeholder="Descripción">
+                            </div>
+                            &nbsp
+                            <div class="col-xs-1" id="groupMarca">
+                                <label for="Monto">Marca:</label>
+                                <input type="text" class="form-control" id="monto" placeholder="Marca">
+                            </div>
+                            &nbsp     
+                            <div class="col-xs-1" id="groupModelo">
+                                <label for="Modelo">Modelo:</label>
+                                <input type="text" class="form-control" id="modelo" placeholder="Modelo">
+                            </div>    
+                           &nbsp     
+                            <div class="col-xs-1" id="groupPrecio">
+                                <label for="Precio">Precio:</label>
+                                <input type="text" class="form-control" id="precio" placeholder="Precio">
+                            </div>
+                           &nbsp     
+                            <div class="col-xs-1" id="groupCantidad">
+                                <label for="Cantidad">Cantidad:</label>
                                 <input type="text" class="form-control" id="cantidad" placeholder="Cantidad">
                             </div>
                             
-                            <div class="form-group" id="groupMonto">
-                                <label for="Monto">Monto:</label>
-                                <input type="text" class="form-control" id="monto" placeholder="Monto">
+                           <div class="form-group">
+                                <input type="hidden" value="agregarSolicitud" id="SolicitudesAction"/>
+                                <button type="submit" class="btn btn-info" id="agregar">Agregar</button>
                             </div>
-
+                           
+                            </div> 
                             
+                            <table class="table table-hover table-condensed" id="tablaSolicitud">
+                                        <th>
+                                            Descripción
+                                        </th>
+                                     
+                                        <th>
+                                            Marca
+                                        </th>
+                                        <th>
+                                            Modelo
+                                        </th>
+                                        <th>
+                                            Precio Unitario
+                                        </th>
+                                        <th>
+                                            Cantidad
+                                        </th>
+                                        
+                                        <tr>
+                                            <td>1</td>
+                                            <td>2</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>2</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>2</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>2</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>2</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>5</td>
+                                        </tr>
 
+                                    </table>
+                            
                             <div class="form-group">
-                                <input type="hidden" value="agregarConductor" id="ConductoresAction"/>
+                                <input type="hidden" value="agregarSolicitud" id="ConductoresAction"/>
                                 <button type="submit" class="btn btn-primary" id="enviar">Guardar</button>
                                 <button type="reset" class="btn btn-danger" id="cancelar">Cancelar</button>
                             </div>
 
                             <div class="form-group height25" >
                                 <div class="alert alert-success hiddenDiv" id="mesajeResult">
-                                    <strong id="mesajeResultNeg">Info!</strong> 
-                                    <span id="mesajeResultText">This alert box could indicate a neutral informative change or action.</span>
+                                    <strong id="mesajeResultNeg">Estás en el área de guardar una solicitud.</strong> 
+                                    <span id="mesajeResultText">Por favor guarda una solicitud</span>
                                 </div>
                             </div>
 
@@ -91,129 +185,69 @@
 
         <!-- ********************************************************** -->
         <div id="myDiv">
-            <!--HEADER-->
-            <div class="header">
-                <div class="bg-color">
-                    <header id="main-header">
-                        <nav class="navbar navbar-default navbar-fixed-top">
-                            <div class="container">
-                                <div class="navbar-header">
-                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                                        <span class="icon-bar"></span>
-                                        <span class="icon-bar"></span>
-                                        <span class="icon-bar"></span>
-                                    </button>
-                                    <a class="navbar-brand" href="#">Man<span class="logo-dec">tenimientos</span></a>
-                                </div>
-                                <div class="collapse navbar-collapse" id="myNavbar">
-
-                                    <ul class="nav navbar-nav navbar-right">
-                                        <li class=""><a href="Principal.jsp">Inicio</a></li>
-                                        <li class=""><a href="#UsuarioMante.jsp">Usuarios</a></li>
-                                        <li class=""><a href="VehiculosMante.jsp">Vehiculos</a></li>
-                                        <li class="active"><a href="ConducorMante.jsp">Conductores</a></li>
-                                    </ul>
-
-                                </div>
-                            </div>
-                        </nav>
-                    </header>
-                    <div class="wrapper">
-                        <div class="container">
-                            <div class="row">
-                                <div class="banner-info text-center wow fadeIn delay-05s">
-                                    <h1 class="bnr-title">Bienvenido Administardor</h1>
-                                    <h2 class="bnr-sub-title"><%out.print(sesion.getAttribute("Nombre"));%></h2>
-                                    <p class="bnr-para">Ingresaste a la zona de mantenimientos de <span class="logo-dec">Cabify</span><br>Seleciona un elemento <br>para modificar o editar</p>
-                                    <div class="overlay-detail">
-                                        <a href="#feature"><i class="fa fa-angle-down"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--/ HEADER-->
-            <!---->
-
-            <section id="ManVeiculo" class="section-padding wow fadeInUp delay-05s">
+           <section id="ManVeiculo" class="section-padding wow fadeInUp delay-05s">
                 <div class="container">
                     <div class="row">
                         <div class="container">
                             <div class="page-header">
-                                <h1><small><span class="logo-dec"></span>Sistema para la administración</small></h1>
+                                <h1><small><span class="logo-dec"></span>Mantenimiento para la Solicitudes</small></h1>
                             </div>
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <!-- ********************************************************** -->
-                                        <!-- COLUMNA DEL MENU -->
-                                        <!-- ********************************************************** -->
-                                        <div class="col-md-4">
-                                            <div class="dropdown">
-                                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Mantenimientos
-                                                    <span class="caret"></span></button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a href="#">Mantenimiento Usuarios</a></li>
-                                                    <li><a href="#">Mantenimiento Vehiculos</a></li>
-                                                    <li><a href="#">Mantenimiento Conductores</a></li>
-                                                    <li class="divider"></li>
-                                                    <li><a href="Principal.jsp">Cerrar Sesión</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <!-- ********************************************************** -->
-                                        <!-- COLUMNA DEL MENU -->
-                                        <!-- ********************************************************** -->
-
-                                        <!-- ********************************************************** -->
-                                        <!-- COLUMNA DEL BOTON DE CERRAR SESION -->
-                                        <!-- ********************************************************** -->
-                                        <div class="col-md-4" style="text-align: right;">
-                                            <a class="btn btn-warning" href="Principal.jsp" role="button">
-                                                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-                                                Cerrar Sesión
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                           
                             <div class="panel panel-primary">
-                                <div class="panel-heading"><h3>Mantenimiento de Conductores</h3></div>
                                 <div class="panel-body">
                                     <center>
-                                        <button type="button" class="btn btn-primary centered" data-toggle="modal" data-target="#myModalConductor" id="btMostarFormConductor">Insertar Conductor</button>
+                                        <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#myModalSolicitud" id="btMostarFormConductor">Insertar Solicitud</button>
                                     </center><br>
                                     <!-- ********************************************************** -->
                                     <div class="col-sm-12">
                                         <form role="form" onsubmit="return false;" id="formConductor" class="form-horizontal centered">
                                             <div class="form-group" id="groupFiltroConductor">
-                                                <div class="col-sm-4" style="text-align: right; vertical-align: middle;">
-                                                    <p><b>Buscar por id de conductor</b></p>
+                                                <div class="col-sm-4" class="Centered ">
+                                                    <p><b>Buscar por comprobante de solicitud</b></p>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <input type="text" class="form-control" id="FiltroConductor" placeholder="Digite el id del conductor">
+                                                    <input type="text" class="form-control" id="FiltroSolicitud" placeholder="Dígite el comprobante de la solicitud">
+                                                    <br>
+                                                    <button type="button" class="btn btn-info " id="btBuscarSolicitud">
+                                                        Buscar 
+                                                    </button> 
                                                 </div>
-                                                <div class="col-sm-4">
-                                                    <button type="button" class="btn btn-info centered" data-toggle="modal" data-target="" id="btBuscarConductor">
-                                                        Buscar <span class="glyphicon glyphicon-search"></span>
-                                                    </button>
-                                                </div>
+                                            
                                             </div>
+                                            
                                         </form>
-                                    </div>
+                                    
                                     <!-- ********************************************************** -->
 
-                                    <table class="table table-hover table-condensed" id="tablaConductor"></table>
+                                    <table class="table table-hover table-condensed" id="tablaSolicitud">
+                                        <th>
+                                            Descripción
+                                        </th>
+                                     
+                                        <th>
+                                            Marca
+                                        </th>
+                                        <th>
+                                            Modelo
+                                        </th>
+                                        <th>
+                                            Precio Unitario
+                                        </th>
+                                        <th>
+                                            Cantidad
+                                        </th>
+                                    </table>
 
                                 </div>
-                                <div class="panel-footer">Nota: Acciones validas dependeran del rol del usuario</div>
+                                
                             </div>
                         </div> 
                     </div>
                 </div>
             </section>
+         <%@ include file="/presentation/footer.jsp" %>
         </div>
+        
     </body>
+    
 </html>

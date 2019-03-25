@@ -37,7 +37,7 @@
                         </a>  
                         <div class="dropdown-menu" aria-labelledby="subMenuAdmin">
                             <a class="dropdown-item" href="presentation/users/Admin/Listado.jsp">Mostrar Solicitudes</a>
-                            <a class="dropdown-item" href="#">Realizar Solicitud</a>
+                            <a class="dropdown-item" href="Solicitud.jsp">Realizar Solicitud</a>
                         </div>
                     </li>
 

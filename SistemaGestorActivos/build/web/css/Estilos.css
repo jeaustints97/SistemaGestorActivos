@@ -10,3 +10,9 @@
   alignment-adjust: middle;
 }
 
+table.tableListado, th.tableListado,td.tableListado{
+    border-collapse: collapse;
+    width:100%;
+    padding: 15px;
+    text-align: center;
+}
