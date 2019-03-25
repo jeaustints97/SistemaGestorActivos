@@ -1,5 +1,5 @@
 package SistemaGestorActivos.Logic;
-// Generated 19-mar-2019 19:56:13 by Hibernate Tools 4.3.1
+// Generated 24-mar-2019 18:06:35 by Hibernate Tools 4.3.1
 
 
 
@@ -9,26 +9,26 @@ package SistemaGestorActivos.Logic;
 public class Activo  implements java.io.Serializable {
 
 
-     private Integer codigo;
+     private Integer id;
      private Bien bien;
      private Categoria categoria;
-     private Labora labora;
+     private Funcionario funcionario;
 
     public Activo() {
     }
 
-    public Activo(Bien bien, Categoria categoria, Labora labora) {
+    public Activo(Bien bien, Categoria categoria, Funcionario funcionario) {
        this.bien = bien;
        this.categoria = categoria;
-       this.labora = labora;
+       this.funcionario = funcionario;
     }
    
-    public Integer getCodigo() {
-        return this.codigo;
+    public Integer getId() {
+        return this.id;
     }
     
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
+    public void setId(Integer id) {
+        this.id = id;
     }
     public Bien getBien() {
         return this.bien;
@@ -44,12 +44,12 @@ public class Activo  implements java.io.Serializable {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
-    public Labora getLabora() {
-        return this.labora;
+    public Funcionario getFuncionario() {
+        return this.funcionario;
     }
     
-    public void setLabora(Labora labora) {
-        this.labora = labora;
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 
 

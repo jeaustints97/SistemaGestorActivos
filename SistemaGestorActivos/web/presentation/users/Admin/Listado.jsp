@@ -16,8 +16,11 @@
     <body>
         <%@ include file="/presentation/header.jsp" %>
         <br>
-        <div class="boxed">
+        <div class="boxed bg-light text-dark boxed">
             <br>
+
+            <h3 class="encabezado">Solicitudes -</h3>
+
 
             <div class="container">
                 <br/>
@@ -25,16 +28,13 @@
                     <div class="col-12 col-md-10 col-lg-8">
                         <form class="card card-sm">
                             <div class="card-body row no-gutters align-items-center">
-                                <div class="col-auto">
-                                    <i class="fas fa-search h4 text-body"></i>
-                                </div>
-                                <!--end of col-->
                                 <div class="col">
-                                    <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Search topics or keywords">
+                                    <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Comprobante">
                                 </div>
                                 <!--end of col-->
+                                &nbsp;&nbsp;&nbsp;
                                 <div class="col-auto">
-                                    <button class="btn btn-lg btn-success" type="submit">Search</button>
+                                    <button class="btn btn-lg btn-success" type="submit">Buscar</button>
                                 </div>
                                 <!--end of col-->
                             </div>
@@ -44,40 +44,73 @@
                 </div>
             </div>
 
-            <table>
-                <tr>
-                    <th>Numero</th>
-                    <th>Comprobante</th>
-                    <th>Fecha</th>
-                    <th>Tipo</th>
-                    <th>Cantidad</th>
-                    <th>Monto</th>
-                    <th>estado</th>
-                    <th>Realizar Cambios</th>
-                </tr>
-                <tr>
-                    <td>01</td>
-                    <td>A1</td>
-                    <td>23/03/2019</td>
-                    <td>Compra</td>
-                    <td>1</td>
-                    <td>1000</td>
-                    <td>Recibida</td>
-                    <td>Realizar Cambios</td>
-                </tr>
-                <tr>
-                    <td>02</td>
-                    <td>A1</td>
-                    <td>23/03/2019</td>
-                    <td>Compra</td>
-                    <td>2</td>
-                    <td>1200</td>
-                    <td>Recibida</td>
-                    <td>Realizar Cambios</td>
-                </tr>
+            <br>
 
 
-            </table>
+            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table table-bordered table-striped mb-0">
+                    <tr>                
+                        <th>Numero</th>
+                        <th>Comprobante</th>
+                        <th>Fecha</th>
+                        <th>Tipo</th>
+                        <th>Cantidad</th>
+                        <th>Monto</th>
+                        <th>estado</th>
+                        <th>Realizar Cambios</th>
+                    </tr>
+                    <tr>
+                        <td>01</td>
+                        <td>A1</td>
+                        <td>23/03/2019</td>
+                        <td>Compra</td>
+                        <td>1</td>
+                        <td>1000</td>
+                        <td>Recibida</td>
+                        <td>Realizar Cambios</td>
+                    </tr>
+                    <tr>
+                        <td>01</td>
+                        <td>A1</td>
+                        <td>23/03/2019</td>
+                        <td>Compra</td>
+                        <td>1</td>
+                        <td>1000</td>
+                        <td>Recibida</td>
+                        <td>Realizar Cambios</td>
+                    </tr>
+                    <tr>
+                        <td>01</td>
+                        <td>A1</td>
+                        <td>23/03/2019</td>
+                        <td>Compra</td>
+                        <td>1</td>
+                        <td>1000</td>
+                        <td>Recibida</td>
+                        <td>Realizar Cambios</td>
+                    </tr>
+                    <tr>
+                        <td>01</td>
+                        <td>A1</td>
+                        <td>23/03/2019</td>
+                        <td>Compra</td>
+                        <td>1</td>
+                        <td>1000</td>
+                        <td>Recibida</td>
+                        <td>Realizar Cambios</td>
+                    </tr>
+                    <tr>
+                        <td>01</td>
+                        <td>A1</td>
+                        <td>23/03/2019</td>
+                        <td>Compra</td>
+                        <td>1</td>
+                        <td>1000</td>
+                        <td>Recibida</td>
+                        <td>Realizar Cambios</td>
+                    </tr>
+                </table>
+            </div>
             <br>
         </div>
         <br>

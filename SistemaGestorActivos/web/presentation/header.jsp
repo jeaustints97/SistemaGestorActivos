@@ -24,13 +24,13 @@
 
                     <% if (logged != null) { %>
 
-                    <% if (logged.getRol().equals("Admin") || logged.getRol().equals("JefeRH")
-                                || logged.getRol().equals("Secretaria") || logged.getRol().equals("Jefe")
-                                || logged.getRol().equals("Registrador")) { %>         
-                    <li class="nav-item"><a class="nav-link" href="presentation/index.jsp">Acerca de</a> </li>
-                        <% }%>
+                    <% if (obtenerRol(logged).equals("Admin") || obtenerRol(logged).equals("SOCCB")
+                                || obtenerRol(logged).equals("JOCCB") || obtenerRol(logged).equals("Registrador")
+                                || obtenerRol(logged).equals("JefeRH")) { %>         
+                    <li class="nav-item"><a class="nav-link" href="presentation/users/Admin/Admin.jsp">Principal</a> </li>
+                        <% }%> 
 
-                    <% if (logged.getRol().equals("Admin")) { %>        
+                    <% if (obtenerRol(logged).equals("Admin")) { %>        
                     <li class="nav-item dropdown"> 
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Administrador
@@ -45,7 +45,7 @@
 
                     <li class="nav-item dropdown"> 
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <%=getFuncionario(logged).getNombre()%>
+                            <%=obtenerFuncionario(logged).getNombre()%>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="subMenuAdmin">
                             <a class="dropdown-item" <a href="presentation/logout">Cerrar sesión</a>
@@ -72,9 +72,15 @@
 </html>
 
 <%!
-    private Funcionario getFuncionario(Usuario model) {
-        Funcionario funcionario = new Funcionario();
-        funcionario.setNombre(Model.instance().getUsuarioDAO().busquedaNombre(model.getId()));
-        return funcionario;
+    private Funcionario obtenerFuncionario(Usuario model) {
+        Funcionario f = new Funcionario();
+        f.setNombre(Model.instance().getUsuarioDAO().busquedaNombre(model.getId()));
+        return f;
+    }
+
+    private String obtenerRol(Usuario model) {
+        String rol = "";
+        rol = Model.instance().getUsuarioDAO().busquedaRol(model.getId());
+        return rol;
     }
 %>

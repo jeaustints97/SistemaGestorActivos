@@ -57,8 +57,7 @@
 </html>
 
 
-<%!
-    private String validity(String field, Map<String, String> errors) {
+<%!    private String validity(String field, Map<String, String> errors) {
         if ((errors != null) && (errors.get(field) != null)) {
             return "is-invalid";
         } else {
@@ -76,6 +75,5 @@
         values.put("clave", new String[]{model.getClave()});
         return values;
     }
-
 
 %>

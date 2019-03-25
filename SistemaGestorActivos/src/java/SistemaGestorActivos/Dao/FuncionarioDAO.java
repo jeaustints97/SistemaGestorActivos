@@ -4,6 +4,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import SistemaGestorActivos.Logic.Funcionario;
 import SistemaGestorActivos.Utils.HibernateUtil;
+import java.math.BigInteger;
 
 public class FuncionarioDAO extends HibernateUtil implements IBaseDao<Funcionario, String> {
 

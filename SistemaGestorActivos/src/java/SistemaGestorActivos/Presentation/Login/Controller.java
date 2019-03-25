@@ -6,7 +6,6 @@
 package SistemaGestorActivos.Presentation.Login;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,17 +47,18 @@ public class Controller extends HttpServlet {
                 try {
                     logged = Model.instance().getUsuarioDAO().auntenticar(model.getId(), model.getClave());
                     request.getSession(true).setAttribute("logged", logged);
-                    switch (logged.getRol()) {
+                    String rol = Model.instance().getUsuarioDAO().busquedaRol(model.getId());
+                    switch (rol) {
                         case "Admin":
                             request.getRequestDispatcher("/presentation/users/Admin/Admin.jsp").forward(request, response);
                             break;
                         case "JefeRH":
                             request.getRequestDispatcher("/presentation/users/JefeRH/JefeRH.jsp").forward(request, response);
                             break;
-                        case "Secretaria":
+                        case "SOCCB":
                             request.getRequestDispatcher("/presentation/users/Secretaria/Secretaria.jsp").forward(request, response);
                             break;
-                        case "Jefe":
+                        case "JOCCB":
                             request.getRequestDispatcher("/presentation/users/Jefe/Jefe.jsp").forward(request, response);
                             break;
                         case "Registrador":

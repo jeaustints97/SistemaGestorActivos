@@ -1,21 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 19-mar-2019 19:56:15 by Hibernate Tools 4.3.1 -->
+<!-- Generated 24-mar-2019 18:06:35 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="SistemaGestorActivos.Logic.Usuario" table="usuario" catalog="proyecto" optimistic-lock="version">
+    <class name="SistemaGestorActivos.Logic.Usuario" table="usuario" catalog="sistemagestoractivos" optimistic-lock="version">
         <id name="id" type="string">
-            <column name="id" length="30" />
-            <generator class="assigned" />
+            <column name="Id" length="25" />
+            <generator class="foreign">
+                <param name="property">funcionario</param>
+            </generator>
         </id>
-        <many-to-one name="funcionario" class="SistemaGestorActivos.Logic.Funcionario" fetch="select">
-            <column name="funcionario" length="30" not-null="true" />
-        </many-to-one>
+        <one-to-one name="funcionario" class="SistemaGestorActivos.Logic.Funcionario" constrained="true"></one-to-one>
         <property name="clave" type="string">
-            <column name="clave" length="20" not-null="true" />
-        </property>
-        <property name="rol" type="string">
-            <column name="rol" length="30" not-null="true" />
+            <column name="Clave" length="10" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

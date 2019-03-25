@@ -1,5 +1,5 @@
 package SistemaGestorActivos.Logic;
-// Generated 19-mar-2019 19:56:13 by Hibernate Tools 4.3.1
+// Generated 24-mar-2019 18:06:35 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -11,42 +11,42 @@ import java.util.Set;
 public class Bien  implements java.io.Serializable {
 
 
-     private Integer codigo;
+     private Integer id;
      private Solicitud solicitud;
-     private String marca;
-     private double precio;
-     private int cantidad;
      private String descripcion;
+     private String marca;
      private String modelo;
+     private float precio;
+     private int cantidad;
      private Set<Activo> activos = new HashSet<Activo>(0);
 
     public Bien() {
     }
 
 	
-    public Bien(String marca, double precio, int cantidad, String descripcion, String modelo) {
+    public Bien(String descripcion, String marca, String modelo, float precio, int cantidad) {
+        this.descripcion = descripcion;
         this.marca = marca;
+        this.modelo = modelo;
         this.precio = precio;
         this.cantidad = cantidad;
-        this.descripcion = descripcion;
-        this.modelo = modelo;
     }
-    public Bien(Solicitud solicitud, String marca, double precio, int cantidad, String descripcion, String modelo, Set<Activo> activos) {
+    public Bien(Solicitud solicitud, String descripcion, String marca, String modelo, float precio, int cantidad, Set<Activo> activos) {
        this.solicitud = solicitud;
+       this.descripcion = descripcion;
        this.marca = marca;
+       this.modelo = modelo;
        this.precio = precio;
        this.cantidad = cantidad;
-       this.descripcion = descripcion;
-       this.modelo = modelo;
        this.activos = activos;
     }
    
-    public Integer getCodigo() {
-        return this.codigo;
+    public Integer getId() {
+        return this.id;
     }
     
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
+    public void setId(Integer id) {
+        this.id = id;
     }
     public Solicitud getSolicitud() {
         return this.solicitud;
@@ -55,6 +55,13 @@ public class Bien  implements java.io.Serializable {
     public void setSolicitud(Solicitud solicitud) {
         this.solicitud = solicitud;
     }
+    public String getDescripcion() {
+        return this.descripcion;
+    }
+    
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
     public String getMarca() {
         return this.marca;
     }
@@ -62,11 +69,18 @@ public class Bien  implements java.io.Serializable {
     public void setMarca(String marca) {
         this.marca = marca;
     }
-    public double getPrecio() {
+    public String getModelo() {
+        return this.modelo;
+    }
+    
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+    public float getPrecio() {
         return this.precio;
     }
     
-    public void setPrecio(double precio) {
+    public void setPrecio(float precio) {
         this.precio = precio;
     }
     public int getCantidad() {
@@ -75,20 +89,6 @@ public class Bien  implements java.io.Serializable {
     
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
-    }
-    public String getDescripcion() {
-        return this.descripcion;
-    }
-    
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-    public String getModelo() {
-        return this.modelo;
-    }
-    
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
     }
     public Set<Activo> getActivos() {
         return this.activos;
