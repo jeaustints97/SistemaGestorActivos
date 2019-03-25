@@ -4,9 +4,13 @@
 }
 
 .boxed {
-  border: 1px solid lightblue;
-  margin-left: 20%;
-  margin-right: 20%;
-  alignment-adjust: middle;
+    border: 1px solid lightblue;
+    margin-left: 20%;
+    margin-right: 20%;
+    alignment-adjust: middle;
+}
+
+.alinear{
+     box-sizing: border-box;
 }
 

@@ -1,5 +1,5 @@
 package SistemaGestorActivos.Logic;
-// Generated 19-mar-2019 19:56:13 by Hibernate Tools 4.3.1
+// Generated 24-mar-2019 18:06:35 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -12,27 +12,35 @@ public class Funcionario  implements java.io.Serializable {
 
 
      private String id;
+     private Puesto puesto;
+     private Rol rol;
      private String nombre;
-     private Set<Usuario> usuarios = new HashSet<Usuario>(0);
-     private Set<Labora> laboras = new HashSet<Labora>(0);
-     private Set<Solicitud> solicituds = new HashSet<Solicitud>(0);
+     private String dependencia;
+     private Set<Activo> activos = new HashSet<Activo>(0);
+     private Usuario usuario;
      private Set<Dependencia> dependencias = new HashSet<Dependencia>(0);
+     private Set<Solicitud> solicituds = new HashSet<Solicitud>(0);
 
     public Funcionario() {
     }
 
 	
-    public Funcionario(String id, String nombre) {
+    public Funcionario(String id, Puesto puesto, String nombre, String dependencia) {
         this.id = id;
+        this.puesto = puesto;
         this.nombre = nombre;
+        this.dependencia = dependencia;
     }
-    public Funcionario(String id, String nombre, Set<Usuario> usuarios, Set<Labora> laboras, Set<Solicitud> solicituds, Set<Dependencia> dependencias) {
+    public Funcionario(String id, Puesto puesto, Rol rol, String nombre, String dependencia, Set<Activo> activos, Usuario usuario, Set<Dependencia> dependencias, Set<Solicitud> solicituds) {
        this.id = id;
+       this.puesto = puesto;
+       this.rol = rol;
        this.nombre = nombre;
-       this.usuarios = usuarios;
-       this.laboras = laboras;
-       this.solicituds = solicituds;
+       this.dependencia = dependencia;
+       this.activos = activos;
+       this.usuario = usuario;
        this.dependencias = dependencias;
+       this.solicituds = solicituds;
     }
    
     public String getId() {
@@ -42,6 +50,20 @@ public class Funcionario  implements java.io.Serializable {
     public void setId(String id) {
         this.id = id;
     }
+    public Puesto getPuesto() {
+        return this.puesto;
+    }
+    
+    public void setPuesto(Puesto puesto) {
+        this.puesto = puesto;
+    }
+    public Rol getRol() {
+        return this.rol;
+    }
+    
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
     public String getNombre() {
         return this.nombre;
     }
@@ -49,26 +71,26 @@ public class Funcionario  implements java.io.Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public Set<Usuario> getUsuarios() {
-        return this.usuarios;
+    public String getDependencia() {
+        return this.dependencia;
     }
     
-    public void setUsuarios(Set<Usuario> usuarios) {
-        this.usuarios = usuarios;
+    public void setDependencia(String dependencia) {
+        this.dependencia = dependencia;
     }
-    public Set<Labora> getLaboras() {
-        return this.laboras;
-    }
-    
-    public void setLaboras(Set<Labora> laboras) {
-        this.laboras = laboras;
-    }
-    public Set<Solicitud> getSolicituds() {
-        return this.solicituds;
+    public Set<Activo> getActivos() {
+        return this.activos;
     }
     
-    public void setSolicituds(Set<Solicitud> solicituds) {
-        this.solicituds = solicituds;
+    public void setActivos(Set<Activo> activos) {
+        this.activos = activos;
+    }
+    public Usuario getUsuario() {
+        return this.usuario;
+    }
+    
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
     public Set<Dependencia> getDependencias() {
         return this.dependencias;
@@ -76,6 +98,13 @@ public class Funcionario  implements java.io.Serializable {
     
     public void setDependencias(Set<Dependencia> dependencias) {
         this.dependencias = dependencias;
+    }
+    public Set<Solicitud> getSolicituds() {
+        return this.solicituds;
+    }
+    
+    public void setSolicituds(Set<Solicitud> solicituds) {
+        this.solicituds = solicituds;
     }
 
 

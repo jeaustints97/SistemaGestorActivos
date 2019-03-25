@@ -1,5 +1,5 @@
 package SistemaGestorActivos.Logic;
-// Generated 19-mar-2019 19:56:13 by Hibernate Tools 4.3.1
+// Generated 24-mar-2019 18:06:35 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -11,34 +11,32 @@ import java.util.Set;
 public class Dependencia  implements java.io.Serializable {
 
 
-     private String codigo;
+     private int id;
      private Funcionario funcionario;
-     private String nombreDep;
-     private Set<Labora> laboras = new HashSet<Labora>(0);
+     private String nombre;
      private Set<Solicitud> solicituds = new HashSet<Solicitud>(0);
 
     public Dependencia() {
     }
 
 	
-    public Dependencia(String codigo, String nombreDep) {
-        this.codigo = codigo;
-        this.nombreDep = nombreDep;
+    public Dependencia(int id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
     }
-    public Dependencia(String codigo, Funcionario funcionario, String nombreDep, Set<Labora> laboras, Set<Solicitud> solicituds) {
-       this.codigo = codigo;
+    public Dependencia(int id, Funcionario funcionario, String nombre, Set<Solicitud> solicituds) {
+       this.id = id;
        this.funcionario = funcionario;
-       this.nombreDep = nombreDep;
-       this.laboras = laboras;
+       this.nombre = nombre;
        this.solicituds = solicituds;
     }
    
-    public String getCodigo() {
-        return this.codigo;
+    public int getId() {
+        return this.id;
     }
     
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setId(int id) {
+        this.id = id;
     }
     public Funcionario getFuncionario() {
         return this.funcionario;
@@ -47,19 +45,12 @@ public class Dependencia  implements java.io.Serializable {
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
     }
-    public String getNombreDep() {
-        return this.nombreDep;
+    public String getNombre() {
+        return this.nombre;
     }
     
-    public void setNombreDep(String nombreDep) {
-        this.nombreDep = nombreDep;
-    }
-    public Set<Labora> getLaboras() {
-        return this.laboras;
-    }
-    
-    public void setLaboras(Set<Labora> laboras) {
-        this.laboras = laboras;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
     public Set<Solicitud> getSolicituds() {
         return this.solicituds;

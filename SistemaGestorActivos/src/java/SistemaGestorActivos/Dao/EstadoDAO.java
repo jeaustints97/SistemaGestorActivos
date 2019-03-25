@@ -1,15 +1,15 @@
 package SistemaGestorActivos.Dao;
 
-import java.util.List;
-import org.hibernate.HibernateException;
-import SistemaGestorActivos.Logic.Labora;
+import SistemaGestorActivos.Logic.Estado;
 import SistemaGestorActivos.Utils.HibernateUtil;
 import java.math.BigInteger;
+import java.util.List;
+import org.hibernate.HibernateException;
 
-public class LaboraDAO extends HibernateUtil implements IBaseDao<Labora, java.math.BigInteger> {
+public class EstadoDAO extends HibernateUtil implements IBaseDao<Estado, java.math.BigInteger> {
 
     @Override
-    public void save(Labora o) {
+    public void save(Estado o) {
         try {
             iniciaOperacion();
             getSesion().save(o);
@@ -23,10 +23,10 @@ public class LaboraDAO extends HibernateUtil implements IBaseDao<Labora, java.ma
     }
 
     @Override
-    public Labora merge(Labora o) throws HibernateException {
+    public Estado merge(Estado o) throws HibernateException {
         try {
             iniciaOperacion();
-            o = (Labora) getSesion().merge(o);
+            o = (Estado) getSesion().merge(o);
             getTransc().commit();
         } catch (HibernateException he) {
             manejaExcepcion(he);
@@ -38,7 +38,7 @@ public class LaboraDAO extends HibernateUtil implements IBaseDao<Labora, java.ma
     }
 
     @Override
-    public void delete(Labora o) {
+    public void delete(Estado o) {
         try {
             iniciaOperacion();
             getSesion().delete(o);
@@ -53,28 +53,28 @@ public class LaboraDAO extends HibernateUtil implements IBaseDao<Labora, java.ma
     }
 
     @Override
-    public Labora findById(BigInteger o) {
-        Labora labora = null;
+    public Estado findById(BigInteger o) {
+        Estado estado = null;
         try {
             iniciaOperacion();
-            labora = (Labora) getSesion().get(Labora.class, o);
+            estado = (Estado) getSesion().get(Estado.class, o);
         } finally {
             getSesion().close();
         }
-        return labora;
+        return estado;
     }
 
     @Override
-    public List<Labora> findAll() {
-        List<Labora> laboras = null;
-        String hql = "from Labora";
+    public List<Estado> findAll() {
+        List<Estado> estados = null;
+        String hql = "from Estado";
         try {
             iniciaOperacion();
-            laboras = getSesion().createQuery(hql).list();
+            estados = getSesion().createQuery(hql).list();
         } finally {
             getSesion().close();
         }
-        return laboras;
+        return estados;
     }
 
 }

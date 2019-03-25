@@ -4,8 +4,9 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import SistemaGestorActivos.Logic.Dependencia;
 import SistemaGestorActivos.Utils.HibernateUtil;
+import java.math.BigInteger;
 
-public class DependenciaDAO extends HibernateUtil implements IBaseDao<Dependencia, String> {
+public class DependenciaDAO extends HibernateUtil implements IBaseDao<Dependencia, java.math.BigInteger> {
 
     @Override
     public void save(Dependencia o) {
@@ -52,7 +53,7 @@ public class DependenciaDAO extends HibernateUtil implements IBaseDao<Dependenci
     }
 
     @Override
-    public Dependencia findById(String o) {
+    public Dependencia findById(BigInteger o) {
         Dependencia dependencia = null;
         try {
             iniciaOperacion();

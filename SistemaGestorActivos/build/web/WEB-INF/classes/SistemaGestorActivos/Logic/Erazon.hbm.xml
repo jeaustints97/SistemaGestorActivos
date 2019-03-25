@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-mar-2019 18:06:35 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="SistemaGestorActivos.Logic.Erazon" table="erazon" catalog="sistemagestoractivos" optimistic-lock="version">
+        <id name="idSolicitud" type="int">
+            <column name="IdSolicitud" />
+            <generator class="foreign">
+                <param name="property">solicitud</param>
+            </generator>
+        </id>
+        <many-to-one name="estado" class="SistemaGestorActivos.Logic.Estado" fetch="select">
+            <column name="IdEstado" not-null="true" />
+        </many-to-one>
+        <one-to-one name="solicitud" class="SistemaGestorActivos.Logic.Solicitud" constrained="true"></one-to-one>
+        <property name="comentario" type="string">
+            <column name="Comentario" length="25" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

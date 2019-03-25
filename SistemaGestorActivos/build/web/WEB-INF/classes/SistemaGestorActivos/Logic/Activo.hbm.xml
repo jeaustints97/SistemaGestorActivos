@@ -1,21 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 19-mar-2019 19:56:15 by Hibernate Tools 4.3.1 -->
+<!-- Generated 24-mar-2019 18:06:35 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="SistemaGestorActivos.Logic.Activo" table="activo" catalog="proyecto" optimistic-lock="version">
-        <id name="codigo" type="java.lang.Integer">
-            <column name="codigo" />
+    <class name="SistemaGestorActivos.Logic.Activo" table="activo" catalog="sistemagestoractivos" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="Id" />
             <generator class="identity" />
         </id>
         <many-to-one name="bien" class="SistemaGestorActivos.Logic.Bien" fetch="select">
-            <column name="bien" />
+            <column name="Bien" not-null="true" />
         </many-to-one>
         <many-to-one name="categoria" class="SistemaGestorActivos.Logic.Categoria" fetch="select">
-            <column name="categoria" />
+            <column name="Categoria" not-null="true" />
         </many-to-one>
-        <many-to-one name="labora" class="SistemaGestorActivos.Logic.Labora" fetch="select">
-            <column name="labora" />
+        <many-to-one name="funcionario" class="SistemaGestorActivos.Logic.Funcionario" fetch="select">
+            <column name="Funcionario" length="25" not-null="true" />
         </many-to-one>
     </class>
 </hibernate-mapping>

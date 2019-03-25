@@ -1,42 +1,43 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 19-mar-2019 19:56:15 by Hibernate Tools 4.3.1 -->
+<!-- Generated 24-mar-2019 18:06:35 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="SistemaGestorActivos.Logic.Solicitud" table="solicitud" catalog="proyecto" optimistic-lock="version">
-        <id name="numero" type="java.lang.Integer">
-            <column name="numero" />
+    <class name="SistemaGestorActivos.Logic.Solicitud" table="solicitud" catalog="sistemagestoractivos" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="Id" />
             <generator class="identity" />
         </id>
         <many-to-one name="dependencia" class="SistemaGestorActivos.Logic.Dependencia" fetch="select">
-            <column name="dependencia" length="30" />
+            <column name="Dependencia" not-null="true" />
+        </many-to-one>
+        <many-to-one name="estado" class="SistemaGestorActivos.Logic.Estado" fetch="select">
+            <column name="Estado" not-null="true" />
         </many-to-one>
         <many-to-one name="funcionario" class="SistemaGestorActivos.Logic.Funcionario" fetch="select">
-            <column name="registrador" length="30" />
+            <column name="Registrador" length="25" />
         </many-to-one>
-        <property name="estado" type="string">
-            <column name="estado" length="30" not-null="true" />
+        <property name="comprobante" type="string">
+            <column name="Comprobante" length="25" not-null="true" />
         </property>
         <property name="fecha" type="date">
-            <column name="fecha" length="10" not-null="true" />
+            <column name="Fecha" length="10" not-null="true" />
         </property>
-        <property name="tipoAdquisicion" type="string">
-            <column name="tipoAdquisicion" length="30" not-null="true" />
+        <property name="tipo" type="string">
+            <column name="Tipo" length="25" not-null="true" />
         </property>
         <property name="cantidad" type="int">
-            <column name="cantidad" not-null="true" />
+            <column name="Cantidad" not-null="true" />
         </property>
-        <property name="monto" type="double">
-            <column name="monto" precision="22" scale="0" not-null="true" />
-        </property>
-        <property name="comprobante" type="string">
-            <column name="comprobante" length="30" not-null="true" />
+        <property name="total" type="float">
+            <column name="Total" precision="12" scale="0" not-null="true" />
         </property>
         <set name="biens" table="bien" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="solicitud" />
+                <column name="Solicitud" />
             </key>
             <one-to-many class="SistemaGestorActivos.Logic.Bien" />
         </set>
+        <one-to-one name="erazon" class="SistemaGestorActivos.Logic.Erazon"></one-to-one>
     </class>
 </hibernate-mapping>

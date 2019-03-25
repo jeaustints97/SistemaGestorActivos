@@ -3,16 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/Marco/Downloads/Carrera/Prg%20IV/Proyecto%20I/SistemaGestorActivos/SistemaGestorActivos/src/java/SistemaGestorActivos/Presentation/Login/Controller.java</file>
-            <file>file:/C:/Users/Marco/Downloads/Carrera/Prg%20IV/Proyecto%20I/SistemaGestorActivos/SistemaGestorActivos/web/presentation/login/login.jsp</file>
-            <file>file:/C:/Users/Marco/Downloads/Carrera/Prg%20IV/Proyecto%20I/SistemaGestorActivos/SistemaGestorActivos/web/presentation/users/Registrador.jsp</file>
-            <file>file:/C:/Users/Marco/Downloads/Carrera/Prg%20IV/Proyecto%20I/SistemaGestorActivos/SistemaGestorActivos/web/presentation/users/Solicitud.jsp</file>
-=======
             <file>file:/C:/Users/Jeaustin/Desktop/Proyecto%20I/SistemaGestorActivos/web/css/ListadoCss.css</file>
             <file>file:/C:/Users/Jeaustin/Desktop/Proyecto%20I/SistemaGestorActivos/web/presentation/users/Admin/Admin.jsp</file>
             <file>file:/C:/Users/Jeaustin/Desktop/Proyecto%20I/SistemaGestorActivos/web/presentation/users/Admin/Listado.jsp</file>
->>>>>>> d8333d162525a22d1ddec0df366e5e8c1c3d1538
+            <file>file:/C:/Users/Jeaustin/Desktop/Proyecto%20I/SistemaGestorActivos/src/java/SistemaGestorActivos/Presentation/Users/Admin/Listado/Controller.java</file>
         </group>
     </open-files>
 </project-private>
