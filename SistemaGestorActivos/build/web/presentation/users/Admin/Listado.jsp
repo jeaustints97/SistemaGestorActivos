@@ -1,7 +1,10 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="SistemaGestorActivos.Logic.Solicitud"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-
+<%@page import="SistemaGestorActivos.Logic.Model"%>
+<%@page import="SistemaGestorActivos.Logic.Usuario"%>
 
 <html>
     <head>
@@ -19,8 +22,9 @@
         <div class="boxed bg-light text-dark boxed">
             <br>
 
-            <h3 class="encabezado">Solicitudes -</h3>
-
+            <h3 class="encabezado">
+                Solicitudes - <%= obtenerDependencia(logged)%>
+            </h3>
 
             <div class="container">
                 <br/>
@@ -56,59 +60,21 @@
                         <th>Tipo</th>
                         <th>Cantidad</th>
                         <th>Monto</th>
-                        <th>estado</th>
+                        <th>Estado</th>
                         <th>Realizar Cambios</th>
                     </tr>
+                    <% for (Solicitud s : obtenerSolicitudesPorDependencia(logged)) {%>
                     <tr>
-                        <td>01</td>
-                        <td>A1</td>
-                        <td>23/03/2019</td>
-                        <td>Compra</td>
-                        <td>1</td>
-                        <td>1000</td>
-                        <td>Recibida</td>
-                        <td>Realizar Cambios</td>
+                        <td><%=s.getId()%></td>
+                        <td> <%=s.getComprobante()%></td>
+                        <td> <%=s.getFecha().toLocaleString().substring(0, 11) %></td>
+                        <td> <%=s.getTipo()%></td>
+                        <td><%=s.getCantidad()%> </td>
+                        <td><%=s.getTotal()%> </td>
+                        <td> <%=s.getEstado().getDescripcion()%></td>
+                        <td> <a href="#">Modificar</a></td>
                     </tr>
-                    <tr>
-                        <td>01</td>
-                        <td>A1</td>
-                        <td>23/03/2019</td>
-                        <td>Compra</td>
-                        <td>1</td>
-                        <td>1000</td>
-                        <td>Recibida</td>
-                        <td>Realizar Cambios</td>
-                    </tr>
-                    <tr>
-                        <td>01</td>
-                        <td>A1</td>
-                        <td>23/03/2019</td>
-                        <td>Compra</td>
-                        <td>1</td>
-                        <td>1000</td>
-                        <td>Recibida</td>
-                        <td>Realizar Cambios</td>
-                    </tr>
-                    <tr>
-                        <td>01</td>
-                        <td>A1</td>
-                        <td>23/03/2019</td>
-                        <td>Compra</td>
-                        <td>1</td>
-                        <td>1000</td>
-                        <td>Recibida</td>
-                        <td>Realizar Cambios</td>
-                    </tr>
-                    <tr>
-                        <td>01</td>
-                        <td>A1</td>
-                        <td>23/03/2019</td>
-                        <td>Compra</td>
-                        <td>1</td>
-                        <td>1000</td>
-                        <td>Recibida</td>
-                        <td>Realizar Cambios</td>
-                    </tr>
+                    <% }%> 
                 </table>
             </div>
             <br>
@@ -117,3 +83,16 @@
         <%@ include file="/presentation/footer.jsp" %>
     </body>
 </html>
+
+<%!    private String obtenerDependencia(Usuario model) {
+        String dependencia = "";
+        dependencia = Model.instance().getUsuarioDAO().busquedaDependencia(model.getId());
+        return dependencia;
+    }
+
+    private List<Solicitud> obtenerSolicitudesPorDependencia(Usuario model) {
+        List<Solicitud> solicitudes = new ArrayList<Solicitud>();
+        solicitudes = Model.instance().getUsuarioDAO().getSolicitudes(model.getId());
+        return solicitudes;
+    }
+%>

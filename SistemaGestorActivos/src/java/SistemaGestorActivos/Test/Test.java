@@ -1,6 +1,7 @@
 package SistemaGestorActivos.Test;
 
 import SistemaGestorActivos.Logic.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Test {
@@ -25,6 +26,14 @@ public class Test {
 //        lista3 = Model.instance().getSolicitudDAO().findAll();
 //        for (Solicitud s : lista3) {
 //            System.out.println(s.getNumero());
+//        }
+
+        List<Solicitud> lista = null;
+        lista = Model.instance().getUsuarioDAO().getSolicitudes("1");
+        System.out.println("Lista de Solicitudes del ID 1");
+        System.out.println(lista.get(0).getId());
+//        for (Solicitud u : lista) {
+//            System.out.println(u.getId());
 //        }
 
     }

@@ -48,7 +48,7 @@
                             <%=obtenerFuncionario(logged).getNombre()%>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="subMenuAdmin">
-                            <a class="dropdown-item" <a href="presentation/logout">Cerrar sesión</a>
+                            <a class="dropdown-item" href="presentation/logout">Cerrar sesión</a>
                         </div>           
                     </li>
                     <% }%> 
