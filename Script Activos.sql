@@ -2,19 +2,22 @@ DROP SCHEMA SistemaGestorActivos;
 CREATE SCHEMA IF NOT EXISTS `SistemaGestorActivos` DEFAULT CHARACTER SET utf8 ;
 USE `SistemaGestorActivos` ;
 
+
 CREATE TABLE IF NOT EXISTS `SistemaGestorActivos`.`Rol` (
   `Id` INT NOT NULL,
   `Descripcion` VARCHAR(25) NOT NULL,
-  PRIMARY KEY (`Id`));
+  PRIMARY KEY (`Id`)
+);
 
 
 CREATE TABLE IF NOT EXISTS `SistemaGestorActivos`.`Puesto` (
   `Id` INT NOT NULL,
   `Descripcion` VARCHAR(25) NOT NULL,
-  PRIMARY KEY (`Id`));
+  PRIMARY KEY (`Id`)
+);
 
 CREATE TABLE IF NOT EXISTS `SistemaGestorActivos`.`Funcionario` (
-  `Id` INT NOT NULL,
+  `Id` VARCHAR(25) NOT NULL,
   `Nombre` VARCHAR(25) NOT NULL,
   `Dependencia` VARCHAR(45) NOT NULL,
   `Rol` INT NULL,
@@ -32,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `SistemaGestorActivos`.`Funcionario` (
 
 
 CREATE TABLE IF NOT EXISTS `SistemaGestorActivos`.`Usuario` (
-  `Id` INT NOT NULL,
+  `Id` VARCHAR(25) NOT NULL,
   `Clave` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`Id`),
   CONSTRAINT `usuario_fk_func`
@@ -44,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `SistemaGestorActivos`.`Usuario` (
 CREATE TABLE IF NOT EXISTS `SistemaGestorActivos`.`Dependencia` (
   `Id` INT NOT NULL,
   `Nombre` VARCHAR(25) NOT NULL,
-  `Administrador` INT NULL,
+  `Administrador` VARCHAR(25) NULL,
   PRIMARY KEY (`Id`),
   INDEX `dependencia_fk_admin_idx` (`Administrador` ASC),
   CONSTRAINT `dependencia_fk_admin`
@@ -69,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `SistemaGestorActivos`.`Solicitud` (
   `Total` FLOAT NOT NULL,
   `Estado` INT NOT NULL,
   `Dependencia` INT NOT NULL,
-  `Registrador` INT NULL,
+  `Registrador` VARCHAR(25) NULL,
   PRIMARY KEY (`Id`),
   INDEX `Solicitud_fk_estado_idx` (`Estado` ASC),
   INDEX `Solicitud_fk_dep_idx` (`Dependencia` ASC),
@@ -90,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `SistemaGestorActivos`.`ERazon` (
   `IdEstado` INT NOT NULL,
   `IdSolicitud` INT NOT NULL,
   `Comentario` VARCHAR(25) NOT NULL,
-  PRIMARY KEY (`IdEstado`),
+  PRIMARY KEY (`IdSolicitud`),
   INDEX `ERazon_fk_Soli_idx` (`IdSolicitud` ASC),
   CONSTRAINT `ERazon_fk_estado`
     FOREIGN KEY (`IdEstado`)
@@ -130,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `SistemaGestorActivos`.`Activo` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `Bien` INT NOT NULL,
   `Categoria` INT NOT NULL,
-  `Funcionario` INT NOT NULL,
+  `Funcionario` VARCHAR(25) NOT NULL,
   PRIMARY KEY (`Id`),
   INDEX `Activo_fk_Bien_idx` (`Bien` ASC),
   INDEX `Activo_fk_Cat_idx` (`Categoria` ASC),
@@ -170,26 +173,27 @@ insert into dependencia(id,nombre) values(5,'RRHH');
 
 -- Insertando las posibles funcionarios en el sistema
 -- Funcionarios con roles en el sistema
-insert into funcionario(id,nombre,dependencia,rol,puesto) values(1,'Ivannia',1,1,1);
-insert into funcionario(id,nombre,dependencia,rol,puesto) values(2,'Arelis',3,2,2);
-insert into funcionario(id,nombre,dependencia,rol,puesto) values(3,'Orlando',3,3,4);
-insert into funcionario(id,nombre,dependencia,rol,puesto) values(4,'Pedro',3,4,3);
-insert into funcionario(id,nombre,dependencia,rol,puesto) values(5,'Ronald',5,5,1);
+insert into funcionario(id,nombre,dependencia,rol,puesto) values('1','Ivannia',1,1,1);
+insert into funcionario(id,nombre,dependencia,rol,puesto) values('2','Arelis',3,2,2);
+insert into funcionario(id,nombre,dependencia,rol,puesto) values('3','Orlando',3,3,4);
+insert into funcionario(id,nombre,dependencia,rol,puesto) values('4','Pedro',3,4,3);
+insert into funcionario(id,nombre,dependencia,rol,puesto) values('5','Ronald',5,5,1);
 
 -- Funcionarios ordinarios
-insert into funcionario(id,nombre,dependencia,puesto) values(6,'Diego',1,5);
-insert into funcionario(id,nombre,dependencia,puesto) values(7,'Sofia',1,5);
-insert into funcionario(id,nombre,dependencia,puesto) values(8,'Arturo',2,5);
-insert into funcionario(id,nombre,dependencia,puesto) values(9,'Carlos',2,5);
-insert into funcionario(id,nombre,dependencia,puesto) values(10,'Roger',4,6);
+insert into funcionario(id,nombre,dependencia,puesto) values('6','Diego',1,5);
+insert into funcionario(id,nombre,dependencia,puesto) values('7','Sofia',1,5);
+insert into funcionario(id,nombre,dependencia,puesto) values('8','Arturo',2,5);
+insert into funcionario(id,nombre,dependencia,puesto) values('9','Carlos',2,5);
+insert into funcionario(id,nombre,dependencia,puesto) values('10','Roger',4,6);
 
 
 -- Insertando las posibles usuarios en el sistema
-insert into usuario(id,clave) values(1,'1');
-insert into usuario(id,clave) values(2,'2');
-insert into usuario(id,clave) values(3,'3');
-insert into usuario(id,clave) values(4,'4');
-insert into usuario(id,clave) values(5,'5');
+insert into usuario(id,clave) values('1','1');
+insert into usuario(id,clave) values('2','2');
+insert into usuario(id,clave) values('3','3');
+insert into usuario(id,clave) values('4','4');
+insert into usuario(id,clave) values('5','5');
+insert into usuario(id,clave) values('8','8');
 
 -- Insertando las posibles estados de la solicitud en el sistema
 insert into estado(id,descripcion) values(1,'Recibida');
@@ -214,3 +218,25 @@ values(2,'Sillas','Mesh','Ejecutivas',20000,10,2);
 insert into bien(id,descripcion,marca,modelo,precio,cantidad,solicitud) 
 values(3,'Piano','Yamaha','De cola',600000,1,3);
 
+update dependencia set administrador=1 where id=1;
+update dependencia set administrador=8 where id=2;
+update funcionario set rol=1 where id =8;
+
+select * from solicitud;
+
+select * from dependencia;
+select * from funcionario;
+select * from usuario;
+select d.nombre from Usuario u, Funcionario f, Dependencia d where u.id=f.id and f.dependencia=d.id;
+
+select s.id, s.comprobante,s.fecha,s.tipo,s.cantidad,s.total,s.estado
+from Usuario u, Funcionario f, Dependencia d, Solicitud s
+where u.id=f.id and f.id=d.administrador and d.id=s.dependencia;
+
+select distinct s.id, s.comprobante,s.fecha,s.tipo,s.cantidad,s.total,e.descripcion
+from Usuario u, Funcionario f, Dependencia d, Solicitud s, Estado e
+where 1=f.id and f.id=d.administrador and d.id=s.dependencia and s.estado=e.id;
+
+select distinct s.id, s.comprobante,s.fecha,s.tipo,s.cantidad,s.total,e.descripcion
+from Usuario u, Funcionario f, Dependencia d, Solicitud s, Estado e
+where 1=f.id and f.id=d.administrador and d.id=s.dependencia and s.comprobante like '%%1%' and s.estado=e.id;

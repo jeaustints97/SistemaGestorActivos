@@ -158,7 +158,7 @@ public class UsuarioDAO extends HibernateUtil implements IBaseDao<Usuario, Strin
                 String fecha = String.valueOf(obj[2]);
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 System.out.println(fecha);
-                
+
                 Date date1 = format.parse(fecha);
 
                 sol.setFecha(date1);
@@ -180,15 +180,46 @@ public class UsuarioDAO extends HibernateUtil implements IBaseDao<Usuario, Strin
         return solicitudesFinal;
     }
 
-//    public List<Usuario> findByRol(String rol) {
-//        List<Usuario> usuarios = null;
-//        String hql = "from Usuario where rol= '" + rol + "'";
-//        try {
-//            iniciaOperacion();
-//            usuarios = getSesion().createQuery(hql).list();
-//        } finally {
-//            getSesion().close();
-//        }
-//        return usuarios;
-//    }
+    public List<Solicitud> getSolicitudesPorComprobante(String id, String comprobante) {
+        List<Solicitud> solicitudesRaw = null;
+        List<Solicitud> solicitudesFinal = new ArrayList<>();
+        String sql = "select distinct s.id, s.comprobante,s.fecha,s.tipo,s.cantidad,s.total,e.descripcion "
+                + "from Usuario u, Funcionario f, Dependencia d, Solicitud s, Estado e "
+                + "where " + id + " =f.id and f.id=d.administrador and d.id=s.dependencia "
+                + "and s.estado=e.id and s.comprobante like '%%" + comprobante + "%';";
+        try {
+            iniciaOperacion();
+            solicitudesRaw = (List<Solicitud>) getSesion().createSQLQuery(sql).list();
+            Iterator itr = solicitudesRaw.iterator();
+            while (itr.hasNext()) {
+                Object[] obj = (Object[]) itr.next();
+                Solicitud sol = new Solicitud();
+                sol.setId(Integer.parseInt(String.valueOf(obj[0])));
+                sol.setComprobante(String.valueOf(obj[1]));
+
+                String fecha = String.valueOf(obj[2]);
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                System.out.println(fecha);
+
+                Date date1 = format.parse(fecha);
+
+                sol.setFecha(date1);
+
+                sol.setTipo(String.valueOf(obj[3]));
+                sol.setCantidad(Integer.parseInt(String.valueOf(obj[4])));
+                sol.setTotal(Float.parseFloat(String.valueOf(obj[5])));
+                Estado est = new Estado();
+                est.setDescripcion(String.valueOf(obj[6]));
+                sol.setEstado(est);
+                solicitudesFinal.add(sol);
+            }
+
+        } catch (ParseException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            getSesion().close();
+        }
+        return solicitudesFinal;
+    }
+
 }

@@ -1,7 +1,6 @@
 package SistemaGestorActivos.Presentation.Users.Admin.Listado;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet(name = "Controller", urlPatterns = {"/Controller"})
+@WebServlet(name = "SistemaGestorActivos.Presentation.Users.Admin.Listado", urlPatterns = {"/presentation/users/Admin/Consultar"})
 public class Controller extends HttpServlet {
 
    

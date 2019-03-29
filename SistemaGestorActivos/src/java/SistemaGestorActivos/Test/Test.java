@@ -29,8 +29,8 @@ public class Test {
 //        }
 
         List<Solicitud> lista = null;
-        lista = Model.instance().getUsuarioDAO().getSolicitudes("1");
-        System.out.println("Lista de Solicitudes del ID 1");
+        lista = Model.instance().getUsuarioDAO().getSolicitudesPorComprobante("1", "A");
+        System.out.println("Lista de Solicitudes del ID 1 con comprobante A");
         System.out.println(lista.get(0).getId());
 //        for (Solicitud u : lista) {
 //            System.out.println(u.getId());
