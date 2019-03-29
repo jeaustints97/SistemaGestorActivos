@@ -1,10 +1,10 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="SistemaGestorActivos.Logic.Solicitud"%>
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <%@page import="SistemaGestorActivos.Logic.Model"%>
 <%@page import="SistemaGestorActivos.Logic.Usuario"%>
+<!DOCTYPE html>
 
 <html>
     <head>
@@ -23,17 +23,17 @@
             <br>
 
             <h3 class="encabezado">
-                Solicitudes - <%= obtenerDependencia(logged)%>
+                Solicitudes - <%= session.getAttribute("depActual")%>
             </h3>
 
             <div class="container">
                 <br/>
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-10 col-lg-8">
-                        <form class="card card-sm">
+                        <form class="card card-sm" action="presentation/users/Admin/comenzar_filtrado">
                             <div class="card-body row no-gutters align-items-center">
                                 <div class="col">
-                                    <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Comprobante">
+                                    <input id ="filtrado" name="filtrado" class="form-control form-control-lg form-control-borderless" type="search" placeholder="Comprobante">
                                 </div>
                                 <!--end of col-->
                                 &nbsp;&nbsp;&nbsp;
@@ -63,7 +63,7 @@
                         <th>Estado</th>
                         <th>Realizar Cambios</th>
                     </tr>
-                    <% for (Solicitud s : obtenerSolicitudesPorDependencia(logged)) {%>
+                    <% for (Solicitud s : (List<Solicitud>)session.getAttribute("listaSol")) {%>
                     <tr>
                         <td><%=s.getId()%></td>
                         <td> <%=s.getComprobante()%></td>
@@ -72,7 +72,7 @@
                         <td><%=s.getCantidad()%> </td>
                         <td><%=s.getTotal()%> </td>
                         <td> <%=s.getEstado().getDescripcion()%></td>
-                        <td> <a href="#">Modificar</a></td>
+                        <td> <a href="presentation/users/Admin/Solicitud?id=<%=s.getId()%>">Modificar</a></td>
                     </tr>
                     <% }%> 
                 </table>
@@ -84,13 +84,8 @@
     </body>
 </html>
 
-<%!    private String obtenerDependencia(Usuario model) {
-        String dependencia = "";
-        dependencia = Model.instance().getUsuarioDAO().busquedaDependencia(model.getId());
-        return dependencia;
-    }
-
-    private List<Solicitud> obtenerSolicitudesPorDependencia(Usuario model) {
+<%!    
+    private List<Solicitud> obtenerSolicitudesPorDependenciaYComprobante(Usuario model) {
         List<Solicitud> solicitudes = new ArrayList<Solicitud>();
         solicitudes = Model.instance().getUsuarioDAO().getSolicitudes(model.getId());
         return solicitudes;

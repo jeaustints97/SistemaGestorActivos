@@ -5,6 +5,7 @@
  */
 package SistemaGestorActivos.Presentation.Login;
 
+import SistemaGestorActivos.Logic.Funcionario;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import SistemaGestorActivos.Logic.Model;
+import SistemaGestorActivos.Logic.Solicitud;
 import SistemaGestorActivos.Logic.Usuario;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 
@@ -47,8 +50,17 @@ public class Controller extends HttpServlet {
                 try {
                     logged = Model.instance().getUsuarioDAO().auntenticar(model.getId(), model.getClave());
                     request.getSession(true).setAttribute("logged", logged);
-                    String rol = Model.instance().getUsuarioDAO().busquedaRol(model.getId());
-                    switch (rol) {
+
+                    //Seteando el funcionario actual...
+                    request.getSession().setAttribute("funcActual", this.obtenerFuncionarioActual(logged));
+                    //Seteando el rol actual...
+                    request.getSession().setAttribute("rolActual", this.obtenerRolActual(logged));
+                    //Seteando la dependencia actual...
+                    request.getSession().setAttribute("depActual", this.obtenerDependenciaActual(logged));
+                    //Seteando la lista total de solicitudes del usuario...
+                    request.getSession().setAttribute("listaSol", this.obtenerListaSolicitudes(logged));
+                    
+                    switch ((String) request.getSession().getAttribute("rolActual")) {
                         case "Admin":
                             request.getRequestDispatcher("/presentation/users/Admin/Admin.jsp").forward(request, response);
                             break;
@@ -117,6 +129,22 @@ public class Controller extends HttpServlet {
             errores.put("clave", "Clave requerida");
         }
         return errores;
+    }
+
+    private String obtenerFuncionarioActual(Usuario model) {
+        return Model.instance().obtenerFuncionarioActual(model);
+    }
+
+    private String obtenerRolActual(Usuario model) {
+        return Model.instance().obtenerRolActual(model);
+    }
+
+    private String obtenerDependenciaActual(Usuario model) {
+        return Model.instance().obtenerDependenciaActual(model);
+    }
+
+    private List<Solicitud> obtenerListaSolicitudes(Usuario model) {
+        return Model.instance().obtenerTotalSolicitudes(model);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

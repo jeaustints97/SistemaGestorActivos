@@ -1,6 +1,8 @@
 package SistemaGestorActivos.Logic;
 
 import SistemaGestorActivos.Dao.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Model {
 
@@ -82,7 +84,35 @@ public class Model {
     public UsuarioDAO getUsuarioDAO() {
         return usuarioDAO;
     }
+
+    public String obtenerFuncionarioActual(Usuario user) {
+        String f = "";
+        f = this.getUsuarioDAO().busquedaNombre(user.getId());
+        return f;
+    }
+
+    public String obtenerRolActual(Usuario user) {
+        String rol = "";
+        rol = this.getUsuarioDAO().busquedaRol(user.getId());
+        return rol;
+    }
+
+    public String obtenerDependenciaActual(Usuario user) {
+        String dep = "";
+        dep = this.getUsuarioDAO().busquedaDependencia(user.getId());
+        return dep;
+    }
+
+    public List<Solicitud> obtenerTotalSolicitudes(Usuario user) {
+        List<Solicitud> sols = new ArrayList<>();
+        sols = this.getUsuarioDAO().getSolicitudes(user.getId());
+        return sols;
+    }
     
-    
+    public List<Solicitud> obtenerSolicitudesXComprobante(Usuario user,String comprobante) {
+        List<Solicitud> sols = new ArrayList<>();
+        sols = this.getUsuarioDAO().getSolicitudesPorComprobante(user.getId(), comprobante);
+        return sols;
+    }
 
 }
