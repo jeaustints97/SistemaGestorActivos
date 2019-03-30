@@ -11,5 +11,25 @@
 }
 
 .alinear{
-     box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.ventanaSolicitud{
+    text-align: center;
+    margin-left: 15%;
+    margin-right: 10%;
+}
+
+.bordeInferior{
+    border-bottom: 3px solid black;
+}
+
+.tablaListado{
+    border-collapse: collapse;
+    background-color: lightblue;
+}
+
+.ladosTablaListado{
+    border-top: 2px solid blue;
+    border-bottom: 2px solid blue;
 }

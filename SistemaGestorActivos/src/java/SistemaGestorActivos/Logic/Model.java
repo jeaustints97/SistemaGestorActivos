@@ -108,11 +108,23 @@ public class Model {
         sols = this.getUsuarioDAO().getSolicitudes(user.getId());
         return sols;
     }
-    
-    public List<Solicitud> obtenerSolicitudesXComprobante(Usuario user,String comprobante) {
+
+    public List<Solicitud> obtenerSolicitudesXComprobante(Usuario user, String comprobante) {
         List<Solicitud> sols = new ArrayList<>();
         sols = this.getUsuarioDAO().getSolicitudesPorComprobante(user.getId(), comprobante);
         return sols;
+    }
+
+    public Dependencia obtenerDependenciaPorUsuario(String id) {
+        Dependencia dependencia = null;
+        dependencia = this.getUsuarioDAO().busquedaDependenciaPorUsuario(id);
+        return dependencia;
+    }
+
+    public Estado obtenerEstado(int id) {
+        Estado estado = null;
+        estado = this.getEstadoDAO().findById(id);
+        return estado;
     }
 
 }

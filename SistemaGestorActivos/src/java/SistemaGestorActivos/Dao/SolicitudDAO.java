@@ -6,7 +6,7 @@ import SistemaGestorActivos.Logic.Solicitud;
 import SistemaGestorActivos.Utils.HibernateUtil;
 import java.math.BigInteger;
 
-public class SolicitudDAO extends HibernateUtil implements IBaseDao<Solicitud, java.math.BigInteger> {
+public class SolicitudDAO extends HibernateUtil implements IBaseDao<Solicitud, Integer> {
 
     @Override
     public void save(Solicitud o) {
@@ -20,6 +20,22 @@ public class SolicitudDAO extends HibernateUtil implements IBaseDao<Solicitud, j
         } finally {
             getSesion().close();
         }
+    }
+
+    public Integer saveAndGet(Solicitud o) {
+        int id;
+        try {
+            iniciaOperacion();
+            getSesion().save(o);
+            id = o.getId();
+            getTransc().commit();
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+            throw he;
+        } finally {
+            getSesion().close();
+        }
+        return id;
     }
 
     @Override
@@ -53,7 +69,7 @@ public class SolicitudDAO extends HibernateUtil implements IBaseDao<Solicitud, j
     }
 
     @Override
-    public Solicitud findById(BigInteger o) {
+    public Solicitud findById(Integer o) {
         Solicitud solicitud = null;
         try {
             iniciaOperacion();
@@ -76,5 +92,4 @@ public class SolicitudDAO extends HibernateUtil implements IBaseDao<Solicitud, j
         }
         return solicitudes;
     }
-
 }

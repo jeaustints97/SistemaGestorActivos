@@ -83,11 +83,3 @@
         <%@ include file="/presentation/footer.jsp" %>
     </body>
 </html>
-
-<%!    
-    private List<Solicitud> obtenerSolicitudesPorDependenciaYComprobante(Usuario model) {
-        List<Solicitud> solicitudes = new ArrayList<Solicitud>();
-        solicitudes = Model.instance().getUsuarioDAO().getSolicitudes(model.getId());
-        return solicitudes;
-    }
-%>

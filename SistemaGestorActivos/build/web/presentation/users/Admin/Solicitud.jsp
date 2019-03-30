@@ -1,253 +1,106 @@
-<%-- 
-    Document   : Solicitud
-    Created on : Mar 23, 2019, 4:29:40 PM
-    Author     : Marco
---%>
-
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="SistemaGestorActivos.Logic.Solicitud"%>
+<%@page import="SistemaGestorActivos.Logic.Bien"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-   <head>
-    <link href="css/Estilos.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <title>Administración de Solicitudes</title>
-   </head>
-    <body>
+    <head>
+        <title>Ingresar Solicitud</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <base href="http://localhost:8080/SistemaGestorActivos/">
+        <script src="presentation/js/solicitud.js" type="text/javascript"></script>
+        <link href="css/Estilos.css" rel="stylesheet" type="text/css"/>
+    </head>
+
+    <body onLoad="camposSolicitud()">
         <%@ include file="/presentation/header.jsp" %>
-        <!-- ********************************************************** -->
-        <!-- ********************************************************** -->
-        <!-- Modal del BootsTrap para mostrar mensajes                  -->
-        <!-- ********************************************************** -->
-        <!-- ********************************************************** -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title" id="myModalTitle">Administrar</h4>
-                    </div>
-                    <div class="modal-body" id="myModalMessage">
-                        <p>Bienvenido</p>
-                    </div>
-                </div>
-            </div>
+
+        <% Solicitud solTemp = (Solicitud) session.getAttribute("solicitud");%>
+        <% ArrayList<Bien> bienesTemp = (ArrayList<Bien>) session.getAttribute("bienes");%>
+
+        <div class="ventanaSolicitud">
+            <form method="POST" name="nuevaSolicitud" action="presentation/users/Admin/ingresarSolicitud">
+                <br>
+                <table border=0 cellpadding=6 cellspacing=8>
+                    <tr>
+                        <td colspan="6" class="bordeInferior"><h3>Nueva Solicitud</h3></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6"><br></td>
+                    </tr>
+                    <tr>
+                        <th id="labelComprobante">Comprobante</th>
+                        <td><input type="text" id="comprobante" name="comprobante" value="<%= solTemp.getComprobante()%>"></td>
+
+                        <th id="labelFecha">Fecha</th>
+                            <%if (solTemp.getFecha() == null) {%>
+                        <td><input type="text" id="fecha" name="fecha" placeholder="DD-MM-YYYY" value="<%= solTemp.getFecha()%>"></td>
+                            <% } else {%>
+                        <td><input type="text" id="fecha" name="fecha" placeholder="DD-MM-YYYY" value="<%= solTemp.getFecha().toLocaleString().substring(0, 11)%>"></td>
+                            <% } %>
+                        <th id="labelTipo">Tipo</th>
+                        <td>
+                            <select name="tipo">
+                                <%if (solTemp.getTipo().equals("")) { %>
+                                <option value="inv" selected>Tipo</option>
+                                <option value="Compra">Compra</option>
+                                <option value="Donacion">Donacion</option>
+                                <option value="Produccion">Produccion</option>
+                                <% } else {%>
+                                <option value="<%=solTemp.getTipo()%>" selected><%=solTemp.getTipo()%></option>
+                                <% } %>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="6" class="bordeInferior"><h3>Bienes</h3></td>
+                    </tr>
+                    <tr>
+                        <th id="labelDescripcion">Descripcion</th>
+                        <th id="labelMarca">Marca</th>
+                        <th id="labelModelo">Modelo</th>
+                        <th id="labelPrecioU">Precio Unitario</th>
+                        <th id="labelCantidad">Cantidad</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input size=13 type="text" name="descripcion" placeholder="Descripcion" value=""></td>
+                        <td><input size=13 type="text" name="marca" placeholder="Marca" value=""></td>
+                        <td><input size=13 type="text" name="modelo" placeholder="Modelo" value=""></td>
+                        <td><input type="number" name="precioU" step="0.01" placeholder="0.0" value=""></td>
+                        <td><input type="number" name="cantidad" placeholder="0" value=""></td>
+                        <td> <input type="submit" name="agregarBien" formaction="presentation/users/Admin/agregarBien" value="Agregar"> </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="bordeInferior"><h3>Listado</h3></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6"><br></td>
+                    </tr>
+                    <% for (Bien b : bienesTemp) {%>
+                    <tr class="tablaListado">
+                        <td class="ladosTablaListado"><%=b.getDescripcion()%></td>
+                        <td class="ladosTablaListado"> <%=b.getMarca()%></td>
+                        <td class="ladosTablaListado"> <%=b.getModelo()%></td>
+                        <td class="ladosTablaListado"> <%=b.getPrecio()%></td>
+                        <td class="ladosTablaListado"><%=b.getCantidad()%> </td>
+                        <td class="ladosTablaListado"></td>
+                    </tr>
+                    <% }%> 
+                    <tr>
+                        <td colspan="6"><br></td>
+                    </tr>
+                    <tr>
+                        <td height="55" colspan="6" align="center">
+                            <input type="submit" name="agregarSolicitud" value="Aceptar">
+                        </td>
+                    </tr>
+                </table>
+            </form>
         </div>
-        <!-- ********************************************************** -->
-        <!-- Modal del BootsTrap formulario del ingreso de conductores                  -->
-
-        <div class="modal fade" id="myModalSolicitud" role="dialog">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myModalTitle">Crear una solicitud </h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body" id="myModalMessage">
-                        <form role="form" onsubmit="return false;" id="formConductores">
-                          
-                            <div class="form-group" id="groupCedula">
-                                <label for="comprobante">Comprobante:</label>
-                                <input type="text" class="form-control" id="comprobante" autofocus="true" placeholder="Comprobante">
-                            </div>
-
-                            <div class="form-group" id="groupestado">
-                                <label for="nombre">Estado:</label>
-                                <input type="text" class="form-control" id="estado" placeholder="Estado" >
-                            </div>
-                            
-                            <div class="form-group" id="groupApellidos">
-                                <label for="apellidos">Fecha:</label>
-                                <input type="text" class="form-control" id="fecha" placeholder="Fecha">
-                            </div>
-                            
-                            <div class="form-group" id="groupTipo">
-                                <label for="Tipo">Tipo:</label>
-                                <select class="form-control" >
-                                    <option value="donacion" name="donacion" selected="donacion">Donación</option>
-                                    <option value="compra" name="compra">Compra</option>
-                                    <option value="produccion" name="produccion">Producción</option>
-                                </select>
-                            
-                            </div>
-                            
-                            
-                            <div class="form-group row"> 
-                           &nbsp
-                           <div class="col-xs-1" id="groupDescripcion">
-                                <label for="TA">Descripción:</label>
-                                <input type="text" class="form-control" id="descripcion" placeholder="Descripción">
-                            </div>
-                            &nbsp
-                            <div class="col-xs-1" id="groupMarca">
-                                <label for="Monto">Marca:</label>
-                                <input type="text" class="form-control" id="monto" placeholder="Marca">
-                            </div>
-                            &nbsp     
-                            <div class="col-xs-1" id="groupModelo">
-                                <label for="Modelo">Modelo:</label>
-                                <input type="text" class="form-control" id="modelo" placeholder="Modelo">
-                            </div>    
-                           &nbsp     
-                            <div class="col-xs-1" id="groupPrecio">
-                                <label for="Precio">Precio:</label>
-                                <input type="text" class="form-control" id="precio" placeholder="Precio">
-                            </div>
-                           &nbsp     
-                            <div class="col-xs-1" id="groupCantidad">
-                                <label for="Cantidad">Cantidad:</label>
-                                <input type="text" class="form-control" id="cantidad" placeholder="Cantidad">
-                            </div>
-                            
-                           <div class="form-group">
-                                <input type="hidden" value="agregarSolicitud" id="SolicitudesAction"/>
-                                <button type="submit" class="btn btn-info" id="agregar">Agregar</button>
-                            </div>
-                           
-                            </div> 
-                            
-                            <table class="table table-hover table-condensed" id="tablaSolicitud">
-                                        <th>
-                                            Descripción
-                                        </th>
-                                     
-                                        <th>
-                                            Marca
-                                        </th>
-                                        <th>
-                                            Modelo
-                                        </th>
-                                        <th>
-                                            Precio Unitario
-                                        </th>
-                                        <th>
-                                            Cantidad
-                                        </th>
-                                        
-                                        <tr>
-                                            <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>5</td>
-                                        </tr>
-
-                                    </table>
-                            
-                            <div class="form-group">
-                                <input type="hidden" value="agregarSolicitud" id="ConductoresAction"/>
-                                <button type="submit" class="btn btn-primary" id="enviar">Guardar</button>
-                                <button type="reset" class="btn btn-danger" id="cancelar">Cancelar</button>
-                            </div>
-
-                            <div class="form-group height25" >
-                                <div class="alert alert-success hiddenDiv" id="mesajeResult">
-                                    <strong id="mesajeResultNeg">Estás en el área de guardar una solicitud.</strong> 
-                                    <span id="mesajeResultText">Por favor guarda una solicitud</span>
-                                </div>
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ********************************************************** -->
-        <div id="myDiv">
-           <section id="ManVeiculo" class="section-padding wow fadeInUp delay-05s">
-                <div class="container">
-                    <div class="row">
-                        <div class="container">
-                            <div class="page-header">
-                                <h1><small><span class="logo-dec"></span>Mantenimiento para la Solicitudes</small></h1>
-                            </div>
-                           
-                            <div class="panel panel-primary">
-                                <div class="panel-body">
-                                    <center>
-                                        <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#myModalSolicitud" id="btMostarFormConductor">Insertar Solicitud</button>
-                                    </center><br>
-                                    <!-- ********************************************************** -->
-                                    <div class="col-sm-12">
-                                        <form role="form" onsubmit="return false;" id="formConductor" class="form-horizontal centered">
-                                            <div class="form-group" id="groupFiltroConductor">
-                                                <div class="col-sm-4" class="Centered ">
-                                                    <p><b>Buscar por comprobante de solicitud</b></p>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <input type="text" class="form-control" id="FiltroSolicitud" placeholder="Dígite el comprobante de la solicitud">
-                                                    <br>
-                                                    <button type="button" class="btn btn-info " id="btBuscarSolicitud">
-                                                        Buscar 
-                                                    </button> 
-                                                </div>
-                                            
-                                            </div>
-                                            
-                                        </form>
-                                    
-                                    <!-- ********************************************************** -->
-
-                                    <table class="table table-hover table-condensed" id="tablaSolicitud">
-                                        <th>
-                                            Descripción
-                                        </th>
-                                     
-                                        <th>
-                                            Marca
-                                        </th>
-                                        <th>
-                                            Modelo
-                                        </th>
-                                        <th>
-                                            Precio Unitario
-                                        </th>
-                                        <th>
-                                            Cantidad
-                                        </th>
-                                    </table>
-
-                                </div>
-                                
-                            </div>
-                        </div> 
-                    </div>
-                </div>
-            </section>
-         <%@ include file="/presentation/footer.jsp" %>
-        </div>
-        
+        <%@ include file="/presentation/footer.jsp" %>
     </body>
-    
 </html>

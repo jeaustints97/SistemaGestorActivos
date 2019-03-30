@@ -1,6 +1,8 @@
 package SistemaGestorActivos.Dao;
 
+import SistemaGestorActivos.Logic.Dependencia;
 import SistemaGestorActivos.Logic.Estado;
+import SistemaGestorActivos.Logic.Funcionario;
 import SistemaGestorActivos.Logic.Solicitud;
 import java.util.List;
 import org.hibernate.HibernateException;
@@ -222,4 +224,28 @@ public class UsuarioDAO extends HibernateUtil implements IBaseDao<Usuario, Strin
         return solicitudesFinal;
     }
 
+    public Dependencia busquedaDependenciaPorUsuario(String id) {
+        List<Dependencia> listaRaw = null;
+        Dependencia dep = new Dependencia();
+        String sql = "select distinct d.id, d.nombre,d.administrador\n"
+                + "from Dependencia d, Usuario u, Funcionario f\n"
+                + "where '" + id + "' =f.id and f.id=d.administrador;";
+        try {
+            iniciaOperacion();
+            listaRaw = (List<Dependencia>) getSesion().createSQLQuery(sql).list();
+            Iterator itr = listaRaw.iterator();
+            while (itr.hasNext()) {
+                Object[] obj = (Object[]) itr.next();
+                dep.setId(Integer.parseInt(String.valueOf(obj[0])));
+                dep.setNombre(String.valueOf(obj[1]));
+                Funcionario f= new Funcionario();
+                f.setId(String.valueOf(obj[2]));
+                dep.setFuncionario(f);
+            }
+        } catch (Exception ex) {
+        } finally {
+            getSesion().close();
+        }
+        return dep;
+    }
 }

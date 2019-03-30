@@ -12,19 +12,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "SistemaGestorActivos.Presentation.Users.Admin.Listado", urlPatterns = {"/presentation/users/Admin/comenzar_filtrado"})
+@WebServlet(name = "ControllerListadoAdmin", urlPatterns = {"/presentation/users/Admin/Lista", "/presentation/users/Admin/comenzar_filtrado"})
 public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if (request.getServletPath().equals("/presentation/users/Admin/Lista")) {
+            this.MostrarListaCompleta(request, response);
+        }
+
         if (request.getServletPath().equals("/presentation/users/Admin/comenzar_filtrado")) {
             this.filtrarListaSolicitudes(request, response);
         }
     }
 
+    protected void MostrarListaCompleta(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Usuario user = (Usuario) request.getSession().getAttribute("logged");
+        request.getSession().setAttribute("listaSol", this.obtenerListaSolicitudes(user));
+        request.getRequestDispatcher("/presentation/users/Admin/Listado.jsp").forward(request, response);
+    }
+
     protected void filtrarListaSolicitudes(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Solicitud> model = new ArrayList<Solicitud>();
+        List<Solicitud> model = new ArrayList<>();
         String comprobante = (String) request.getParameter("filtrado");
         Usuario user = (Usuario) request.getSession().getAttribute("logged");
 
@@ -37,9 +48,6 @@ public class Controller extends HttpServlet {
         request.getRequestDispatcher("/presentation/users/Admin/Listado.jsp").forward(request, response);
     }
 
-//    void updateModelLista(List<Solicitud> model, HttpServletRequest request) {
-//        model.addAll((List<Solicitud>) request.getSession().getAttribute("listSol"));
-//    }
     protected List<Solicitud> obtenerSolicitudesPorComprobante(Usuario user, String comprobante) {
         return Model.instance().getUsuarioDAO().getSolicitudesPorComprobante(user.getId(), comprobante);
     }

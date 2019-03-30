@@ -4,10 +4,6 @@
 <%@page import="java.util.Map"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="SistemaGestorActivos.Logic.Usuario"%>
-<% String funcActual = (String) session.getAttribute("funcActual");%>
-<% String rolActual = (String) session.getAttribute("rolActual");%>
-<% String depActual = (String) session.getAttribute("depActual");%>
-<% List<Solicitud> listaSol = (List<Solicitud>) session.getAttribute("listaSol");%>
 <!DOCTYPE html>
 
 <html>

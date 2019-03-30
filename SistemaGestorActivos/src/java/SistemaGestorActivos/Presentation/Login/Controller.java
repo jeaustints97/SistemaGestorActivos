@@ -5,7 +5,6 @@
  */
 package SistemaGestorActivos.Presentation.Login;
 
-import SistemaGestorActivos.Logic.Funcionario;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,10 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import SistemaGestorActivos.Logic.Model;
-import SistemaGestorActivos.Logic.Solicitud;
 import SistemaGestorActivos.Logic.Usuario;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 
@@ -57,12 +54,10 @@ public class Controller extends HttpServlet {
                     request.getSession().setAttribute("rolActual", this.obtenerRolActual(logged));
                     //Seteando la dependencia actual...
                     request.getSession().setAttribute("depActual", this.obtenerDependenciaActual(logged));
-                    //Seteando la lista total de solicitudes del usuario...
-                    request.getSession().setAttribute("listaSol", this.obtenerListaSolicitudes(logged));
                     
                     switch ((String) request.getSession().getAttribute("rolActual")) {
                         case "Admin":
-                            request.getRequestDispatcher("/presentation/users/Admin/Admin.jsp").forward(request, response);
+                            request.getRequestDispatcher("/presentation/users/Lobby").forward(request, response);
                             break;
                         case "JefeRH":
                             request.getRequestDispatcher("/presentation/users/JefeRH/JefeRH.jsp").forward(request, response);
@@ -141,10 +136,6 @@ public class Controller extends HttpServlet {
 
     private String obtenerDependenciaActual(Usuario model) {
         return Model.instance().obtenerDependenciaActual(model);
-    }
-
-    private List<Solicitud> obtenerListaSolicitudes(Usuario model) {
-        return Model.instance().obtenerTotalSolicitudes(model);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

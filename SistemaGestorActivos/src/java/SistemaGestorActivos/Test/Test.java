@@ -28,13 +28,20 @@ public class Test {
 //            System.out.println(s.getNumero());
 //        }
 
-        List<Solicitud> lista = null;
-        lista = Model.instance().getUsuarioDAO().getSolicitudesPorComprobante("1", "A");
-        System.out.println("Lista de Solicitudes del ID 1 con comprobante A");
-        System.out.println(lista.get(0).getId());
+//        List<Solicitud> lista = null;
+//        lista = Model.instance().getUsuarioDAO() getSolicitudesPorComprobante("1", "A");
+//        System.out.println("Lista de Solicitudes del ID 1 con comprobante A");
+//        System.out.println(lista.get(0).getId());
 //        for (Solicitud u : lista) {
 //            System.out.println(u.getId());
 //        }
+        Dependencia dep = null;
+        dep = Model.instance().getUsuarioDAO().busquedaDependenciaPorUsuario("1");
+        System.out.println("Administrador de Dependencia con ID 1");
+        System.out.println(dep.getId());
 
+        Estado est = null;
+        est = Model.instance().getEstadoDAO().findById(1);
+        System.out.println(est.getDescripcion());
     }
 }

@@ -27,17 +27,17 @@
                     <% if (session.getAttribute("rolActual").equals("Admin") || session.getAttribute("rolActual").equals("SOCCB")
                                 || session.getAttribute("rolActual").equals("JOCCB") || session.getAttribute("rolActual").equals("Registrador")
                                 || session.getAttribute("rolActual").equals("JefeRH")) { %>         
-                    <li class="nav-item"><a class="nav-link" href="presentation/users/Admin/Admin.jsp">Principal</a> </li>
-                        <% }%> 
+                    <li class="nav-item"><a class="nav-link" href="presentation/users/Lobby">Principal</a> </li>
+                    <% }%> 
 
                     <% if (session.getAttribute("rolActual").equals("Admin")) { %>        
                     <li class="nav-item dropdown"> 
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Administrador
                         </a>  
-                        <div class="dropdown-menu" aria-labelledby="subMenuAdmin">
-                            <a class="dropdown-item" href="presentation/users/Admin/Listado.jsp">Mostrar Solicitudes</a>
-                            <a class="dropdown-item" href="Solicitud.jsp">Realizar Solicitud</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="presentation/users/Admin/Lista">Mostrar Solicitudes</a>
+                            <a class="dropdown-item" href="presentation/users/Admin/nuevaSolicitud">Realizar Solicitud</a>
                         </div>
                     </li>
 
@@ -47,7 +47,7 @@
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <%=session.getAttribute("funcActual")%>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="subMenuAdmin">
+                        <div class="dropdown-menu">
                             <a class="dropdown-item" href="presentation/logout">Cerrar sesión</a>
                         </div>           
                     </li>
