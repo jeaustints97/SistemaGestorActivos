@@ -33,13 +33,12 @@
                     <tr>
                         <th id="labelComprobante">Comprobante</th>
                         <td><input type="text" id="comprobante" name="comprobante" value="<%= solTemp.getComprobante()%>"></td>
-
                         <th id="labelFecha">Fecha</th>
                             <%if (solTemp.getFecha() == null) {%>
                         <td><input type="text" id="fecha" name="fecha" placeholder="DD-MM-YYYY" value="<%= solTemp.getFecha()%>"></td>
                             <% } else {%>
                         <td><input type="text" id="fecha" name="fecha" placeholder="DD-MM-YYYY" value="<%= solTemp.getFecha().toLocaleString().substring(0, 11)%>"></td>
-                            <% } %>
+                            <% }%>
                         <th id="labelTipo">Tipo</th>
                         <td>
                             <select name="tipo">
@@ -50,11 +49,10 @@
                                 <option value="Produccion">Produccion</option>
                                 <% } else {%>
                                 <option value="<%=solTemp.getTipo()%>" selected><%=solTemp.getTipo()%></option>
-                                <% } %>
+                                <% }%>
                             </select>
                         </td>
                     </tr>
-
                     <tr>
                         <td colspan="6" class="bordeInferior"><h3>Bienes</h3></td>
                     </tr>
@@ -89,13 +87,17 @@
                         <td class="ladosTablaListado"><%=b.getCantidad()%> </td>
                         <td class="ladosTablaListado"></td>
                     </tr>
-                    <% }%> 
+                    <% }%>
                     <tr>
                         <td colspan="6"><br></td>
                     </tr>
                     <tr>
-                        <td height="55" colspan="6" align="center">
-                            <input type="submit" name="agregarSolicitud" value="Aceptar">
+                    <tr>
+                        <td height="55" colspan="3" align="center">
+                            <input type="submit" name="agregarSolicitud" value="Solicitar">
+                        </td>
+                        <td height="55" colspan="3" align="center">
+                            <input type="submit" name="RegresarEdicion" value="Cancelar" formaction="presentation/users/Admin/Regresar">
                         </td>
                     </tr>
                 </table>

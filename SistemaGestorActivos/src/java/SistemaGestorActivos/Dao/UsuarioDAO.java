@@ -159,7 +159,6 @@ public class UsuarioDAO extends HibernateUtil implements IBaseDao<Usuario, Strin
 
                 String fecha = String.valueOf(obj[2]);
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                System.out.println(fecha);
 
                 Date date1 = format.parse(fecha);
 

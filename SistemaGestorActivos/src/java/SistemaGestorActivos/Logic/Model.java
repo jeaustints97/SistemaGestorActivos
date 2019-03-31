@@ -127,4 +127,15 @@ public class Model {
         return estado;
     }
 
+    public List<Bien> obtenerBienesPorSolicitud(int dependencia, int solicitud) {
+        return this.getBienDAO().getBienesBySolicitud(dependencia, solicitud);
+    }
+
+    public Solicitud obtenerSolicitudCompleta(int idSolicitud) {
+        Solicitud solicitud = new Solicitud();
+        List<Solicitud> lista = this.getSolicitudDAO().getSolicitud(idSolicitud);
+        solicitud = lista.get(0);
+        return solicitud;
+    }
+
 }

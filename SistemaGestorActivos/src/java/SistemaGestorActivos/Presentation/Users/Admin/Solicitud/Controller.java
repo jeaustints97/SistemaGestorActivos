@@ -7,7 +7,6 @@ import SistemaGestorActivos.Logic.Estado;
 import SistemaGestorActivos.Logic.Model;
 import SistemaGestorActivos.Logic.Usuario;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -114,6 +113,11 @@ public class Controller extends HttpServlet {
         Date trueDate = null;
         try {
             trueDate = formatter1.parse(date);
+        } catch (Exception e) {
+        }
+        SimpleDateFormat formatter2 = new SimpleDateFormat("dd-MMM-yyyy");
+        try {
+            trueDate = formatter2.parse(date);
         } catch (Exception e) {
         }
         return trueDate;

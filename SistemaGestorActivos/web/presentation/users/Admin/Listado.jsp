@@ -72,7 +72,7 @@
                         <td><%=s.getCantidad()%> </td>
                         <td><%=s.getTotal()%> </td>
                         <td> <%=s.getEstado().getDescripcion()%></td>
-                        <td> <a href="presentation/users/Admin/Solicitud?id=<%=s.getId()%>">Modificar</a></td>
+                        <td> <a href="presentation/users/Admin/verSolicitud?idSolicitud=<%=s.getId()%>">Ver</a></td>
                     </tr>
                     <% }%> 
                 </table>

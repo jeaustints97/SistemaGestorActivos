@@ -239,4 +239,29 @@ where 1=f.id and f.id=d.administrador and d.id=s.dependencia and s.estado=e.id;
 
 select distinct s.id, s.comprobante,s.fecha,s.tipo,s.cantidad,s.total,e.descripcion
 from Usuario u, Funcionario f, Dependencia d, Solicitud s, Estado e
-where 1=f.id and f.id=d.administrador and d.id=s.dependencia and s.comprobante like '%%1%' and s.estado=e.id;
+where u.id=f.id and f.id=d.administrador and d.id=s.dependencia and s.comprobante like '%%1%' 
+and s.estado=e.id;
+
+select * from bien;
+select * from solicitud;
+select * from dependencia;
+
+desc solicitud;
+
+select distinct d.id, d.nombre,d.administrador 
+from Dependencia d, Usuario u, Funcionario f
+where 1=f.id and f.id=d.administrador;
+
+select b.id, b.descripcion, b. marca,b.modelo,b.precio,b.cantidad
+from Dependencia d, Bien b,Solicitud s
+where d.id=s.dependencia and b.solicitud=s.id;
+
+select distinct b.id, b.descripcion, b. marca,b.modelo,b.precio,b.cantidad
+from Dependencia d, Bien b,Solicitud s
+where 1=s.dependencia and b.solicitud=1;
+
+select distinct s.id, s.comprobante, s.fecha, s.tipo,s.cantidad,s.total,s.estado,s.dependencia
+from Solicitud s
+where id=1;
+
+update solicitud set estado="2" where id=1;
