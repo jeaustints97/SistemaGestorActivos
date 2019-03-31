@@ -17,11 +17,7 @@
    </head>
     <body>
         <%@ include file="/presentation/header.jsp" %>
-        <!-- ********************************************************** -->
-        <!-- ********************************************************** -->
-        <!-- Modal del BootsTrap para mostrar mensajes                  -->
-        <!-- ********************************************************** -->
-        <!-- ********************************************************** -->
+        
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
@@ -46,26 +42,22 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body" id="myModalMessage">
-                        <form role="form" onsubmit="return false;" id="formConductores">
+                        <form role="form" action="presentation/register/create" method="POST">
                           
                             <div class="form-group" id="groupCedula">
                                 <label for="comprobante">Comprobante:</label>
-                                <input type="text" class="form-control" id="comprobante" autofocus="true" placeholder="Comprobante">
+                                <input type="text" class="form-control" id="comprobante" name="comprobante"autofocus="true" placeholder="Comprobante">
                             </div>
 
-                            <div class="form-group" id="groupestado">
-                                <label for="nombre">Estado:</label>
-                                <input type="text" class="form-control" id="estado" placeholder="Estado" >
-                            </div>
                             
                             <div class="form-group" id="groupApellidos">
                                 <label for="apellidos">Fecha:</label>
-                                <input type="text" class="form-control" id="fecha" placeholder="Fecha">
+                                <input type="text" class="form-control" id="fecha" name="fecha" placeholder="Fecha">
                             </div>
                             
                             <div class="form-group" id="groupTipo">
                                 <label for="Tipo">Tipo:</label>
-                                <select class="form-control" >
+                                <select class="form-control" name="tipo" >
                                     <option value="donacion" name="donacion" selected="donacion">Donación</option>
                                     <option value="compra" name="compra">Compra</option>
                                     <option value="produccion" name="produccion">Producción</option>
@@ -73,42 +65,52 @@
                             
                             </div>
                             
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-info" value="Guardar Solicitud"  name="Guardar"action="SolicitudesAction"/>
+                            </div>
                             
+                        </form>
+                        
+                        
+                        <form role="form" action="presentation/register/add" >
+                            <div class="form-group">
                             <div class="form-group row"> 
                            &nbsp
                            <div class="col-xs-1" id="groupDescripcion">
                                 <label for="TA">Descripción:</label>
-                                <input type="text" class="form-control" id="descripcion" placeholder="Descripción">
+                                <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripción">
                             </div>
                             &nbsp
                             <div class="col-xs-1" id="groupMarca">
                                 <label for="Monto">Marca:</label>
-                                <input type="text" class="form-control" id="monto" placeholder="Marca">
+                                <input type="text" class="form-control" id="monto" name="monto" placeholder="Marca">
                             </div>
                             &nbsp     
                             <div class="col-xs-1" id="groupModelo">
                                 <label for="Modelo">Modelo:</label>
-                                <input type="text" class="form-control" id="modelo" placeholder="Modelo">
+                                <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Modelo">
                             </div>    
-                           &nbsp     
+                           &nbsp &nbsp      
                             <div class="col-xs-1" id="groupPrecio">
                                 <label for="Precio">Precio:</label>
-                                <input type="text" class="form-control" id="precio" placeholder="Precio">
+                                <input type="text" class="form-control" id="precio" name="precio" placeholder="Precio">
                             </div>
                            &nbsp     
                             <div class="col-xs-1" id="groupCantidad">
                                 <label for="Cantidad">Cantidad:</label>
-                                <input type="text" class="form-control" id="cantidad" placeholder="Cantidad">
+                                <input type="text" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad">
                             </div>
                             
                            <div class="form-group">
-                                <input type="hidden" value="agregarSolicitud" id="SolicitudesAction"/>
-                                <button type="submit" class="btn btn-info" id="agregar">Agregar</button>
+                               <input type="hidden" value="agregar Solicitud" name="agregar" id="SolicitudesAction"/>
+                                <button type="submit" class="btn btn-info" id="agregar">Agregar bien</button>
                             </div>
-                           
-                            </div> 
                             
-                            <table class="table table-hover table-condensed" id="tablaSolicitud">
+                            </div>
+                            </div> 
+                        </form>
+                        
+                            <table class="table table-hover table-condensed" id="tablaSolicitud" name="tablaSolicitud">
                                         <th>
                                             Descripción
                                         </th>
@@ -128,42 +130,27 @@
                                         
                                         <tr>
                                             <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>5</td>
+
                                         </tr>
                                         <tr>
                                             <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>5</td>
+                                           
                                         </tr>
                                         <tr>
                                             <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>5</td>
+                                           
                                         </tr>
                                         <tr>
                                             <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>5</td>
+                                           
                                         </tr>
                                         <tr>
                                             <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>5</td>
+                                           
                                         </tr>
 
                                     </table>
-                            
+                        
                             <div class="form-group">
                                 <input type="hidden" value="agregarSolicitud" id="ConductoresAction"/>
                                 <button type="submit" class="btn btn-primary" id="enviar">Guardar</button>
@@ -176,8 +163,6 @@
                                     <span id="mesajeResultText">Por favor guarda una solicitud</span>
                                 </div>
                             </div>
-
-                        </form>
                     </div>
                 </div>
             </div>

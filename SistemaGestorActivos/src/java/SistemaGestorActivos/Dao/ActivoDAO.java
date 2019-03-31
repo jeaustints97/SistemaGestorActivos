@@ -76,5 +76,6 @@ public class ActivoDAO extends HibernateUtil implements IBaseDao<Activo, java.ma
         }
         return activos;
     }
-
+    
+    
 }

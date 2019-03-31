@@ -76,4 +76,6 @@ public class BienDAO extends HibernateUtil implements IBaseDao<Bien, java.math.B
         }
         return bienes;
     }
+    
+    
 }
