@@ -193,6 +193,10 @@ insert into usuario(id,clave) values('2','2');
 insert into usuario(id,clave) values('3','3');
 insert into usuario(id,clave) values('4','4');
 insert into usuario(id,clave) values('5','5');
+<<<<<<< HEAD:Script-Activos.sql
+=======
+insert into usuario(id,clave) values('8','8');
+>>>>>>> 16c5f03457cbe42b3e4fd4b651e5c801d0e3fd31:Script Activos.sql
 
 -- Insertando las posibles estados de la solicitud en el sistema
 insert into estado(id,descripcion) values(1,'Recibida');
@@ -217,4 +221,54 @@ values(2,'Sillas','Mesh','Ejecutivas',20000,10,2);
 insert into bien(id,descripcion,marca,modelo,precio,cantidad,solicitud) 
 values(3,'Piano','Yamaha','De cola',600000,1,3);
 
+<<<<<<< HEAD:Script-Activos.sql
 select * from Rol;
+=======
+update dependencia set administrador=1 where id=1;
+update dependencia set administrador=8 where id=2;
+update funcionario set rol=1 where id =8;
+
+select * from solicitud;
+
+select * from dependencia;
+select * from funcionario;
+select * from usuario;
+select d.nombre from Usuario u, Funcionario f, Dependencia d where u.id=f.id and f.dependencia=d.id;
+
+select s.id, s.comprobante,s.fecha,s.tipo,s.cantidad,s.total,s.estado
+from Usuario u, Funcionario f, Dependencia d, Solicitud s
+where u.id=f.id and f.id=d.administrador and d.id=s.dependencia;
+
+select distinct s.id, s.comprobante,s.fecha,s.tipo,s.cantidad,s.total,e.descripcion
+from Usuario u, Funcionario f, Dependencia d, Solicitud s, Estado e
+where 1=f.id and f.id=d.administrador and d.id=s.dependencia and s.estado=e.id;
+
+select distinct s.id, s.comprobante,s.fecha,s.tipo,s.cantidad,s.total,e.descripcion
+from Usuario u, Funcionario f, Dependencia d, Solicitud s, Estado e
+where u.id=f.id and f.id=d.administrador and d.id=s.dependencia and s.comprobante like '%%1%' 
+and s.estado=e.id;
+
+select * from bien;
+select * from solicitud;
+select * from dependencia;
+
+desc solicitud;
+
+select distinct d.id, d.nombre,d.administrador 
+from Dependencia d, Usuario u, Funcionario f
+where 1=f.id and f.id=d.administrador;
+
+select b.id, b.descripcion, b. marca,b.modelo,b.precio,b.cantidad
+from Dependencia d, Bien b,Solicitud s
+where d.id=s.dependencia and b.solicitud=s.id;
+
+select distinct b.id, b.descripcion, b. marca,b.modelo,b.precio,b.cantidad
+from Dependencia d, Bien b,Solicitud s
+where 1=s.dependencia and b.solicitud=1;
+
+select distinct s.id, s.comprobante, s.fecha, s.tipo,s.cantidad,s.total,s.estado,s.dependencia
+from Solicitud s
+where id=1;
+
+update solicitud set estado="2" where id=1;
+>>>>>>> 16c5f03457cbe42b3e4fd4b651e5c801d0e3fd31:Script Activos.sql

@@ -48,10 +48,17 @@ public class Controller extends HttpServlet {
                 try {
                     logged = Model.instance().getUsuarioDAO().auntenticar(model.getId(), model.getClave());
                     request.getSession(true).setAttribute("logged", logged);
-                    String rol = Model.instance().getUsuarioDAO().busquedaRol(model.getId());
-                    switch (rol) {
+
+                    //Seteando el funcionario actual...
+                    request.getSession().setAttribute("funcActual", this.obtenerFuncionarioActual(logged));
+                    //Seteando el rol actual...
+                    request.getSession().setAttribute("rolActual", this.obtenerRolActual(logged));
+                    //Seteando la dependencia actual...
+                    request.getSession().setAttribute("depActual", this.obtenerDependenciaActual(logged));
+                    
+                    switch ((String) request.getSession().getAttribute("rolActual")) {
                         case "Admin":
-                            request.getRequestDispatcher("/presentation/users/Admin/Admin.jsp").forward(request, response);
+                            request.getRequestDispatcher("/presentation/users/Lobby").forward(request, response);
                             break;
                         case "JefeRH":
                             request.getRequestDispatcher("/presentation/users/JefeRH/JefeRH.jsp").forward(request, response);
@@ -118,6 +125,18 @@ public class Controller extends HttpServlet {
             errores.put("clave", "Clave requerida");
         }
         return errores;
+    }
+
+    private String obtenerFuncionarioActual(Usuario model) {
+        return Model.instance().obtenerFuncionarioActual(model);
+    }
+
+    private String obtenerRolActual(Usuario model) {
+        return Model.instance().obtenerRolActual(model);
+    }
+
+    private String obtenerDependenciaActual(Usuario model) {
+        return Model.instance().obtenerDependenciaActual(model);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

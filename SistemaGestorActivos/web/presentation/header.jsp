@@ -24,20 +24,20 @@
 
                     <% if (logged != null) { %>
 
-                    <% if (obtenerRol(logged).equals("Admin") || obtenerRol(logged).equals("SOCCB")
-                                || obtenerRol(logged).equals("JOCCB") || obtenerRol(logged).equals("Registrador")
-                                || obtenerRol(logged).equals("JefeRH")) { %>         
-                    <li class="nav-item"><a class="nav-link" href="presentation/users/Admin/Admin.jsp">Principal</a> </li>
-                        <% }%> 
+                    <% if (session.getAttribute("rolActual").equals("Admin") || session.getAttribute("rolActual").equals("SOCCB")
+                                || session.getAttribute("rolActual").equals("JOCCB") || session.getAttribute("rolActual").equals("Registrador")
+                                || session.getAttribute("rolActual").equals("JefeRH")) { %>         
+                    <li class="nav-item"><a class="nav-link" href="presentation/users/Lobby">Principal</a> </li>
+                    <% }%> 
 
-                    <% if (obtenerRol(logged).equals("Admin")) { %>        
+                    <% if (session.getAttribute("rolActual").equals("Admin")) { %>        
                     <li class="nav-item dropdown"> 
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Administrador
                         </a>  
-                        <div class="dropdown-menu" aria-labelledby="subMenuAdmin">
-                            <a class="dropdown-item" href="presentation/users/Admin/Listado.jsp">Mostrar Solicitudes</a>
-                            <a class="dropdown-item" href="Solicitud.jsp">Realizar Solicitud</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="presentation/users/Admin/Lista">Mostrar Solicitudes</a>
+                            <a class="dropdown-item" href="presentation/users/Admin/nuevaSolicitud">Realizar Solicitud</a>
                         </div>
                     </li>
 
@@ -45,10 +45,10 @@
 
                     <li class="nav-item dropdown"> 
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <%=obtenerFuncionario(logged).getNombre()%>
+                            <%=session.getAttribute("funcActual")%>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="subMenuAdmin">
-                            <a class="dropdown-item" <a href="presentation/logout">Cerrar sesión</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="presentation/logout">Cerrar sesión</a>
                         </div>           
                     </li>
                     <% }%> 
@@ -70,17 +70,3 @@
     </nav>
 </body>
 </html>
-
-<%!
-    private Funcionario obtenerFuncionario(Usuario model) {
-        Funcionario f = new Funcionario();
-        f.setNombre(Model.instance().getUsuarioDAO().busquedaNombre(model.getId()));
-        return f;
-    }
-
-    private String obtenerRol(Usuario model) {
-        String rol = "";
-        rol = Model.instance().getUsuarioDAO().busquedaRol(model.getId());
-        return rol;
-    }
-%>

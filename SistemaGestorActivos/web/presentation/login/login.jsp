@@ -1,3 +1,5 @@
+<%@page import="SistemaGestorActivos.Logic.Solicitud"%>
+<%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

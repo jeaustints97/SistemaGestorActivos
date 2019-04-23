@@ -6,7 +6,7 @@ import java.math.BigInteger;
 import java.util.List;
 import org.hibernate.HibernateException;
 
-public class EstadoDAO extends HibernateUtil implements IBaseDao<Estado, java.math.BigInteger> {
+public class EstadoDAO extends HibernateUtil implements IBaseDao<Estado, Integer> {
 
     @Override
     public void save(Estado o) {
@@ -53,7 +53,7 @@ public class EstadoDAO extends HibernateUtil implements IBaseDao<Estado, java.ma
     }
 
     @Override
-    public Estado findById(BigInteger o) {
+    public Estado findById(Integer o) {
         Estado estado = null;
         try {
             iniciaOperacion();
