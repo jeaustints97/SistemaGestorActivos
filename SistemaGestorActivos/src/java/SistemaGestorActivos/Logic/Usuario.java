@@ -1,5 +1,5 @@
 package SistemaGestorActivos.Logic;
-// Generated 24-mar-2019 18:06:35 by Hibernate Tools 4.3.1
+// Generated 19-abr-2019 17:06:01 by Hibernate Tools 4.3.1
 
 
 
@@ -11,13 +11,20 @@ public class Usuario  implements java.io.Serializable {
 
      private String id;
      private Funcionario funcionario;
+     private Rol rol;
      private String clave;
 
     public Usuario() {
     }
 
+	
     public Usuario(Funcionario funcionario, String clave) {
+        this.funcionario = funcionario;
+        this.clave = clave;
+    }
+    public Usuario(Funcionario funcionario, Rol rol, String clave) {
        this.funcionario = funcionario;
+       this.rol = rol;
        this.clave = clave;
     }
    
@@ -34,6 +41,13 @@ public class Usuario  implements java.io.Serializable {
     
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
+    }
+    public Rol getRol() {
+        return this.rol;
+    }
+    
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
     public String getClave() {
         return this.clave;

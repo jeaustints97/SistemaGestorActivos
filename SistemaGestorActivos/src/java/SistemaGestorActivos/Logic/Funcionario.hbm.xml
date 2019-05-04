@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 24-mar-2019 18:06:35 by Hibernate Tools 4.3.1 -->
+<!-- Generated 19-abr-2019 17:06:02 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="SistemaGestorActivos.Logic.Funcionario" table="funcionario" catalog="sistemagestoractivos" optimistic-lock="version">
         <id name="id" type="string">
@@ -10,9 +10,6 @@
         </id>
         <many-to-one name="puesto" class="SistemaGestorActivos.Logic.Puesto" fetch="select">
             <column name="Puesto" not-null="true" />
-        </many-to-one>
-        <many-to-one name="rol" class="SistemaGestorActivos.Logic.Rol" fetch="select">
-            <column name="Rol" />
         </many-to-one>
         <property name="nombre" type="string">
             <column name="Nombre" length="25" not-null="true" />

@@ -105,11 +105,11 @@ public class UsuarioDAO extends HibernateUtil implements IBaseDao<Usuario, Strin
     }
 
     public String busquedaRol(String id) {
-        String hql = "select distinct r.descripcion from Usuario u, Funcionario f, Rol r where '"
-                + id + "' =f.id and f.rol=r.id";
+        String hql = "select distinct r.descripcion from Usuario u, Rol r "
+                + "where '" + id + "' = u.rol and r.id = u.rol";
         try {
             iniciaOperacion();
-            String nombreFinal = (String) getSesion().createQuery(hql).uniqueResult();
+            String nombreFinal = (String) getSesion().createSQLQuery(hql).uniqueResult();
             return nombreFinal;
         } finally {
             getSesion().close();

@@ -1,3 +1,6 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="SistemaGestorActivos.Logic.Solicitud"%>
@@ -43,13 +46,26 @@
                         <td>
                             <select name="tipo">
                                 <%if (solTemp.getTipo().equals("")) { %>
-                                <option value="inv" selected>Tipo</option>
+                                <option value="Seleccionar" selected disabled>Seleccionar</option>
                                 <option value="Compra">Compra</option>
                                 <option value="Donacion">Donacion</option>
                                 <option value="Produccion">Produccion</option>
-                                <% } else {%>
-                                <option value="<%=solTemp.getTipo()%>" selected><%=solTemp.getTipo()%></option>
-                                <% }%>
+                                <%}%>
+                                <%if (solTemp.getTipo().equals("Compra")) { %>
+                                <option value="Compra" selected>Compra</option>
+                                <option value="Donacion">Donacion</option>
+                                <option value="Produccion">Produccion</option>
+                                <%}%>
+                                <%if (solTemp.getTipo().equals("Donacion")) { %>
+                                <option value="Compra">Compra</option>
+                                <option value="Donacion" selected>Donacion</option>
+                                <option value="Produccion">Produccion</option>
+                                <%}%>
+                                <%if (solTemp.getTipo().equals("Produccion")) { %>
+                                <option value="Compra">Compra</option>
+                                <option value="Donacion">Donacion</option>
+                                <option value="Produccion" selected>Produccion</option>
+                                <%}%>
                             </select>
                         </td>
                     </tr>

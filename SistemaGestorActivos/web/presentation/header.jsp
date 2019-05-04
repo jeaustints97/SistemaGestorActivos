@@ -24,13 +24,9 @@
 
                     <% if (logged != null) { %>
 
-                    <% if (session.getAttribute("rolActual").equals("Admin") || session.getAttribute("rolActual").equals("SOCCB")
-                                || session.getAttribute("rolActual").equals("JOCCB") || session.getAttribute("rolActual").equals("Registrador")
-                                || session.getAttribute("rolActual").equals("JefeRH")) { %>         
                     <li class="nav-item"><a class="nav-link" href="presentation/users/Lobby">Principal</a> </li>
-                    <% }%> 
 
-                    <% if (session.getAttribute("rolActual").equals("Admin")) { %>        
+                    <% if (request.isUserInRole("Admin")) { %>
                     <li class="nav-item dropdown"> 
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Administrador
@@ -39,9 +35,12 @@
                             <a class="dropdown-item" href="presentation/users/Admin/Lista">Mostrar Solicitudes</a>
                             <a class="dropdown-item" href="presentation/users/Admin/nuevaSolicitud">Realizar Solicitud</a>
                         </div>
-                    </li>
+                    </li>               
+                    <% }%>
 
-                    <% }%>         
+                    <% if (request.isUserInRole("SOCCB")) { %>
+                    <li class="nav-item"><a class="nav-link" href="presentation/users/Secretaria/Secretaria.jsp">PRUEBITA</a> </li>             
+                        <% }%>
 
                     <li class="nav-item dropdown"> 
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
