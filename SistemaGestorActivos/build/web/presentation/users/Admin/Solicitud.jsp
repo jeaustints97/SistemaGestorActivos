@@ -22,7 +22,7 @@
         <div class="ventanaSolicitud">
             <form method="POST" name="nuevaSolicitud" action="presentation/users/Admin/ingresarSolicitud">
                 <br>
-                <table border=0 cellpadding=6 cellspacing=8>
+                <table border=0 name="tablasolicitud" id="tablasolicitud" cellpadding=6 cellspacing=8>
                     <tr>
                         <td colspan="6" class="bordeInferior"><h3>Nueva Solicitud</h3></td>
                     </tr>
@@ -56,20 +56,24 @@
                         <td colspan="6" class="bordeInferior"><h3>Bienes</h3></td>
                     </tr>
                     <tr>
+                        
                         <th id="labelDescripcion">Descripcion</th>
                         <th id="labelMarca">Marca</th>
                         <th id="labelModelo">Modelo</th>
                         <th id="labelPrecioU">Precio Unitario</th>
                         <th id="labelCantidad">Cantidad</th>
-                        <td></td>
+                        <td>
+                            
+                        </td>
                     </tr>
                     <tr>
+                        
                         <td><input size=13 type="text" name="descripcion" id="descripcion" placeholder="Descripcion" value=""></td>
                         <td><input size=13 type="text" name="marca" id="marca" placeholder="Marca" value=""></td>
                         <td><input size=13 type="text" name="modelo" id="modelo" placeholder="Modelo" value=""></td>
                         <td><input type="number" name="precioU" id="precioU" step="0.01" placeholder="0.0" value=""></td>
                         <td><input type="number" name="cantidad" id="cantidad" placeholder="0" value=""></td>
-                        <td> <input type="submit" name="agregarBien" id="agregarBien" formaction="presentation/users/Admin/agregarBien" value="Agregar"> </td>
+                        <td> <input type="submit" name="agregarBien" id="agregarBien" onclick="agregarbien();" formaction="presentation/users/Admin/agregarBien" value="Agregar"> </td>
                     </tr>
                     <tr>
                         <td colspan="6" class="bordeInferior"><h3>Listado</h3></td>
@@ -79,6 +83,7 @@
                     </tr>
                     <% for (Bien b : bienesTemp) {%>
                     <tr class="tablaListado">
+                       <td><input type="checkbox" name="seleccionar"></td>
                         <td class="ladosTablaListado"><%=b.getDescripcion()%></td>
                         <td class="ladosTablaListado"> <%=b.getMarca()%></td>
                         <td class="ladosTablaListado"> <%=b.getModelo()%></td>
@@ -88,7 +93,7 @@
                     </tr>
                     <% }%>
                     <tr>
-                        <td colspan="6"><br></td>
+                        <td colspan="6"> <button type="button" class="delete-row">Borrar bien</button></td>
                     </tr>
                     <tr>
                     <tr>

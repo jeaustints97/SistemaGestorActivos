@@ -14,6 +14,42 @@ function camposSolicitud() {
  * and open the template in the editor.
  */
 
+function agregarbien(){
+    
+    if(validar()){
+    $(document).ready(function(){
+       $('#agregarBien').click(function(){
+          var descripcion = $("#descripcion").val();
+          var marca= $("#marca").val();
+          var modelo = $("#modelo").val();
+          var precioU = $("#precioU").val();
+          var cantidad = $("#cantidad").val();
+          
+          var markup = "<tr><td><input type='checkbox' name='seleccionar'></td>\n\
+            <td>" + descripcion + "</td>\n\
+            <td>" + marca + "</td>\n\
+            <td>"+modelo+"</td>\n\
+            <td>"+precioU+"</td>\n\
+            <td>"+cantidad+"</td></tr>";
+           $("table tbody").append(markup);
+       });     
+    });
+    $(".delete-row").click(function(){
+        $("table tbody").find('input[name="seleccionar"]').each(function(){
+            if($(this).is(":checked")){
+                $(this).parents("tr").remove();
+            }
+        });
+    });
+}else{
+    window.alert("Error en la operación");
+}
+
+}
+
+
+
+
 function validar(){
     
     var validacion = true;
