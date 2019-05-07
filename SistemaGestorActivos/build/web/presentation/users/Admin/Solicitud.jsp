@@ -1,9 +1,25 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="SistemaGestorActivos.Logic.Solicitud"%>
 <%@page import="SistemaGestorActivos.Logic.Bien"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="myModalTitle">Error</h4>
+                    </div>
+                    <div class="modal-body" id="myModalMessage">
+                        <p>No se puede dejar campos vacíos.</p>
+                    </div>
+                </div>
+            </div>
+</div>
     <head>
         <title>Ingresar Solicitud</title>
         <meta charset="UTF-8">
@@ -42,13 +58,26 @@
                         <td>
                             <select name="tipo">
                                 <%if (solTemp.getTipo().equals("")) { %>
-                                <option value="inv" selected>Tipo</option>
+                                <option value="Seleccionar" selected disabled>Seleccionar</option>
                                 <option value="Compra">Compra</option>
                                 <option value="Donacion">Donacion</option>
                                 <option value="Produccion">Produccion</option>
-                                <% } else {%>
-                                <option value="<%=solTemp.getTipo()%>" selected><%=solTemp.getTipo()%></option>
-                                <% }%>
+                                <%}%>
+                                <%if (solTemp.getTipo().equals("Compra")) { %>
+                                <option value="Compra" selected>Compra</option>
+                                <option value="Donacion">Donacion</option>
+                                <option value="Produccion">Produccion</option>
+                                <%}%>
+                                <%if (solTemp.getTipo().equals("Donacion")) { %>
+                                <option value="Compra">Compra</option>
+                                <option value="Donacion" selected>Donacion</option>
+                                <option value="Produccion">Produccion</option>
+                                <%}%>
+                                <%if (solTemp.getTipo().equals("Produccion")) { %>
+                                <option value="Compra">Compra</option>
+                                <option value="Donacion">Donacion</option>
+                                <option value="Produccion" selected>Produccion</option>
+                                <%}%>
                             </select>
                         </td>
                     </tr>
@@ -73,7 +102,7 @@
                         <td><input size=13 type="text" name="modelo" id="modelo" placeholder="Modelo" value=""></td>
                         <td><input type="number" name="precioU" id="precioU" step="0.01" placeholder="0.0" value=""></td>
                         <td><input type="number" name="cantidad" id="cantidad" placeholder="0" value=""></td>
-                        <td> <input type="submit" name="agregarBien" id="agregarBien" onclick="agregarbien();" formaction="presentation/users/Admin/agregarBien" value="Agregar"> </td>
+                        <td> <input type="submit" name="agregarBien" id="agregarBien" onclick="agregarbien();"  value="Agregar"> </td>
                     </tr>
                     <tr>
                         <td colspan="6" class="bordeInferior"><h3>Listado</h3></td>
@@ -83,7 +112,6 @@
                     </tr>
                     <% for (Bien b : bienesTemp) {%>
                     <tr class="tablaListado">
-                       <td><input type="checkbox" name="seleccionar"></td>
                         <td class="ladosTablaListado"><%=b.getDescripcion()%></td>
                         <td class="ladosTablaListado"> <%=b.getMarca()%></td>
                         <td class="ladosTablaListado"> <%=b.getModelo()%></td>

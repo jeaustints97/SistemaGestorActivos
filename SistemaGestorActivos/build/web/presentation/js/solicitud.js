@@ -8,13 +8,7 @@ function camposSolicitud() {
 }
 
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-function agregarbien(){
+function agregarbien(rowData){
     
     if(validar()){
     $(document).ready(function(){
@@ -25,13 +19,16 @@ function agregarbien(){
           var precioU = $("#precioU").val();
           var cantidad = $("#cantidad").val();
           
-          var markup = "<tr><td><input type='checkbox' name='seleccionar'></td>\n\
-            <td>" + descripcion + "</td>\n\
-            <td>" + marca + "</td>\n\
-            <td>"+modelo+"</td>\n\
-            <td>"+precioU+"</td>\n\
-            <td>"+cantidad+"</td></tr>";
-           $("table tbody").append(markup);
+          var row = $("<tr />");
+          $("#tablaListado").append(row); 
+          
+          row.append($("<tr><td><input type='checkbox' name='seleccionar'></td>"));
+          row.append($("<td>" + rowData.descipcion + "</td>"));
+          row.append($("<td>" + rowData.marca + "</td>"));
+          row.append($("<td>" + rowData.modelo + "</td>"));
+          row.append($("<td>" + rowData.precioU + "</td>"));
+          row.append($("<td>" + rowData.cantidad + "</td>"));
+
        });     
     });
     $(".delete-row").click(function(){
@@ -42,7 +39,9 @@ function agregarbien(){
         });
     });
 }else{
-    window.alert("Error en la operación");
+        //mostrarMensaje("alert alert-danger", "Debe digitar los campos del formulario", "Error!");
+        window.alert("Debe digitar los campos del formulario");
+        //mostrarModal("myModal", "Error", "Datos equivocados");
 }
 
 }
@@ -75,4 +74,18 @@ function validar(){
     
     // 
     return validacion;
+}
+
+function mostrarMensaje(classCss, msg, neg) {
+    //se le eliminan los estilos al mensaje
+    $("#mesajeResult").removeClass();
+
+    //se setean los estilos
+    $("#mesajeResult").addClass(classCss);
+
+    //se muestra la capa del mensaje con los parametros del metodo
+    $("#mesajeResult").fadeIn("slow");
+    $("#mesajeResultNeg").html(neg);
+    $("#mesajeResultText").html(msg);
+    $("#mesajeResultText").html(msg);
 }

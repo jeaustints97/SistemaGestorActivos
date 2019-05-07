@@ -7,12 +7,10 @@ package SistemaGestorActivos.Presentation.Users.Admin.Edicion;
 
 import SistemaGestorActivos.Logic.Bien;
 import SistemaGestorActivos.Logic.Dependencia;
-import SistemaGestorActivos.Logic.Estado;
 import SistemaGestorActivos.Logic.Model;
 import SistemaGestorActivos.Logic.Solicitud;
 import SistemaGestorActivos.Logic.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,10 +21,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Jeaustin
- */
 @WebServlet(name = "ControllerEdicion", urlPatterns = {"/presentation/users/Admin/Regresar", "/presentation/users/Admin/GuardarCambiosEdicion", "/presentation/users/Admin/BorrarBien", "/presentation/users/Admin/verSolicitud", "/presentation/users/Admin/Edicion", "/presentation/users/Admin/agregarBienEdicion"})
 public class Controller extends HttpServlet {
 

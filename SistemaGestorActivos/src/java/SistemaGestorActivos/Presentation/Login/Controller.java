@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package SistemaGestorActivos.Presentation.Login;
 
+import SistemaGestorActivos.Logic.Funcionario;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -13,10 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import SistemaGestorActivos.Logic.Model;
+import SistemaGestorActivos.Logic.Rol;
 import SistemaGestorActivos.Logic.Usuario;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 
 @WebServlet(name = "presentation.login", urlPatterns = {"/presentation/prepareLogin", "/presentation/login", "/presentation/logout"})
 public class Controller extends HttpServlet {
@@ -37,6 +35,13 @@ public class Controller extends HttpServlet {
         }
     }
 
+    protected void prepareLogin(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Usuario model = new Usuario();
+        request.setAttribute("model", model);
+        request.getRequestDispatcher("/presentation/login/login.jsp").forward(request, response);
+    }
+
     private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (this.verificar(request)) {
             Map<String, String> errors = this.validar(request);
@@ -44,10 +49,24 @@ public class Controller extends HttpServlet {
                 Usuario model = new Usuario();
                 updateModel(model, request);
                 request.setAttribute("model", model);
-                Usuario logged = null;
+                //-----------------------------------------
+                Model domainModel = Model.instance();
+                HttpSession session = request.getSession(true);
+
+                Principal principal = request.getUserPrincipal();
+                if (principal != null) {
+                    try {
+                        request.logout();
+                    } catch (ServletException ex) {
+                    }
+                }
+
                 try {
-                    logged = Model.instance().getUsuarioDAO().auntenticar(model.getId(), model.getClave());
-                    request.getSession(true).setAttribute("logged", logged);
+                    request.login(model.getId(), model.getClave());
+                    principal = request.getUserPrincipal();
+
+                    Usuario logged = domainModel.getUsuarioDAO().findById(model.getId());
+                    session.setAttribute("logged", logged);
 
                     //Seteando el funcionario actual...
                     request.getSession().setAttribute("funcActual", this.obtenerFuncionarioActual(logged));
@@ -55,24 +74,10 @@ public class Controller extends HttpServlet {
                     request.getSession().setAttribute("rolActual", this.obtenerRolActual(logged));
                     //Seteando la dependencia actual...
                     request.getSession().setAttribute("depActual", this.obtenerDependenciaActual(logged));
+
+                    //Pues todos los tipos de usuario van a llegar al Lobby del sistema...
+                    request.getRequestDispatcher("/presentation/users/Lobby").forward(request, response);
                     
-                    switch ((String) request.getSession().getAttribute("rolActual")) {
-                        case "Admin":
-                            request.getRequestDispatcher("/presentation/users/Lobby").forward(request, response);
-                            break;
-                        case "JefeRH":
-                            request.getRequestDispatcher("/presentation/users/JefeRH/JefeRH.jsp").forward(request, response);
-                            break;
-                        case "SOCCB":
-                            request.getRequestDispatcher("/presentation/users/Secretaria/Secretaria.jsp").forward(request, response);
-                            break;
-                        case "JOCCB":
-                            request.getRequestDispatcher("/presentation/users/Jefe/Jefe.jsp").forward(request, response);
-                            break;
-                        case "Registrador":
-                            request.getRequestDispatcher("/presentation/users/Registrador/Registrador.jsp").forward(request, response);
-                            break;
-                    }
                 } catch (Exception ex) {
                     request.getRequestDispatcher("/presentation/login/login.jsp").forward(request, response);
                 }
@@ -85,17 +90,14 @@ public class Controller extends HttpServlet {
         }
     }
 
-    protected void prepareLogin(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        Usuario model = new Usuario();
-        request.setAttribute("model", model);
-        request.getRequestDispatcher("/presentation/login/login.jsp").forward(request, response);
-    }
-
     protected void logout(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         session.removeAttribute("logged");
+        try {
+            request.logout();
+        } catch (ServletException ex) {
+        }
         session.invalidate();
         request.getRequestDispatcher("/presentation/index.jsp").forward(request, response);
     }

@@ -1,5 +1,5 @@
 package SistemaGestorActivos.Logic;
-// Generated 24-mar-2019 18:06:35 by Hibernate Tools 4.3.1
+// Generated 19-abr-2019 17:06:01 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -13,7 +13,6 @@ public class Funcionario  implements java.io.Serializable {
 
      private String id;
      private Puesto puesto;
-     private Rol rol;
      private String nombre;
      private String dependencia;
      private Set<Activo> activos = new HashSet<Activo>(0);
@@ -31,10 +30,9 @@ public class Funcionario  implements java.io.Serializable {
         this.nombre = nombre;
         this.dependencia = dependencia;
     }
-    public Funcionario(String id, Puesto puesto, Rol rol, String nombre, String dependencia, Set<Activo> activos, Usuario usuario, Set<Dependencia> dependencias, Set<Solicitud> solicituds) {
+    public Funcionario(String id, Puesto puesto, String nombre, String dependencia, Set<Activo> activos, Usuario usuario, Set<Dependencia> dependencias, Set<Solicitud> solicituds) {
        this.id = id;
        this.puesto = puesto;
-       this.rol = rol;
        this.nombre = nombre;
        this.dependencia = dependencia;
        this.activos = activos;
@@ -56,13 +54,6 @@ public class Funcionario  implements java.io.Serializable {
     
     public void setPuesto(Puesto puesto) {
         this.puesto = puesto;
-    }
-    public Rol getRol() {
-        return this.rol;
-    }
-    
-    public void setRol(Rol rol) {
-        this.rol = rol;
     }
     public String getNombre() {
         return this.nombre;

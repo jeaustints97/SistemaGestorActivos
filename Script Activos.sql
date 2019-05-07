@@ -227,6 +227,10 @@ select * from Rol;
 update dependencia set administrador=1 where id=1;
 update dependencia set administrador=8 where id=2;
 update funcionario set rol=1 where id =8;
+update solicitud set estado="2" where id=1;
+
+
+-- Pruebas/Consultas a la base de datos...
 
 select * from solicitud;
 
@@ -270,5 +274,8 @@ select distinct s.id, s.comprobante, s.fecha, s.tipo,s.cantidad,s.total,s.estado
 from Solicitud s
 where id=1;
 
+<<<<<<< HEAD
 update solicitud set estado="2" where id=1;
 >>>>>>> 16c5f03457cbe42b3e4fd4b651e5c801d0e3fd31:Script Activos.sql
+=======
+>>>>>>> 8484f4465a607e3527f8c386be232b3dcf09db92

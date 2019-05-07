@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sun-web-app PUBLIC "-//Sun Microsystems, Inc.//DTD GlassFish Application Server 3.0 Servlet 3.0//EN" "http://www.sun.com/software/appserver/dtds/sun-web-app_3_0-0.dtd">
+<sun-web-app error-url="">
+    <security-role-mapping>
+        <role-name>Admin</role-name>
+        <group-name>Admin</group-name>
+    </security-role-mapping>
+    <security-role-mapping>
+        <role-name>SOCCB</role-name>
+        <group-name>SOCCB</group-name>
+    </security-role-mapping>
+    <security-role-mapping>
+        <role-name>JOCCB</role-name>
+        <group-name>JOCCB</group-name>
+    </security-role-mapping>
+    <security-role-mapping>
+        <role-name>Registrador</role-name>
+        <group-name>Registrador</group-name>
+    </security-role-mapping>
+    <security-role-mapping>
+        <role-name>JefeRH</role-name>
+        <group-name>JefeRH</group-name>
+    </security-role-mapping>
+    <class-loader delegate="true"/>
+    <jsp-config>
+        <property name="keepgenerated" value="true">
+            <description>Keep a copy of the generated servlet class' java code.</description>
+        </property>
+        <property name="compilerSourceVM" value="7"/> 
+        <property name="compilerTargetVM" value="7"/>    
+    </jsp-config>
+</sun-web-app>
+
