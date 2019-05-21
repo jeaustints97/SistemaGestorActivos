@@ -109,9 +109,39 @@ public class Model {
         return sols;
     }
 
+    public List<Solicitud> obtenerTotalSolicitudes() {
+        List<Solicitud> sols = new ArrayList<>();
+        sols = this.getSolicitudDAO().getSolicitudes();
+        return sols;
+    }
+
+    public List<Solicitud> obtenerSolicitudesPorVerificar() {
+        List<Solicitud> sols = new ArrayList<>();
+        sols = this.getSolicitudDAO().getSolicitudesPorVerificar();
+        return sols;
+    }
+
+    public List<Funcionario> obtenerRegistradores() {
+        List<Funcionario> funs = new ArrayList<>();
+        funs = this.getFuncionarioDAO().getRegistradores();
+        return funs;
+    }
+
     public List<Solicitud> obtenerSolicitudesXComprobante(Usuario user, String comprobante) {
         List<Solicitud> sols = new ArrayList<>();
         sols = this.getUsuarioDAO().getSolicitudesPorComprobante(user.getId(), comprobante);
+        return sols;
+    }
+
+    public List<Solicitud> obtenerSolicitudesXComprobante(String comprobante) {
+        List<Solicitud> sols = new ArrayList<>();
+        sols = this.getSolicitudDAO().getSolicitudesPorComprobante(comprobante);
+        return sols;
+    }
+
+    public List<Solicitud> obtenerSolicitudesXComprobanteJefe(String comprobante) {
+        List<Solicitud> sols = new ArrayList<>();
+        sols = this.getSolicitudDAO().getSolicitudesPorComprobanteJefe(comprobante);
         return sols;
     }
 
@@ -131,11 +161,27 @@ public class Model {
         return this.getBienDAO().getBienesBySolicitud(dependencia, solicitud);
     }
 
+    public List<Bien> obtenerBienesPorSolicitud(int solicitud) {
+        return this.getBienDAO().getBienesBySolicitud(solicitud);
+    }
+
     public Solicitud obtenerSolicitudCompleta(int idSolicitud) {
         Solicitud solicitud = new Solicitud();
         List<Solicitud> lista = this.getSolicitudDAO().getSolicitud(idSolicitud);
         solicitud = lista.get(0);
         return solicitud;
+    }
+
+    public void AprobarSolicitud(int solicitud) {
+        this.getSolicitudDAO().AprobarSolicitud(solicitud);
+    }
+
+    public void RechazarSolicitud(int solicitud) {
+        this.getSolicitudDAO().RechazarSolicitud(solicitud);
+    }
+
+    public void asignacionDeRegistrador(int idSolicitud, String idRegistrador) {
+        this.getSolicitudDAO().asignacionDeRegistrador(idSolicitud, idRegistrador);
     }
 
 }

@@ -39,9 +39,36 @@
                     <% }%>
 
                     <% if (request.isUserInRole("SOCCB")) { %>
-                    <li class="nav-item"><a class="nav-link" href="presentation/users/Secretaria/Secretaria.jsp">PRUEBITA</a> </li>             
-                        <% }%>
-
+                    <li class="nav-item dropdown"> 
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Secretaria
+                        </a>  
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="presentation/users/Secretaria/Lista">Ver Solicitudes</a>
+                        </div>
+                    </li> 
+                    <% }%>
+                    <% if (request.isUserInRole("JOCCB")) { %>
+                    <li class="nav-item dropdown"> 
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Jefe OCCB
+                        </a>  
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="presentation/users/Jefe/Asignacion">Asignar Registrador</a>
+                        </div>
+                    </li> 
+                    <% }%>
+                    <% if (request.isUserInRole("Registrador")) { %>
+                    <li class="nav-item dropdown"> 
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Registrador
+                        </a>  
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="presentation/users/Jefe/Asignacion">Administrar categorias</a>
+                            <a class="dropdown-item" href="presentation/users/Jefe/Asignacion">Incorporar Bienes</a>
+                        </div>
+                    </li> 
+                    <% }%>
                     <li class="nav-item dropdown"> 
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <%=session.getAttribute("funcActual")%>

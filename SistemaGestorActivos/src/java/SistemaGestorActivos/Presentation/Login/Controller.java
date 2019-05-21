@@ -62,7 +62,7 @@ public class Controller extends HttpServlet {
 
                 try {
                     request.login(model.getId(), model.getClave());
-                    principal = request.getUserPrincipal();
+                    //principal = request.getUserPrincipal();
 
                     Usuario logged = domainModel.getUsuarioDAO().findById(model.getId());
                     session.setAttribute("logged", logged);

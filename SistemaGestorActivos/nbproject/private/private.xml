@@ -3,13 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Jeaustin/Desktop/Proyecto%20I/SistemaGestorActivos/web/presentation/users/Admin/Solicitud.jsp</file>
-            <file>file:/C:/Users/Jeaustin/Desktop/Proyecto%20I/SistemaGestorActivos/web/presentation/login/login.jsp</file>
+            <file>file:/C:/Users/Jeaustin/Desktop/Proyecto%20I/SistemaGestorActivos/src/java/SistemaGestorActivos/Presentation/Users/Jefe/Controller.java</file>
+            <file>file:/C:/Users/Jeaustin/Desktop/Proyecto%20I/SistemaGestorActivos/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Jeaustin/Desktop/Proyecto%20I/SistemaGestorActivos/src/java/SistemaGestorActivos/Logic/Model.java</file>
             <file>file:/C:/Users/Jeaustin/Desktop/Proyecto%20I/SistemaGestorActivos/web/presentation/header.jsp</file>
-            <file>file:/C:/Users/Jeaustin/Desktop/Proyecto%20I/SistemaGestorActivos/web/presentation/users/Secretaria/Secretaria.jsp</file>
-            <file>file:/C:/Users/Jeaustin/Desktop/Proyecto%20I/SistemaGestorActivos/web/WEB-INF/sun-web.xml</file>
-            <file>file:/C:/Users/Jeaustin/Desktop/Proyecto%20I/SistemaGestorActivos/src/java/SistemaGestorActivos/Presentation/Login/Controller.java</file>
-            <file>file:/C:/Users/Jeaustin/Desktop/Proyecto%20I/SistemaGestorActivos/src/java/SistemaGestorActivos/Presentation/Users/Admin/Listado/Controller.java</file>
+            <file>file:/C:/Users/Jeaustin/Desktop/Proyecto%20I/SistemaGestorActivos/web/presentation/users/Jefe/Asignacion.jsp</file>
         </group>
     </open-files>
 </project-private>

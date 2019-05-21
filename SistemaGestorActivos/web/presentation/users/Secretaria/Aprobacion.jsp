@@ -1,22 +1,19 @@
-<%@page import="java.util.HashMap"%>
-<%@page import="java.util.Map"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="SistemaGestorActivos.Logic.Solicitud"%>
 <%@page import="SistemaGestorActivos.Logic.Bien"%>
+<%@page import="SistemaGestorActivos.Logic.Solicitud"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
     <head>
         <title>Ingresar Solicitud</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <base href="http://localhost:8080/SistemaGestorActivos/">
-        <script src="presentation/js/solicitud.js" type="text/javascript"></script>
+        <script src="presentation/js/Secretaria.js" type="text/javascript"></script>
         <link href="css/Estilos.css" rel="stylesheet" type="text/css"/>
     </head>
-
     <body onLoad="camposSolicitud()">
         <%@ include file="/presentation/header.jsp" %>
 
@@ -24,27 +21,23 @@
         <% ArrayList<Bien> bienesTemp = (ArrayList<Bien>) session.getAttribute("bienes");%>
 
         <div class="ventanaSolicitud">
-            <form method="POST" name="nuevaSolicitud" action="presentation/users/Admin/ingresarSolicitud">
+            <form method="POST" name="aprobacionSolicitud" action="presentation/users/Secretaria/AprobarSolicitud">
                 <br>
                 <table border=0 cellpadding=6 cellspacing=8>
                     <tr>
-                        <td colspan="6" class="bordeInferior"><h3>Nueva Solicitud</h3></td>
+                        <td colspan="6" class="bordeInferior"><h3>Inspección de Solicitud</h3></td>
                     </tr>
                     <tr>
                         <td colspan="6"><br></td>
                     </tr>
                     <tr>
                         <th id="labelComprobante">Comprobante</th>
-                        <td><input type="text" id="comprobante" name="comprobante" value="<%= solTemp.getComprobante()%>"></td>
+                        <td><input type="text" id="comprobante" name="comprobante" value="<%= solTemp.getComprobante()%>" disabled></td>
                         <th id="labelFecha">Fecha</th>
-                            <%if (solTemp.getFecha() == null) {%>
-                        <td><input type="text" id="fecha" name="fecha" placeholder="DD-MM-YYYY" value="<%= solTemp.getFecha()%>"></td>
-                            <% } else {%>
-                        <td><input type="text" id="fecha" name="fecha" placeholder="DD-MM-YYYY" value="<%= solTemp.getFecha().toLocaleString().substring(0, 11)%>"></td>
-                            <% }%>
+                        <td><input type="text" id="fecha" name="fecha" placeholder="DD-MM-YYYY" value="<%= solTemp.getFecha().toLocaleString().substring(0, 11)%>" disabled></td>
                         <th id="labelTipo">Tipo</th>
                         <td>
-                            <select name="tipo">
+                            <select name="tipo" disabled>
                                 <%if (solTemp.getTipo().equals("Compra")) { %>
                                 <option value="Compra" selected>Compra</option>
                                 <option value="Donacion">Donacion</option>
@@ -75,12 +68,12 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td><input size=13 type="text" name="descripcion" placeholder="Descripcion" value=""></td>
-                        <td><input size=13 type="text" name="marca" placeholder="Marca" value=""></td>
-                        <td><input size=13 type="text" name="modelo" placeholder="Modelo" value=""></td>
-                        <td><input type="number" name="precioU" step="0.01" placeholder="0.0" value=""></td>
-                        <td><input type="number" name="cantidad" placeholder="0" value=""></td>
-                        <td> <input type="submit" name="agregarBien" formaction="presentation/users/Admin/agregarBien" value="Agregar"> </td>
+                        <td><input size=13 type="text" name="descripcion" placeholder="Descripcion" value="" disabled></td>
+                        <td><input size=13 type="text" name="marca" placeholder="Marca" value="" disabled></td>
+                        <td><input size=13 type="text" name="modelo" placeholder="Modelo" value="" disabled></td>
+                        <td><input type="number" name="precioU" step="0.01" placeholder="0.0" value="" disabled></td>
+                        <td><input type="number" name="cantidad" placeholder="0" value="" disabled></td>
+                        <td> <input type="submit" name="agregarBien" formaction="presentation/users/Admin/agregarBienEdicion" value="Agregar" disabled></td>
                     </tr>
                     <tr>
                         <td colspan="6" class="bordeInferior"><h3>Listado</h3></td>
@@ -88,26 +81,24 @@
                     <tr>
                         <td colspan="6"><br></td>
                     </tr>
-                    <% for (Bien b : bienesTemp) {%>
+                    <% for (int i = 0; i < bienesTemp.size(); i++) {%>
                     <tr class="tablaListado">
-                        <td class="ladosTablaListado"><%=b.getDescripcion()%></td>
-                        <td class="ladosTablaListado"> <%=b.getMarca()%></td>
-                        <td class="ladosTablaListado"> <%=b.getModelo()%></td>
-                        <td class="ladosTablaListado"> <%=b.getPrecio()%></td>
-                        <td class="ladosTablaListado"><%=b.getCantidad()%> </td>
-                        <td class="ladosTablaListado"></td>
+                        <td class="ladosTablaListado"><%= bienesTemp.get(i).getDescripcion()%></td>
+                        <td class="ladosTablaListado"> <%=bienesTemp.get(i).getMarca()%></td>
+                        <td class="ladosTablaListado"> <%=bienesTemp.get(i).getModelo()%></td>
+                        <td class="ladosTablaListado"> <%=bienesTemp.get(i).getPrecio()%></td>
+                        <td class="ladosTablaListado"><%=bienesTemp.get(i).getCantidad()%> </td>
                     </tr>
-                    <% }%>
+                    <% }%> 
                     <tr>
                         <td colspan="6"><br></td>
                     </tr>
                     <tr>
-                    <tr>
                         <td height="55" colspan="3" align="center">
-                            <input type="submit" name="agregarSolicitud" value="Solicitar">
+                            <input type="submit" name="aceptarSolicitud" value="Aceptar Solicitud">
                         </td>
                         <td height="55" colspan="3" align="center">
-                            <input type="submit" name="RegresarEdicion" value="Cancelar" formaction="presentation/users/Admin/Regresar">
+                            <input type="submit" name="rechazarSolicitud" value="Rechazar Solicitud" formaction="presentation/users/Secretaria/RechazarSolicitud">
                         </td>
                     </tr>
                 </table>
