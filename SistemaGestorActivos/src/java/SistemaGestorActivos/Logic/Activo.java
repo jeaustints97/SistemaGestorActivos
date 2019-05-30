@@ -1,5 +1,5 @@
 package SistemaGestorActivos.Logic;
-// Generated 19-abr-2019 17:06:01 by Hibernate Tools 4.3.1
+// Generated 29-may-2019 18:47:09 by Hibernate Tools 4.3.1
 
 
 
@@ -13,14 +13,22 @@ public class Activo  implements java.io.Serializable {
      private Bien bien;
      private Categoria categoria;
      private Funcionario funcionario;
+     private int consecutivoActual;
 
     public Activo() {
     }
 
-    public Activo(Bien bien, Categoria categoria, Funcionario funcionario) {
+	
+    public Activo(Bien bien, Categoria categoria, int consecutivoActual) {
+        this.bien = bien;
+        this.categoria = categoria;
+        this.consecutivoActual = consecutivoActual;
+    }
+    public Activo(Bien bien, Categoria categoria, Funcionario funcionario, int consecutivoActual) {
        this.bien = bien;
        this.categoria = categoria;
        this.funcionario = funcionario;
+       this.consecutivoActual = consecutivoActual;
     }
    
     public Integer getId() {
@@ -50,6 +58,13 @@ public class Activo  implements java.io.Serializable {
     
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
+    }
+    public int getConsecutivoActual() {
+        return this.consecutivoActual;
+    }
+    
+    public void setConsecutivoActual(int consecutivoActual) {
+        this.consecutivoActual = consecutivoActual;
     }
 
 

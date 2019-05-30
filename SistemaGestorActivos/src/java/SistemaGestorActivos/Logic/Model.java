@@ -121,6 +121,12 @@ public class Model {
         return sols;
     }
 
+    public List<Solicitud> obtenerTotalSolicitudesXRegistrador(String idReg) {
+        List<Solicitud> sols = new ArrayList<>();
+        sols = this.getSolicitudDAO().getSolicitudesPorRegistrador(idReg);
+        return sols;
+    }
+
     public List<Funcionario> obtenerRegistradores() {
         List<Funcionario> funs = new ArrayList<>();
         funs = this.getFuncionarioDAO().getRegistradores();
@@ -165,6 +171,10 @@ public class Model {
         return this.getBienDAO().getBienesBySolicitud(solicitud);
     }
 
+    public List<Categoria> obtenerCategorias() {
+        return this.getCategoriaDAO().findAll();
+    }
+
     public Solicitud obtenerSolicitudCompleta(int idSolicitud) {
         Solicitud solicitud = new Solicitud();
         List<Solicitud> lista = this.getSolicitudDAO().getSolicitud(idSolicitud);
@@ -182,6 +192,30 @@ public class Model {
 
     public void asignacionDeRegistrador(int idSolicitud, String idRegistrador) {
         this.getSolicitudDAO().asignacionDeRegistrador(idSolicitud, idRegistrador);
+    }
+
+    public void registroDeActivo(int idBien, String idCategoria) {
+        this.getSolicitudDAO().registroDeActivo(idBien, idCategoria);
+    }
+
+    public void agregarCategoria(Categoria categoria) {
+        this.getCategoriaDAO().save(categoria);
+    }
+
+    public Categoria obtenerCategoria(int id) {
+        return this.getCategoriaDAO().findById(id);
+    }
+
+    public void eliminarCategoria(int id) {
+        this.getCategoriaDAO().delete(id);
+    }
+
+    public List<Categoria> obtenerCategorias(String descripcion) {
+        return this.getCategoriaDAO().getCategoriasPorDescripcion(descripcion);
+    }
+
+    public void actualizarCategoria(Categoria categoria) {
+        this.getCategoriaDAO().merge(categoria);
     }
 
 }

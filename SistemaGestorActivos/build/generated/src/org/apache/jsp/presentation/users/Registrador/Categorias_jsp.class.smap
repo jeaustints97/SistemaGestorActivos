@@ -1,0 +1,42 @@
+SMAP
+Categorias_jsp.java
+JSP
+*S JSP
+*F
++ 0 Categorias.jsp
+presentation/users/Registrador/Categorias.jsp
++ 1 header.jsp
+presentation/header.jsp
++ 2 footer.jsp
+presentation/footer.jsp
+*L
+1,16:53
+1#1,5:69
+5:73,2
+6,19:75
+25:94,3
+26,3:97
+29:100,3
+30,9:103
+39:112,3
+40:115
+41:116,3
+42,8:119
+50,2:127,3
+52,8:133
+60,2:141,3
+62,9:147
+71:156,3
+72,2:159
+74:161,3
+75,5:164
+80:169,3
+81:172
+82:173,3
+83,7:176
+90:183,3
+91,9:186
+16#0,110:194
+1#2,60:304
+125#0,90:363
+*E

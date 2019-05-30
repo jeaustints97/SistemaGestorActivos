@@ -22,6 +22,22 @@ public class ActivoDAO extends HibernateUtil implements IBaseDao<Activo, java.ma
         }
     }
 
+    public Integer saveAndGet(Activo o) {
+        int id;
+        try {
+            iniciaOperacion();
+            getSesion().save(o);
+            id = o.getId();
+            getTransc().commit();
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+            throw he;
+        } finally {
+            getSesion().close();
+        }
+        return id;
+    }
+
     @Override
     public Activo merge(Activo o) throws HibernateException {
         try {

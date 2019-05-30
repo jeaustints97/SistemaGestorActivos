@@ -1,5 +1,5 @@
 package SistemaGestorActivos.Logic;
-// Generated 19-abr-2019 17:06:01 by Hibernate Tools 4.3.1
+// Generated 29-may-2019 18:47:09 by Hibernate Tools 4.3.1
 
 
 

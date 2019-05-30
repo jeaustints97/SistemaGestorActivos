@@ -1,5 +1,5 @@
 package SistemaGestorActivos.Logic;
-// Generated 19-abr-2019 17:06:01 by Hibernate Tools 4.3.1
+// Generated 29-may-2019 18:47:09 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -12,6 +12,7 @@ public class Categoria  implements java.io.Serializable {
 
 
      private Integer id;
+     private String codigo;
      private String descripcion;
      private int consecutivo;
      private Set<Activo> activos = new HashSet<Activo>(0);
@@ -20,11 +21,13 @@ public class Categoria  implements java.io.Serializable {
     }
 
 	
-    public Categoria(String descripcion, int consecutivo) {
+    public Categoria(String codigo, String descripcion, int consecutivo) {
+        this.codigo = codigo;
         this.descripcion = descripcion;
         this.consecutivo = consecutivo;
     }
-    public Categoria(String descripcion, int consecutivo, Set<Activo> activos) {
+    public Categoria(String codigo, String descripcion, int consecutivo, Set<Activo> activos) {
+       this.codigo = codigo;
        this.descripcion = descripcion;
        this.consecutivo = consecutivo;
        this.activos = activos;
@@ -36,6 +39,13 @@ public class Categoria  implements java.io.Serializable {
     
     public void setId(Integer id) {
         this.id = id;
+    }
+    public String getCodigo() {
+        return this.codigo;
+    }
+    
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
     public String getDescripcion() {
         return this.descripcion;

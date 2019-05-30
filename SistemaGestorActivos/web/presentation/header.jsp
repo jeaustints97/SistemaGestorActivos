@@ -9,10 +9,10 @@
     <title>Encabezado</title>
     <base href="http://localhost:8080/SistemaGestorActivos/">
     <link href="css/Estilos.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
@@ -64,8 +64,8 @@
                             Registrador
                         </a>  
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="presentation/users/Jefe/Asignacion">Administrar categorias</a>
-                            <a class="dropdown-item" href="presentation/users/Jefe/Asignacion">Incorporar Bienes</a>
+                            <a class="dropdown-item" href="presentation/users/Registrador/AdministrarCategorias">Administrar categorias</a>
+                            <a class="dropdown-item" href="presentation/users/Registrador/verSolicitudes">Incorporar Bienes</a>
                         </div>
                     </li> 
                     <% }%>
