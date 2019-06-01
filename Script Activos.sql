@@ -19,19 +19,21 @@ CREATE TABLE IF NOT EXISTS `SistemaGestorActivos`.`Puesto` (
 CREATE TABLE IF NOT EXISTS `SistemaGestorActivos`.`Funcionario` (
   `Id` VARCHAR(25) NOT NULL,
   `Nombre` VARCHAR(25) NOT NULL,
-  `Dependencia` VARCHAR(45) NOT NULL,
+  `Dependencia` INT NOT NULL,
   `Puesto` INT NOT NULL,
   PRIMARY KEY (`Id`),
   INDEX `funcionario_fk_puesto_idx` (`Puesto` ASC),
+  INDEX `funcionario_fk_dependencia_idx` (`Dependencia` ASC),
   CONSTRAINT `funcionario_fk_puesto`
     FOREIGN KEY (`Puesto`)
     REFERENCES `SistemaGestorActivos`.`Puesto` (`Id`)
+
 );
 
 
 CREATE TABLE IF NOT EXISTS `SistemaGestorActivos`.`Usuario` (
   `Id` VARCHAR(25) NOT NULL,
-  `Clave` VARCHAR(10) NOT NULL,
+  `Clave` VARCHAR(64) NOT NULL,
   `Rol` INT NULL,
   PRIMARY KEY (`Id`),
   INDEX `usuario_fk_rol_idx` (`Rol` ASC),
@@ -54,6 +56,10 @@ CREATE TABLE IF NOT EXISTS `SistemaGestorActivos`.`Dependencia` (
     FOREIGN KEY (`Administrador`)
     REFERENCES `SistemaGestorActivos`.`Funcionario` (`Id`)
 );
+
+ALTER TABLE Funcionario ADD CONSTRAINT `funcionario_fk_dependencia` 
+FOREIGN KEY (`Dependencia`)
+REFERENCES `SistemaGestorActivos`.`Dependencia` (`Id`);
 
 
 CREATE TABLE IF NOT EXISTS `SistemaGestorActivos`.`Estado` (
@@ -105,13 +111,12 @@ CREATE TABLE IF NOT EXISTS `SistemaGestorActivos`.`ERazon` (
 
 
 CREATE TABLE IF NOT EXISTS `SistemaGestorActivos`.`Categoria` (
-  `Id` INT NOT NULL,
-  `Descripcion` VARCHAR(35) NOT NULL,
-  `Consecutivo` INT NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`Id`),
-  KEY `Consecutivo` (`Consecutivo`)
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `Codigo` VARCHAR(6) NOT NULL,
+  `Descripcion` VARCHAR(40) NOT NULL,
+  `Consecutivo` INT NOT NULL,
+  PRIMARY KEY (`Id`)
 );
-
 
 CREATE TABLE IF NOT EXISTS `SistemaGestorActivos`.`Bien` (
   `Id` INT NOT NULL AUTO_INCREMENT,
@@ -185,10 +190,10 @@ insert into funcionario(id,nombre,dependencia,puesto) values('5','Ronald',5,1);
 
 -- Funcionarios ordinarios
 insert into funcionario(id,nombre,dependencia,puesto) values('6','Diego',1,5);
-insert into funcionario(id,nombre,dependencia,puesto) values('7','Sofia',1,5);
+insert into funcionario(id,nombre,dependencia,puesto) values('7','Sofia',3,3);
 insert into funcionario(id,nombre,dependencia,puesto) values('8','Arturo',2,5);
 insert into funcionario(id,nombre,dependencia,puesto) values('9','Carlos',2,5);
-insert into funcionario(id,nombre,dependencia,puesto) values('10','Roger',4,6);
+insert into funcionario(id,nombre,dependencia,puesto) values('10','Roger',3,3);
 
 -- Insertando las posibles usuarios en el sistema
 insert into usuario(id,clave,rol) values ('1',SHA2('1', 256),1);
@@ -224,11 +229,12 @@ insert into bien(id,descripcion,marca,modelo,precio,cantidad,solicitud)
 values(3,'Piano','Yamaha','De cola',600000,1,3);
 
 -- Insertando las posibles categorias en el sistema
-insert into categoria(id,descripcion,consecutivo) values (1,'Silla de Laboratorio',1);
-insert into categoria(id,descripcion,consecutivo) values (2,'Escritorio de Laboratorio',1);
-insert into categoria(id,descripcion,consecutivo) values (3,'Computadora de Escritorio',1);
-insert into categoria(id,descripcion,consecutivo) values (4,'Instrumento Mus',1);
+insert into categoria(id,codigo,descripcion,consecutivo) values (1,'SiLab','Silla de Laboratorio',1);
+insert into categoria(id,codigo,descripcion,consecutivo) values (2,'EsLab','Escritorio de Laboratorio',1);
+insert into categoria(id,codigo,descripcion,consecutivo) values (3,'ComEs','Computadora de Escritorio',1);
+insert into categoria(id,codigo,descripcion,consecutivo) values (4,'InsMu','Instrumento Musical',1);
 
+desc categoria;
 update dependencia set administrador=1 where id=1;
 update dependencia set administrador=8 where id=2;
 
@@ -288,6 +294,7 @@ select * from funcionario;
 update funcionario set puesto=3, dependencia=3 where id=7;
 
 desc solicitud;
+select * from categoria;
 
 select * from funcionario;
 
@@ -317,3 +324,40 @@ select a.id, b.descripcion, c.descripcion, a.consecutivoactual
 from activo a, bien b, categoria c
 where a.bien=b.id and a.categoria=c.id;
 
+select * from categoria;
+delete from categoria where id=11;
+
+select a.id, b.descripcion, c.codigo, a.consecutivoactual
+from activo a, bien b, categoria c
+where a.bien=b.id and a.categoria=c.id and
+a.id like '%%%' and funcionario is null;
+
+select a.id, s.id solicitud, b.descripcion, c.codigo, a.consecutivoactual
+from activo a, bien b, categoria c, solicitud s
+where a.bien=b.id and a.categoria=c.id and b.solicitud=s.id
+and a.id like '%%%' and funcionario is null;
+
+select * from solicitud;
+select * from bien;
+select * from activo;
+
+select id, comprobante, fecha, tipo
+from Solicitud
+where estado=2 and registrador= 4 and comprobante like '%%%';
+
+select * from solicitud;
+
+select * from funcionario;
+
+select f.id, f.nombre,d.nombre, p.descripcion
+from funcionario f, dependencia d, puesto p
+where f.dependencia = d.id and f.puesto=p.id;
+
+select count(*) total
+from activo a, solicitud s, bien b 
+where a.bien=b.id and b.solicitud=s.id 
+and s.id=1 and a.funcionario is null and s.estado=4;
+
+select * 
+from solicitud
+where estado=4;
