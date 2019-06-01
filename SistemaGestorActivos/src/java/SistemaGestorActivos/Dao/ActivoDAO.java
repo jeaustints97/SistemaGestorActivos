@@ -97,10 +97,7 @@ public class ActivoDAO extends HibernateUtil implements IBaseDao<Activo, java.ma
         }
         return activos;
     }
-<<<<<<< HEAD
-    
-    
-=======
+
 
     public List<Activo> getActivosSinAsignar(String id) {
         List<Activo> activosRaw = null;
@@ -186,5 +183,4 @@ public class ActivoDAO extends HibernateUtil implements IBaseDao<Activo, java.ma
         return activosFinal;
     }
 
->>>>>>> 5954fe3284859699327b4d91935a39ea045d3feb
 }
