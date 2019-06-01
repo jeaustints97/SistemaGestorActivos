@@ -2,15 +2,15 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="sistemagestoractivos"/>
-  <table-filter match-name="erazon"/>
   <table-filter match-name="usuario"/>
   <table-filter match-name="solicitud"/>
-  <table-filter match-name="puesto"/>
-  <table-filter match-name="bien"/>
-  <table-filter match-name="dependencia"/>
-  <table-filter match-name="activo"/>
-  <table-filter match-name="estado"/>
-  <table-filter match-name="funcionario"/>
-  <table-filter match-name="categoria"/>
   <table-filter match-name="rol"/>
+  <table-filter match-name="activo"/>
+  <table-filter match-name="dependencia"/>
+  <table-filter match-name="funcionario"/>
+  <table-filter match-name="estado"/>
+  <table-filter match-name="categoria"/>
+  <table-filter match-name="bien"/>
+  <table-filter match-name="puesto"/>
+  <table-filter match-name="erazon"/>
 </hibernate-reverse-engineering>

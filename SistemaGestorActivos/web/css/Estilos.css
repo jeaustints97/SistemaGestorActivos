@@ -20,6 +20,12 @@
     margin-right: 10%;
 }
 
+.ventanaSolicitudReg{
+    text-align: center;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
 .bordeInferior{
     border-bottom: 3px solid black;
 }

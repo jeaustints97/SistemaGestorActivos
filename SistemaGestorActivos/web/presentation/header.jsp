@@ -66,6 +66,7 @@
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="presentation/users/Registrador/AdministrarCategorias">Administrar categorias</a>
                             <a class="dropdown-item" href="presentation/users/Registrador/verSolicitudes">Incorporar Bienes</a>
+                            <a class="dropdown-item" href="presentation/users/Registrador/asignarActivos">Asignar Activos</a>
                         </div>
                     </li> 
                     <% }%>

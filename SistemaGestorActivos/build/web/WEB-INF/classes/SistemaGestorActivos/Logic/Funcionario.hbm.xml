@@ -1,21 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 29-may-2019 18:47:10 by Hibernate Tools 4.3.1 -->
+<!-- Generated 31-may-2019 22:51:56 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="SistemaGestorActivos.Logic.Funcionario" table="funcionario" catalog="sistemagestoractivos" optimistic-lock="version">
         <id name="id" type="string">
             <column name="Id" length="25" />
             <generator class="assigned" />
         </id>
+        <many-to-one name="dependencia" class="SistemaGestorActivos.Logic.Dependencia" fetch="select">
+            <column name="Dependencia" not-null="true" />
+        </many-to-one>
         <many-to-one name="puesto" class="SistemaGestorActivos.Logic.Puesto" fetch="select">
             <column name="Puesto" not-null="true" />
         </many-to-one>
         <property name="nombre" type="string">
             <column name="Nombre" length="25" not-null="true" />
-        </property>
-        <property name="dependencia" type="string">
-            <column name="Dependencia" length="45" not-null="true" />
         </property>
         <set name="activos" table="activo" inverse="true" lazy="true" fetch="select">
             <key>

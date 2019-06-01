@@ -12,7 +12,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <base href="http://localhost:8080/SistemaGestorActivos/">
-        <link href="css/RegistradorSol.css" rel="stylesheet" type="text/css"/>
+        <link href="css/Estilos.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <%@ include file="/presentation/header.jsp" %>

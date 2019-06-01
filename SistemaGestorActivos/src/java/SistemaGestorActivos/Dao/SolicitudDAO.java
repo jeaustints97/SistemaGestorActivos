@@ -252,6 +252,39 @@ public class SolicitudDAO extends HibernateUtil implements IBaseDao<Solicitud, I
         return listaFinal;
     }
 
+    public List<Solicitud> getSolicitudesFiltradasPorRegistrador(String idReg,String comprobante) {
+        List<Solicitud> listaRaw = null;
+        List<Solicitud> listaFinal = new ArrayList<>();
+        String sql = "select id, comprobante, fecha, tipo\n"
+                + "from Solicitud\n"
+                + "where estado=2 and registrador=" + idReg + " and comprobante like '%%"+comprobante+"%';";
+        try {
+            iniciaOperacion();
+            listaRaw = (List<Solicitud>) getSesion().createSQLQuery(sql).list();
+            Iterator itr = listaRaw.iterator();
+            while (itr.hasNext()) {
+                Object[] obj = (Object[]) itr.next();
+                Solicitud sol = new Solicitud();
+                sol.setId(Integer.parseInt(String.valueOf(obj[0])));
+                sol.setComprobante(String.valueOf(obj[1]));
+
+                String fecha = String.valueOf(obj[2]);
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                Date date1 = format.parse(fecha);
+                sol.setFecha(date1);
+
+                sol.setTipo(String.valueOf(obj[3]));
+
+                listaFinal.add(sol);
+            }
+
+        } catch (Exception ex) {
+        } finally {
+            getSesion().close();
+        }
+        return listaFinal;
+    }
+
     public List<Solicitud> getSolicitudesPorComprobante(String comprobante) {
         List<Solicitud> solicitudesRaw = null;
         List<Solicitud> solicitudesFinal = new ArrayList<>();

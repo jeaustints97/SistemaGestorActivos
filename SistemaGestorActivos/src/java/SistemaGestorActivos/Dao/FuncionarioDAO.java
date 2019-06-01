@@ -1,8 +1,10 @@
 package SistemaGestorActivos.Dao;
 
+import SistemaGestorActivos.Logic.Dependencia;
 import java.util.List;
 import org.hibernate.HibernateException;
 import SistemaGestorActivos.Logic.Funcionario;
+import SistemaGestorActivos.Logic.Puesto;
 import SistemaGestorActivos.Logic.Solicitud;
 import SistemaGestorActivos.Utils.HibernateUtil;
 import java.math.BigInteger;
@@ -100,6 +102,41 @@ public class FuncionarioDAO extends HibernateUtil implements IBaseDao<Funcionari
                 Funcionario fun = new Funcionario();
                 fun.setId(String.valueOf(obj[0]));
                 fun.setNombre(String.valueOf(obj[1]));
+
+                funcionariosFinal.add(fun);
+            }
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+            throw he;
+        } finally {
+            getSesion().close();
+        }
+        return funcionariosFinal;
+    }
+
+    public List<Funcionario> getAllFuncionarios() {
+        List<Funcionario> funcionariosRaw = null;
+        List<Funcionario> funcionariosFinal = new ArrayList<>();
+        String sql = "select f.id, f.nombre,d.nombre name, p.descripcion\n"
+                + "from funcionario f, dependencia d, puesto p\n"
+                + "where f.dependencia=d.id and f.puesto=p.id";
+        try {
+            iniciaOperacion();
+            funcionariosRaw = (List<Funcionario>) getSesion().createSQLQuery(sql).list();
+            Iterator itr = funcionariosRaw.iterator();
+            while (itr.hasNext()) {
+                Object[] obj = (Object[]) itr.next();
+                Funcionario fun = new Funcionario();
+                fun.setId(String.valueOf(obj[0]));
+                fun.setNombre(String.valueOf(obj[1]));
+                
+                Dependencia dep = new Dependencia();
+                dep.setNombre(String.valueOf(obj[2]));
+                fun.setDependencia(dep);
+                
+                Puesto pue = new Puesto();
+                pue.setDescripcion(String.valueOf(obj[3]));
+                fun.setPuesto(pue);
 
                 funcionariosFinal.add(fun);
             }

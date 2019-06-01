@@ -1,5 +1,5 @@
 package SistemaGestorActivos.Logic;
-// Generated 29-may-2019 18:47:09 by Hibernate Tools 4.3.1
+// Generated 31-may-2019 22:51:55 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -14,6 +14,7 @@ public class Dependencia  implements java.io.Serializable {
      private int id;
      private Funcionario funcionario;
      private String nombre;
+     private Set<Funcionario> funcionarios = new HashSet<Funcionario>(0);
      private Set<Solicitud> solicituds = new HashSet<Solicitud>(0);
 
     public Dependencia() {
@@ -24,10 +25,11 @@ public class Dependencia  implements java.io.Serializable {
         this.id = id;
         this.nombre = nombre;
     }
-    public Dependencia(int id, Funcionario funcionario, String nombre, Set<Solicitud> solicituds) {
+    public Dependencia(int id, Funcionario funcionario, String nombre, Set<Funcionario> funcionarios, Set<Solicitud> solicituds) {
        this.id = id;
        this.funcionario = funcionario;
        this.nombre = nombre;
+       this.funcionarios = funcionarios;
        this.solicituds = solicituds;
     }
    
@@ -51,6 +53,13 @@ public class Dependencia  implements java.io.Serializable {
     
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    public Set<Funcionario> getFuncionarios() {
+        return this.funcionarios;
+    }
+    
+    public void setFuncionarios(Set<Funcionario> funcionarios) {
+        this.funcionarios = funcionarios;
     }
     public Set<Solicitud> getSolicituds() {
         return this.solicituds;
