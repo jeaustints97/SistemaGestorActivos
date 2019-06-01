@@ -40,7 +40,6 @@
                     <!--end of col-->
                 </div>
             </div>
-
             <br>
             <div class="table-wrapper-scroll-y my-custom-scrollbar">
                 <form method="POST" name="asignar" action="presentation/users/Jefe/asignar_registrador">

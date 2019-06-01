@@ -1,5 +1,5 @@
 package SistemaGestorActivos.Logic;
-// Generated 29-may-2019 18:47:09 by Hibernate Tools 4.3.1
+// Generated 31-may-2019 22:51:55 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -12,9 +12,9 @@ public class Funcionario  implements java.io.Serializable {
 
 
      private String id;
+     private Dependencia dependencia;
      private Puesto puesto;
      private String nombre;
-     private String dependencia;
      private Set<Activo> activos = new HashSet<Activo>(0);
      private Usuario usuario;
      private Set<Dependencia> dependencias = new HashSet<Dependencia>(0);
@@ -24,17 +24,17 @@ public class Funcionario  implements java.io.Serializable {
     }
 
 	
-    public Funcionario(String id, Puesto puesto, String nombre, String dependencia) {
+    public Funcionario(String id, Dependencia dependencia, Puesto puesto, String nombre) {
         this.id = id;
+        this.dependencia = dependencia;
         this.puesto = puesto;
         this.nombre = nombre;
-        this.dependencia = dependencia;
     }
-    public Funcionario(String id, Puesto puesto, String nombre, String dependencia, Set<Activo> activos, Usuario usuario, Set<Dependencia> dependencias, Set<Solicitud> solicituds) {
+    public Funcionario(String id, Dependencia dependencia, Puesto puesto, String nombre, Set<Activo> activos, Usuario usuario, Set<Dependencia> dependencias, Set<Solicitud> solicituds) {
        this.id = id;
+       this.dependencia = dependencia;
        this.puesto = puesto;
        this.nombre = nombre;
-       this.dependencia = dependencia;
        this.activos = activos;
        this.usuario = usuario;
        this.dependencias = dependencias;
@@ -47,6 +47,13 @@ public class Funcionario  implements java.io.Serializable {
     
     public void setId(String id) {
         this.id = id;
+    }
+    public Dependencia getDependencia() {
+        return this.dependencia;
+    }
+    
+    public void setDependencia(Dependencia dependencia) {
+        this.dependencia = dependencia;
     }
     public Puesto getPuesto() {
         return this.puesto;
@@ -61,13 +68,6 @@ public class Funcionario  implements java.io.Serializable {
     
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-    public String getDependencia() {
-        return this.dependencia;
-    }
-    
-    public void setDependencia(String dependencia) {
-        this.dependencia = dependencia;
     }
     public Set<Activo> getActivos() {
         return this.activos;

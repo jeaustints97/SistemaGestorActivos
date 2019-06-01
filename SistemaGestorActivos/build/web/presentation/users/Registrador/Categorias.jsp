@@ -6,11 +6,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <base href="http://localhost:8080/SistemaGestorActivos/">
-        <script src="presentation/js/ajaxCategoria.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="presentation/js/ajaxPromise.js"></script>
+
     </head>
     <body>
         <%@ include file="/presentation/header.jsp" %>
@@ -31,15 +28,15 @@
                         <form class="form-horizontal">
                             <div class="form-group form-group-sm">
                                 <label class="col-sm-2 control-label" for="sm">Codigo</label>
-                                <div class="col-sm-8"><input id ="addCodigo" class="form-control" type="text"></div>                     
+                                <div class="col-sm-8"><input id ="addCodigo" class="form-control" type="text" required></div>                     
                                 <label class="col-sm-2 control-label" for="sm">Descripcion</label>
-                                <div class="col-sm-8"><input id ="addDescripcion" class="form-control" type="text"></div>                     
+                                <div class="col-sm-8"><input id ="addDescripcion" class="form-control" type="text" required></div>                     
                             </div>
                         </form>
                     </div>
                     <!-- Footer del Modal -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal" onclick="add()">Agregar</button>
+                        <button type="button" class="btn btn-success" onclick="add()">Agregar</button>
                         <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
@@ -125,28 +122,6 @@
         <%@ include file="/presentation/footer.jsp" %>
 
         <script>
-            function loaded(event) {
-                //Posibles eventos en botones
-                //document.getElementById("agregar").addEventListener("click", add);
-                //document.getElementById("buscar").addEventListener("click", buscar);
-
-                // se envia  al servidor
-                //ajax({type: "GET", url: "api/categorias?descripcion=" + ""})
-                //.then(function (personas) {
-                //list(personas);
-                //},
-                //function (status) {
-                //alert(errorMessage(status));
-                //});
-            }
-
-            function focus(event) {
-                event.target.classList.add("focus");
-            }
-            function blur(event) {
-                event.target.classList.remove("focus");
-            }
-
             function list(categorias) {
                 var listado = document.getElementById("listadoCategorias");
                 listado.innerHTML = "";
@@ -167,12 +142,9 @@
             function buscar() {
                 var descrip = document.getElementById("filtrado").value;
                 ajax({type: "GET", url: "api/categorias?descripcion=" + descrip})
-                        .then(function (personas) {
-                            list(personas);
-                        },
-                                function (status) {
-                                    alert(errorMessage(status));
-                                });
+                        .then(function (personas) {list(personas);},
+                              function (status) {alert(errorMessage(status));
+                    });
             }
             function buscarTodos() {
                 var descrip = "";
@@ -181,13 +153,17 @@
                           function (status) {alert(errorMessage(status));});
             }
             function cleanAdd(){
-                document.getElementById("addCodigo").value="";
-                document.getElementById("addDescripcion").value="";
+                $('.modal').on('hidden.bs.modal', function(){
+                $(this).find('form')[0].reset();
+                });
             }
             function add() {
-                cat = { codigo: document.getElementById("addCodigo").value,
-                        descripcion: document.getElementById("addDescripcion").value
-                      };
+                var cod = document.getElementById("addCodigo");
+                var des = document.getElementById("addDescripcion");
+                if(cod.value.length > 0 && des.value.length > 0 ){      
+                    cat = { codigo: document.getElementById("addCodigo").value,
+                            descripcion: document.getElementById("addDescripcion").value
+                          };
                     // se envia  al servidor
                     ajax({type: "POST", url: "api/categorias", data: JSON.stringify(cat), contentType: "application/json"})
                     .then(function () {
@@ -195,7 +171,14 @@
                         ajax({type: "GET", url: "api/categorias?descripcion=" + descrip})
                             .then(function (personas) {list(personas);},
                                   function (status) {alert(errorMessage(status));})})
-                    .then(cleanAdd());
+                    alert("Categoria agregada correctamente"); 
+                    cleanAdd();
+                    $('#ModalInsCat').modal('hide');
+                    $('.modal-backdrop').remove();
+                }
+                else{
+                    alert("Todos los campos deben estar completos"); 
+                }
             }
             function edit(id) {
             // lo trae del servidor

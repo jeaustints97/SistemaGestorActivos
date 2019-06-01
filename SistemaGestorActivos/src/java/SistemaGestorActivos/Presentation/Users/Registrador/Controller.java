@@ -4,6 +4,7 @@ import SistemaGestorActivos.Logic.Activo;
 import SistemaGestorActivos.Logic.Bien;
 import SistemaGestorActivos.Logic.Categoria;
 import SistemaGestorActivos.Logic.Estado;
+import SistemaGestorActivos.Logic.Funcionario;
 import SistemaGestorActivos.Logic.Model;
 import SistemaGestorActivos.Logic.Solicitud;
 import SistemaGestorActivos.Logic.Usuario;
@@ -23,7 +24,9 @@ import javax.servlet.http.HttpServletResponse;
             "/presentation/users/Registrador/AdministrarCategorias",
             "/presentation/users/Registrador/verSolicitudes",
             "/presentation/users/Registrador/comenzar_filtrado",
+            "/presentation/users/Registrador/comenzar_filtrado_activos",
             "/presentation/users/Registrador/inicioRegistro",
+            "/presentation/users/Registrador/asignarActivos",
             "/presentation/users/Registrador/registrarActivo"})
 public class Controller extends HttpServlet {
 
@@ -36,13 +39,19 @@ public class Controller extends HttpServlet {
             this.verListaSolicitudes(request, response);
         }
         if (request.getServletPath().equals("/presentation/users/Registrador/comenzar_filtrado")) {
-            //this.verListaSolicitudes(request, response);
+            this.filtrarListaSolicitudes(request, response);
+        }
+        if (request.getServletPath().equals("/presentation/users/Registrador/comenzar_filtrado_activos")) {
+            this.filtrarListaActivosPorId(request, response);
         }
         if (request.getServletPath().equals("/presentation/users/Registrador/inicioRegistro")) {
             this.verSolicitud(request, response);
         }
         if (request.getServletPath().equals("/presentation/users/Registrador/registrarActivo")) {
             this.registrarActivo(request, response);
+        }
+        if (request.getServletPath().equals("/presentation/users/Registrador/asignarActivos")) {
+            this.asignarActivos(request, response);
         }
 
     }
@@ -57,6 +66,13 @@ public class Controller extends HttpServlet {
     protected void verListaCategorias(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("/presentation/users/Registrador/Categorias.jsp").forward(request, response);
+    }
+
+    protected void asignarActivos(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getSession().setAttribute("listaActs", this.obtenerListaActivosSinAsignar());
+        request.getSession().setAttribute("listaFunc", this.obtenerListaFuncionarios());
+        request.getRequestDispatcher("/presentation/users/Registrador/AsignacionActivos.jsp").forward(request, response);
     }
 
     protected void verSolicitud(HttpServletRequest request, HttpServletResponse response)
@@ -124,17 +140,30 @@ public class Controller extends HttpServlet {
 
     protected void filtrarListaSolicitudes(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        List<Solicitud> model = new ArrayList<>();
-//        String comprobante = (String) request.getParameter("filtrado");
-//        Usuario user = (Usuario) request.getSession().getAttribute("logged");
-//
-//        if (comprobante == null) {
-//            model = obtenerListaSolicitudes(user);
-//        } else {
-//            model = this.obtenerSolicitudesPorComprobante(user, request.getParameter("filtrado"));
-//        }
-//        request.getSession().setAttribute("listaSol", model);
-//        request.getRequestDispatcher("/presentation/users/Admin/Listado.jsp").forward(request, response);
+        List<Solicitud> model = new ArrayList<>();
+        String comprobante = (String) request.getParameter("filtrado");
+        Usuario user = (Usuario) request.getSession().getAttribute("logged");
+
+        if (comprobante == null) {
+            model = obtenerListaSolicitudes(user.getId());
+        } else {
+            model = this.obtenerSolicitudesPorComprobante(user, request.getParameter("filtrado"));
+        }
+        request.getSession().setAttribute("listaSol", model);
+        request.getRequestDispatcher("/presentation/users/Registrador/Listado.jsp").forward(request, response);
+    }
+
+    protected void filtrarListaActivosPorId(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Activo> model = new ArrayList<>();
+        String id = (String) request.getParameter("filtrado");
+        if (id == null) {
+            model = obtenerListaActivosSinAsignar();
+        } else {
+            model = obtenerListaActivosSinAsignar(request.getParameter("filtrado"));
+        }
+        request.getSession().setAttribute("listaActs", model);
+        request.getRequestDispatcher("/presentation/users/Registrador/AsignacionActivos.jsp").forward(request, response);
     }
 
     protected void updateModelSolicitudId(Solicitud model, HttpServletRequest request) {
@@ -142,8 +171,7 @@ public class Controller extends HttpServlet {
     }
 
     protected List<Solicitud> obtenerSolicitudesPorComprobante(Usuario user, String comprobante) {
-        //return Model.instance().getUsuarioDAO().getSolicitudesPorComprobante(user.getId(), comprobante);
-        return null;
+        return Model.instance().getSolicitudDAO().getSolicitudesFiltradasPorRegistrador(user.getId(), comprobante);
     }
 
     protected List<Solicitud> obtenerListaSolicitudes(String idReg) {
@@ -160,6 +188,18 @@ public class Controller extends HttpServlet {
         estado.setId(4);
         sol.setEstado(estado);
         Model.instance().getSolicitudDAO().merge(sol);
+    }
+
+    protected List<Activo> obtenerListaActivosSinAsignar() {
+        return Model.instance().getActivoDAO().getActivosSinAsignar();
+    }
+
+    protected List<Activo> obtenerListaActivosSinAsignar(String id) {
+        return Model.instance().getActivoDAO().getActivosSinAsignar(id);
+    }
+
+    protected List<Funcionario> obtenerListaFuncionarios() {
+        return Model.instance().getFuncionarioDAO().getAllFuncionarios();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

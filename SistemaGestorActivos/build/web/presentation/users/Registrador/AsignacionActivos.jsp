@@ -1,11 +1,11 @@
+<%@page import="SistemaGestorActivos.Logic.Activo"%>
 <%@page import="SistemaGestorActivos.Logic.Solicitud"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
 <html>
     <head>
-        <title>Bienvenido Jefe</title>
+        <title>Asignacion de Activos a Funcionarios</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <base href="http://localhost:8080/SistemaGestorActivos/">
@@ -16,17 +16,17 @@
     <body>
         <%@ include file="/presentation/header.jsp" %>
         <br>
-        <div class="boxed bg-light text-dark boxed">
+        <div class="container boxed bg-light text-dark boxed ">
             <br>
-            <h3 class="encabezado"> Listado de Solicitudes </h3>
+            <h3 class="encabezado"> Activos sin Asignar </h3>
             <div class="container">
                 <br/>
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-10 col-lg-8">
-                        <form class="card card-sm" action="presentation/users/Jefe/comenzar_filtrado">
+                        <form class="card card-sm" action="presentation/users/Registrador/comenzar_filtrado_activos">
                             <div class="card-body row no-gutters align-items-center">
                                 <div class="col">
-                                    <input id ="filtrado" name="filtrado" class="form-control form-control-lg form-control-borderless" type="search" placeholder="Comprobante">
+                                    <input id ="filtrado" name="filtrado" class="form-control form-control-lg form-control-borderless" type="search" placeholder="Id...">
                                 </div>
                                 <!--end of col-->
                                 &nbsp;&nbsp;&nbsp;
@@ -45,29 +45,33 @@
                 <form method="POST" name="asignar" action="presentation/users/Jefe/asignar_registrador">
                     <table class="table table-bordered table-striped mb-0">
                         <tr>                
-                            <th>Numero</th>
-                            <th>Comprobante</th>
-                            <th>Fecha</th>
-                            <th>Tipo</th>
-                            <th>Registradores</th>
-                            <th>Acción</th>
+                            <th>Id</th>
+                            <th>Solicitud <br> al que pertenece</th>
+                            <th>Bien</th>
+                            <th>Categoria</th>
+                            <th>Consecutivo Asignado</th>
+                            <th>Funcionario/Dependencia/Puesto</th>
+                            <th>Accion</th>
                         </tr>
-                        <% for (Solicitud s : (List<Solicitud>) session.getAttribute("listaSol")) {%>
+                        <% for (Activo act : (List<Activo>) session.getAttribute("listaActs")) {%>
                         <tr>
-                            <td><%=s.getId()%>
-                                <input type="hidden" name="idSolicitud" value="<%=s.getId()%>">
+                            <td><%=act.getId()%>
+                                <input type="hidden" name="idActivo" value="<%=act.getId()%>">
                             </td>
-                            <td> <%=s.getComprobante()%></td>
-                            <td> <%=s.getFecha().toLocaleString().substring(0, 11)%></td>
-                            <td> <%=s.getTipo()%></td>
+                            <td><%=act.getBien().getSolicitud().getId()%> </td>
+                            <td> <%=act.getBien().getDescripcion()%></td>
+                            <td> <%=act.getCategoria().getCodigo()%></td>
+                            <td> <%=act.getConsecutivoActual()%></td>
                             <td> 
-                                <select name="<%=s.getId()%>">
-                                    <% for (Funcionario f : (List<Funcionario>) session.getAttribute("listaReg")) {%>
-                                    <option value="<%=f.getId()%>"><%=f.getNombre()%></option>
-                                    <% }%> 
+                                <select name="<%=act.getId()%>">
+                                    <% for (Funcionario f : (List<Funcionario>) session.getAttribute("listaFunc")) {%>
+                                    <option value="<%=f.getId()%>"><%=f.getNombre() + "/"
+                                            + f.getDependencia().getNombre() + "/"
+                                            + f.getPuesto().getDescripcion()%></option>
+                                        <% }%> 
                                 </select>
                             </td>
-                            <td><input type="submit" name="asignarReg" value="Asignar"></td>
+                            <td><input type="submit" name="asignarFunc" value="Asignar"></td>
                         </tr>
                         <% }%> 
                     </table>

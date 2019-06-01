@@ -35,11 +35,11 @@ function ajax(config) {
 function errorMessage(status) {
     switch (status) {
         case 404:
-            return "Categoria no encontrada";
+            return "Registro no encontrado";
         case 403:
         case 405:
             return "Usuario no autorizado";
         case 406:
-            return "Categoria duplicada";
+            return "Registro duplicado";
     }
 }

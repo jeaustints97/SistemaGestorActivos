@@ -237,7 +237,7 @@ public class UsuarioDAO extends HibernateUtil implements IBaseDao<Usuario, Strin
                 Object[] obj = (Object[]) itr.next();
                 dep.setId(Integer.parseInt(String.valueOf(obj[0])));
                 dep.setNombre(String.valueOf(obj[1]));
-                Funcionario f= new Funcionario();
+                Funcionario f = new Funcionario();
                 f.setId(String.valueOf(obj[2]));
                 dep.setFuncionario(f);
             }
