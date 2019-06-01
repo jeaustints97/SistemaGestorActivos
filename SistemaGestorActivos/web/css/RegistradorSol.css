@@ -1,0 +1,35 @@
+#engranaje{
+    width: 150px;
+    height: auto;
+}
+
+.boxed {
+    border: 1px solid lightblue;
+    margin-left: 20%;
+    margin-right: 20%;
+    alignment-adjust: middle;
+}
+
+.alinear{
+    box-sizing: border-box;
+}
+
+.ventanaSolicitudReg{
+    text-align: center;
+    margin-left: 21%;
+    margin-right: 21%;
+}
+
+.bordeInferior{
+    border-bottom: 3px solid black;
+}
+
+.tablaListado{
+    border-collapse: collapse;
+    background-color: lightblue;
+}
+
+.ladosTablaListado{
+    border-top: 2px solid blue;
+    border-bottom: 2px solid blue;
+}

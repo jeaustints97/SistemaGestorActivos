@@ -49,6 +49,37 @@
             <role-name>Admin</role-name>
         </auth-constraint>
     </security-constraint>
+    <security-constraint>
+        <display-name>Secretaria</display-name>
+        <web-resource-collection>
+            <web-resource-name>Secretaria</web-resource-name>
+            <description/>
+            <url-pattern>/presentation/users/Secretaria/Lista</url-pattern>
+            <url-pattern>/presentation/users/Secretaria/comenzar_filtrado</url-pattern>
+            <url-pattern>/presentation/users/Secretaria/verSolicitud</url-pattern>
+            <url-pattern>/presentation/users/Secretaria/Valoracion</url-pattern>
+            <url-pattern>/presentation/users/Secretaria/AprobarSolicitud</url-pattern>
+            <url-pattern>/presentation/users/Secretaria/RechazarSolicitud</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>SOCCB</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>Jefe</display-name>
+        <web-resource-collection>
+            <web-resource-name>Jefe</web-resource-name>
+            <description/>
+            <url-pattern>/presentation/users/Jefe/Asignacion</url-pattern>
+            <url-pattern>/presentation/users/Jefe/comenzar_filtrado</url-pattern>
+            <url-pattern>/presentation/users/Jefe/asignar_registrador</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>JOCCB</role-name>
+        </auth-constraint>
+    </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>SistemaGestorActivosRealm</realm-name>

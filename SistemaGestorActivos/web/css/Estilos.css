@@ -33,3 +33,37 @@
     border-top: 2px solid blue;
     border-bottom: 2px solid blue;
 }
+
+.botonCentro{
+    position:absolute;
+    top: 30%;
+    left: 45%;
+}
+
+.centrar{
+    text-align: center;
+}
+
+.botonFormatoVerde{
+    background-color: #4CAF50; /* Green */
+    border:none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.botonFormatoRojo{
+    background-color: #f44336; /* Red */
+    border:none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+}

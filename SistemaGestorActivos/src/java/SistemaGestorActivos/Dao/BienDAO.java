@@ -87,7 +87,38 @@ public class BienDAO extends HibernateUtil implements IBaseDao<Bien, Integer> {
         String sql = "select distinct b.id, b.descripcion, b. marca,b.modelo,b.precio,b.cantidad,b.solicitud\n"
                 + "from Dependencia d, Bien b,Solicitud s\n"
                 + "where " + idDependencia + " =s.dependencia and b.solicitud= " + idSolicitud + ";";
+        try {
+            iniciaOperacion();
+            listaRaw = (List<Bien>) getSesion().createSQLQuery(sql).list();
+            Iterator itr = listaRaw.iterator();
+            while (itr.hasNext()) {
+                Object[] obj = (Object[]) itr.next();
+                Bien bien = new Bien();
+                bien.setId(Integer.parseInt(String.valueOf(obj[0])));
+                bien.setDescripcion(String.valueOf(obj[1]));
+                bien.setMarca(String.valueOf(obj[2]));
+                bien.setModelo(String.valueOf(obj[3]));
+                bien.setPrecio(Float.parseFloat(String.valueOf(obj[4])));
+                bien.setCantidad(Integer.parseInt(String.valueOf(obj[5])));
+                
+                Solicitud s= new Solicitud();
+                s.setId(Integer.parseInt(String.valueOf(obj[6])));
+                bien.setSolicitud(s);
 
+                listaFinal.add(bien);
+            }
+
+        } catch (Exception ex) {
+        } finally {
+            getSesion().close();
+        }
+        return listaFinal;
+    }
+        public List<Bien> getBienesBySolicitud(int idSolicitud) {
+        List<Bien> listaRaw = null;
+        List<Bien> listaFinal = new ArrayList<>();
+        String sql = "select b.id, b.descripcion, b. marca,b.modelo,b.precio,b.cantidad,b.solicitud\n" 
+                + "from Bien b,Solicitud s where b.solicitud= " + idSolicitud + " and b.solicitud=s.id;";
         try {
             iniciaOperacion();
             listaRaw = (List<Bien>) getSesion().createSQLQuery(sql).list();

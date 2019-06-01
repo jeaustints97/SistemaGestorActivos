@@ -37,7 +37,7 @@ public class Controller extends HttpServlet {
 
     protected void SolicitudVacia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Solicitud sol = new Solicitud();
-        sol.setTipo("");
+        sol.setTipo("Compra");
         request.getSession().setAttribute("solicitud", sol);
 
         List<Bien> lb = new ArrayList<>();
