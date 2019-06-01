@@ -79,7 +79,8 @@ public class BienDAO extends HibernateUtil implements IBaseDao<Bien, Integer> {
         }
         return bienes;
     }
-
+    
+    
     public List<Bien> getBienesBySolicitud(int idDependencia, int idSolicitud) {
         List<Bien> listaRaw = null;
         List<Bien> listaFinal = new ArrayList<>();
@@ -145,4 +146,5 @@ public class BienDAO extends HibernateUtil implements IBaseDao<Bien, Integer> {
         }
         return listaFinal;
     }
+
 }

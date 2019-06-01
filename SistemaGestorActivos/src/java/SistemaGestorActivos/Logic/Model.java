@@ -217,5 +217,24 @@ public class Model {
     public void actualizarCategoria(Categoria categoria) {
         this.getCategoriaDAO().merge(categoria);
     }
+    
+    public  void agregarPuesto(Puesto puesto) {
+        this.getPuestoDAO().save(puesto);
+    }
+    
+    public Puesto ObtenerPuesto(int id){
+        return this.getPuestoDAO().findById(id);
+    }
+    
+    public void eliminarPuesto(int id){
+        this.getPuestoDAO().delete(id);
+    }
+    
+    public void actualizarPuesto(Puesto puesto){
+        this.getPuestoDAO().merge(puesto);
+    }
 
+    public List<Puesto> ObtenerPuestos(Puesto Puesto){
+        return this.getPuestoDAO().findAll();
+    }
 }

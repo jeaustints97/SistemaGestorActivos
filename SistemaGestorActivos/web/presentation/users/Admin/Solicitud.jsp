@@ -6,8 +6,20 @@
 <%@page import="SistemaGestorActivos.Logic.Solicitud"%>
 <%@page import="SistemaGestorActivos.Logic.Bien"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+
+<div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="myModalTitle">Error</h4>
+                    </div>
+                    <div class="modal-body" id="myModalMessage">
+                        <p>No se puede dejar campos vacíos.</p>
+                    </div>
+                </div>
+            </div>
+</div>
     <head>
         <title>Ingresar Solicitud</title>
         <meta charset="UTF-8">
@@ -26,7 +38,7 @@
         <div class="ventanaSolicitud">
             <form method="POST" name="nuevaSolicitud" action="presentation/users/Admin/ingresarSolicitud">
                 <br>
-                <table border=0 cellpadding=6 cellspacing=8>
+                <table border=0 name="tablasolicitud" id="tablasolicitud" cellpadding=6 cellspacing=8>
                     <tr>
                         <td colspan="6" class="bordeInferior"><h3>Nueva Solicitud</h3></td>
                     </tr>
@@ -67,20 +79,24 @@
                         <td colspan="6" class="bordeInferior"><h3>Bienes</h3></td>
                     </tr>
                     <tr>
+                        
                         <th id="labelDescripcion">Descripcion</th>
                         <th id="labelMarca">Marca</th>
                         <th id="labelModelo">Modelo</th>
                         <th id="labelPrecioU">Precio Unitario</th>
                         <th id="labelCantidad">Cantidad</th>
-                        <td></td>
+                        <td>
+                            
+                        </td>
                     </tr>
                     <tr>
-                        <td><input size=13 type="text" name="descripcion" placeholder="Descripcion" value=""></td>
-                        <td><input size=13 type="text" name="marca" placeholder="Marca" value=""></td>
-                        <td><input size=13 type="text" name="modelo" placeholder="Modelo" value=""></td>
-                        <td><input type="number" name="precioU" step="0.01" placeholder="0.0" value=""></td>
-                        <td><input type="number" name="cantidad" placeholder="0" value=""></td>
-                        <td> <input type="submit" name="agregarBien" formaction="presentation/users/Admin/agregarBien" value="Agregar"> </td>
+                        
+                        <td><input size=13 type="text" name="descripcion" id="descripcion" placeholder="Descripcion" value=""></td>
+                        <td><input size=13 type="text" name="marca" id="marca" placeholder="Marca" value=""></td>
+                        <td><input size=13 type="text" name="modelo" id="modelo" placeholder="Modelo" value=""></td>
+                        <td><input type="number" name="precioU" id="precioU" step="0.01" placeholder="0.0" value=""></td>
+                        <td><input type="number" name="cantidad" id="cantidad" placeholder="0" value=""></td>
+                        <td> <input type="submit" name="agregarBien" id="agregarBien" onclick="agregarbien();"  value="Agregar"> </td>
                     </tr>
                     <tr>
                         <td colspan="6" class="bordeInferior"><h3>Listado</h3></td>
@@ -99,7 +115,7 @@
                     </tr>
                     <% }%>
                     <tr>
-                        <td colspan="6"><br></td>
+                        <td colspan="6"> <button type="button" class="delete-row">Borrar bien</button></td>
                     </tr>
                     <tr>
                     <tr>

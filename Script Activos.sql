@@ -196,6 +196,17 @@ insert into funcionario(id,nombre,dependencia,puesto) values('9','Carlos',2,5);
 insert into funcionario(id,nombre,dependencia,puesto) values('10','Roger',3,3);
 
 -- Insertando las posibles usuarios en el sistema
+<<<<<<< HEAD
+insert into usuario(id,clave) values('1','1');
+insert into usuario(id,clave) values('2','2');
+insert into usuario(id,clave) values('3','3');
+insert into usuario(id,clave) values('4','4');
+insert into usuario(id,clave) values('5','5');
+<<<<<<< HEAD:Script-Activos.sql
+=======
+insert into usuario(id,clave) values('8','8');
+>>>>>>> 16c5f03457cbe42b3e4fd4b651e5c801d0e3fd31:Script Activos.sql
+=======
 insert into usuario(id,clave,rol) values ('1',SHA2('1', 256),1);
 insert into usuario(id,clave,rol) values ('2',SHA2('2', 256),2);
 insert into usuario(id,clave,rol) values ('3',SHA2('3', 256),3);
@@ -204,6 +215,7 @@ insert into usuario(id,clave,rol) values ('5',SHA2('5', 256),5);
 insert into usuario(id,clave,rol) values ('8',SHA2('8', 256),1);
 insert into usuario(id,clave,rol) values ('7',SHA2('7', 256),4);
 insert into usuario(id,clave,rol) values ('10',SHA2('10', 256),4);
+>>>>>>> f1f9104d67c834acb85e2160bdc1aa57a99fb2e4
 
 -- Insertando las posibles estados de la solicitud en el sistema
 insert into estado(id,descripcion) values(1,'Recibida');
@@ -228,13 +240,22 @@ values(2,'Sillas','Mesh','Ejecutivas',20000,10,2);
 insert into bien(id,descripcion,marca,modelo,precio,cantidad,solicitud) 
 values(3,'Piano','Yamaha','De cola',600000,1,3);
 
+<<<<<<< HEAD
+<<<<<<< HEAD:Script-Activos.sql
+select * from Rol;
+=======
+=======
 -- Insertando las posibles categorias en el sistema
 insert into categoria(id,codigo,descripcion,consecutivo) values (1,'SiLab','Silla de Laboratorio',1);
 insert into categoria(id,codigo,descripcion,consecutivo) values (2,'EsLab','Escritorio de Laboratorio',1);
 insert into categoria(id,codigo,descripcion,consecutivo) values (3,'ComEs','Computadora de Escritorio',1);
 insert into categoria(id,codigo,descripcion,consecutivo) values (4,'InsMu','Instrumento Musical',1);
 
+<<<<<<< HEAD
 desc categoria;
+=======
+>>>>>>> f1f9104d67c834acb85e2160bdc1aa57a99fb2e4
+>>>>>>> df5e1f51531561f579acaabca19b3cb214805e90
 update dependencia set administrador=1 where id=1;
 update dependencia set administrador=8 where id=2;
 
@@ -270,6 +291,13 @@ select distinct s.id, s.comprobante, s.fecha, s.tipo,s.cantidad,s.total,s.estado
 from Solicitud s
 where id=1;
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+update solicitud set estado="2" where id=1;
+>>>>>>> 16c5f03457cbe42b3e4fd4b651e5c801d0e3fd31:Script Activos.sql
+=======
+>>>>>>> 8484f4465a607e3527f8c386be232b3dcf09db92
+=======
 select distinct s.id, s.comprobante,s.fecha,s.tipo
 from Solicitud s
 where s.estado=2;
@@ -324,6 +352,7 @@ select a.id, b.descripcion, c.descripcion, a.consecutivoactual
 from activo a, bien b, categoria c
 where a.bien=b.id and a.categoria=c.id;
 
+<<<<<<< HEAD
 select * from categoria;
 delete from categoria where id=11;
 
@@ -361,3 +390,6 @@ and s.id=1 and a.funcionario is null and s.estado=4;
 select * 
 from solicitud
 where estado=4;
+=======
+>>>>>>> f1f9104d67c834acb85e2160bdc1aa57a99fb2e4
+>>>>>>> df5e1f51531561f579acaabca19b3cb214805e90
