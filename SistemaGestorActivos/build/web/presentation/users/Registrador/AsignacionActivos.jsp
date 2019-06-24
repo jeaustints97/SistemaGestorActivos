@@ -64,6 +64,7 @@
                             <td> <%=act.getConsecutivoActual()%></td>
                             <td> 
                                 <select name="<%=act.getId()%>">
+                                    <option value="-1" disabled>Seleccione un funcionario</option>
                                     <% for (Funcionario f : (List<Funcionario>) session.getAttribute("listaFunc")) {%>
                                     <option value="<%=f.getId()%>"><%=f.getNombre() + "/"
                                             + f.getDependencia().getNombre() + "/"

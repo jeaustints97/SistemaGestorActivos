@@ -4,7 +4,6 @@ import SistemaGestorActivos.Logic.Funcionario;
 import SistemaGestorActivos.Logic.Model;
 import SistemaGestorActivos.Logic.Solicitud;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
