@@ -70,6 +70,21 @@
                         </div>
                     </li> 
                     <% }%>
+                    
+                    
+                     <% if (request.isUserInRole("JefeRH")) { %>
+                    <li class="nav-item dropdown"> 
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Jefe recursos Humanos
+                        </a>
+                        
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="presentation/users/JefeRH/Puesto.jsp">Administrar Puestos</a>
+                             <a class="dropdown-item" href="presentation/users/JefeRH/Dependencia.jsp">Administrar Dependencias</a>
+                        </div>
+                    </li> 
+                    <% }%>
+                    
                     <li class="nav-item dropdown"> 
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <%=session.getAttribute("funcActual")%>

@@ -33,10 +33,9 @@ import javax.ws.rs.core.Context;
 public class Puestos {
     @Context
     HttpServletRequest request;
-    
+  
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    
     public void add(Puesto c){
         try{
             Model.instance().agregarPuesto(c);
@@ -51,9 +50,47 @@ public class Puestos {
     @Produces({MediaType.APPLICATION_JSON})
     public Puesto get(@PathParam("id") int id){
         try {
-            return Model.instance().ObtenerPuesto(id);
+            return Model.instance().getPuestoDAO().find(id).get(0);
         } catch (Exception e) {
             throw new NotFoundException("Error al encontrar un cliente");
         }
     }
+
+    @DELETE
+    @Path("{id}")
+    @Produces ({MediaType.APPLICATION_JSON})
+    public List<Puesto> del(@PathParam("id") int id){
+        try {
+            Model.instance().eliminarPuesto(id);
+            String all = "";
+            return Model.instance().getPuestoDAO().getPuestoPorDescripcion(all);
+        } catch (Exception e) {
+            throw new NotFoundException("Error al borrar el puesto");
+        }
+         
+    }
+    
+    @GET
+    @Produces ({MediaType.APPLICATION_JSON})
+    public List<Puesto> list(@QueryParam("descripcion") String descripcion){
+        List<Puesto> puesto;
+        puesto = Model.instance().ObtenerPuestos(descripcion);
+        return puesto;
+    }
+    
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void update(Puesto p){
+        try {
+            Model.instance().getPuestoDAO().merge(p);
+        } catch (Exception e) {
+            throw new NotFoundException("Error al actualizar");
+        }
+        
+    }
+
+
+    
+
+
 }

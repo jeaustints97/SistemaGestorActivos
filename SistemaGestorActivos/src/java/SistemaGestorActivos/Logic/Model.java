@@ -234,7 +234,60 @@ public class Model {
         this.getPuestoDAO().merge(puesto);
     }
 
-    public List<Puesto> ObtenerPuestos(Puesto Puesto){
-        return this.getPuestoDAO().findAll();
+    public List<Puesto> ObtenerPuestos(String descripcion){
+        return this.getPuestoDAO().getPuestoPorDescripcion(descripcion);
     }
+
+    public  void agregarDependencia(Dependencia dependencia) {
+        this.getDependenciaDAO().save(dependencia);
+    }
+    
+    public Dependencia ObtenerDependencia(int id){
+        return this.getDependenciaDAO().findById(id);
+    }
+    
+    public void actualizarDependencia(Dependencia dependencia){
+        this.getDependenciaDAO().merge(dependencia);
+    }
+
+    public List<Dependencia> ObtenerDependencias(String nombre){
+        return this.getDependenciaDAO().getPuestoPorNombre(nombre);
+    }
+    public List<Dependencia> ObtenerDependenciasId(int id){
+        return this.getDependenciaDAO().find(id);
+    }
+    
+    public void eliminarDependencia(int id){
+        this.getDependenciaDAO().delete(id);
+    }
+    
+    public void actualizarFuncionario(Funcionario funcionario){
+        this.getFuncionarioDAO().merge(funcionario);
+    }
+
+    public List<Funcionario> ObtenerFuncionario(String nombre){
+        return this.getFuncionarioDAO().getFuncionarioPorNombre(nombre);
+    }
+    
+    public List<Funcionario> ObtenerTodoFuncionario(){
+        return this.getFuncionarioDAO().getTodoFuncionario();
+    }
+    
+    public List<Funcionario> ObtenerFuncionariosId(int id){
+        return this.getFuncionarioDAO().findFuncionario(id);
+    }
+    
+    public  void agregarFuncionario(Funcionario funcionario) {
+        this.getFuncionarioDAO().save(funcionario);
+    }
+    
+    public Funcionario ObtenerFuncionario(int id){
+        return this.getFuncionarioDAO().findByIdFuncionario(id);
+    }
+    
+    public void eliminarFuncionario(int id){
+        this.getFuncionarioDAO().deleteFuncionario(id);
+    }
+    
+    
 }

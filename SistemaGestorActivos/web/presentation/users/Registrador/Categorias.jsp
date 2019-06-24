@@ -14,34 +14,38 @@
         <br>
 
         <!-- Modal Ingreso Categoria -->
-        <div class="modal" id="ModalInsCat">
-            <div class="modal-dialog modal-lg">
+        <div  class="modal fade" id="ModalInsCat">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-
-                    <!-- Header del Modal -->
                     <div class="modal-header">
                         <h4 class="modal-title">Ingresar Categoria</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-                    <!-- Cuerpo del Modal -->
                     <div class="modal-body">
-                        <form class="form-horizontal">
+                        <form role="form" method="POST" action="" id="formAdd">
                             <div class="form-group form-group-sm">
-                                <label class="col-sm-2 control-label" for="sm">Codigo</label>
-                                <div class="col-sm-8"><input id ="addCodigo" class="form-control" type="text" required></div>                     
-                                <label class="col-sm-2 control-label" for="sm">Descripcion</label>
-                                <div class="col-sm-8"><input id ="addDescripcion" class="form-control" type="text" required></div>                     
+                                <label class="control-label">Codigo</label>
+                                <div>
+                                    <input type="text" class="form-control input-md" name="addCodigo" id="addCodigo" value="" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Descripcion</label>
+                                <div>
+                                    <input type="text" class="form-control input-md" name="addDescripcion" id="addDescripcion" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div>
+                                    <button type="submit" class="btn btn-success" onclick="add()">Agregar</button>
+                                    <button type="submit" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+                                </div>
                             </div>
                         </form>
                     </div>
-                    <!-- Footer del Modal -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" onclick="add()">Agregar</button>
-                        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
 
         <!-- Modal Update Categoria  -->
         <div class="modal" id="ModalUpdCat">
@@ -122,6 +126,12 @@
         <%@ include file="/presentation/footer.jsp" %>
 
         <script>
+              function loaded(event){	
+                document.getElementById("ModalInsCat").addEventListener("submit",validate);  
+            }
+            function validate(event){
+                event.preventDefault();
+            }
             function list(categorias) {
                 var listado = document.getElementById("listadoCategorias");
                 listado.innerHTML = "";
@@ -142,50 +152,50 @@
             function buscar() {
                 var descrip = document.getElementById("filtrado").value;
                 ajax({type: "GET", url: "api/categorias?descripcion=" + descrip})
-                        .then(function (personas) {list(personas);},
-                              function (status) {alert(errorMessage(status));
-                    });
+                        .then(function (personas) {
+                            list(personas);
+                        },
+                                function (status) {
+                                    alert(errorMessage(status));
+                                });
             }
             function buscarTodos() {
                 var descrip = "";
                 ajax({type: "GET", url: "api/categorias?descripcion=" + descrip})
                     .then(function (personas) {list(personas);},
-                          function (status) {alert(errorMessage(status));});
-            }
-            function cleanAdd(){
-                $('.modal').on('hidden.bs.modal', function(){
-                $(this).find('form')[0].reset();
-                });
+                    function (status) {alert(errorMessage(status));});
             }
             function add() {
                 var cod = document.getElementById("addCodigo");
                 var des = document.getElementById("addDescripcion");
-                if(cod.value.length > 0 && des.value.length > 0 ){      
-                    cat = { codigo: document.getElementById("addCodigo").value,
-                            descripcion: document.getElementById("addDescripcion").value
-                          };
+                if (cod.value.length > 0 && des.value.length > 0) {
+                    cat = {codigo: document.getElementById("addCodigo").value,
+                        descripcion: document.getElementById("addDescripcion").value
+                    };
                     // se envia  al servidor
                     ajax({type: "POST", url: "api/categorias", data: JSON.stringify(cat), contentType: "application/json"})
                     .then(function () {
-                        var descrip = "";
-                        ajax({type: "GET", url: "api/categorias?descripcion=" + descrip})
-                            .then(function (personas) {list(personas);},
-                                  function (status) {alert(errorMessage(status));})})
-                    alert("Categoria agregada correctamente"); 
-                    cleanAdd();
+                            var descrip = "";
+                            ajax({type: "GET", url: "api/categorias?descripcion=" + descrip})
+                                .then(function (personas) {list(personas);});
+                    });
                     $('#ModalInsCat').modal('hide');
                     $('.modal-backdrop').remove();
+                    $('#formAdd')[0].reset();
                 }
-                else{
-                    alert("Todos los campos deben estar completos"); 
+                else {
+                    alert("Todos los campos deben estar completos");
                 }
             }
             function edit(id) {
-            // lo trae del servidor
-            ajax({type: "GET",url: "api/categorias/" + id})
-                    .then(function (categoria) {show(categoria);},
-                          function (status) { alert(errorMessage(status));
-                         });
+                // lo trae del servidor
+                ajax({type: "GET", url: "api/categorias/" + id})
+                        .then(function (categoria) {
+                            show(categoria);
+                        },
+                                function (status) {
+                                    alert(errorMessage(status));
+                                });
             }
             function show(cat) {
                 document.getElementById("updId").value = cat.id;
@@ -193,31 +203,42 @@
                 document.getElementById("updDescripcion").value = cat.descripcion;
                 document.getElementById("updConsecutivo").value = cat.consecutivo;
             }
-            function update(){
-                cat = { id:             document.getElementById("updId").value,
-                        codigo:         document.getElementById("updCodigo").value,
-                        descripcion:    document.getElementById("updDescripcion").value,
-                        consecutivo:    document.getElementById("updConsecutivo").value
-                      };
-                       // se envia  al servidor
+            function update() {
+                cat = {id: document.getElementById("updId").value,
+                    codigo: document.getElementById("updCodigo").value,
+                    descripcion: document.getElementById("updDescripcion").value,
+                    consecutivo: document.getElementById("updConsecutivo").value
+                };
+                // se envia  al servidor
                 ajax({type: "PUT", url: "api/categorias", data: JSON.stringify(cat), contentType: "application/json"})
-                .then(function () {
-                    var descrip = "";
-                    ajax({type: "GET", url: "api/categorias?descripcion=" + descrip})
-                    .then(function (personas) {list(personas);},
-                          function (status) {alert(errorMessage(status));});
-                    });
+                        .then(function () {
+                            var descrip = "";
+                            ajax({type: "GET", url: "api/categorias?descripcion=" + descrip})
+                                    .then(function (personas) {
+                                        list(personas);
+                                    },
+                                            function (status) {
+                                                alert(errorMessage(status));
+                                            });
+                        });
             }
             function del(id) {
-                ajax({type: "DELETE",url: "api/categorias/" + id})
-                    .then(function () {
-                        var descrip = "";
-                        ajax({type: "GET", url: "api/categorias?descripcion=" + descrip})
-                            .then(function (personas) {list(personas);},
-                                  function (status) {alert(errorMessage(status));})},
-                              function (status) {alert(errorMessage(status));});
+                ajax({type: "DELETE", url: "api/categorias/" + id})
+                        .then(function () {
+                            var descrip = "";
+                            ajax({type: "GET", url: "api/categorias?descripcion=" + descrip})
+                                    .then(function (personas) {
+                                        list(personas);
+                                    },
+                                            function (status) {
+                                                alert(errorMessage(status));
+                                            })
+                        },
+                                function (status) {
+                                    alert(errorMessage(status));
+                                });
             }
-            document.addEventListener("DOMContentLoaded", loaded);
+            document.addEventListener("DOMContentLoaded",loaded);
         </script>
     </body>
 </html>

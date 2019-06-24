@@ -105,6 +105,35 @@ public class PuestoDAO extends HibernateUtil implements IBaseDao<Puesto, java.ma
         return puestos;
     }
     
+    public List<Puesto> getPuestoPorDescripcion( String descripcion){
+        List<Puesto> puestoRaw = null;
+        List<Puesto> puestoFinal = new ArrayList<>();
+        String sql = "select id, descripcion from puesto where descripcion like '%%" + descripcion + "%';";
+        
+        try {
+            iniciaOperacion();
+            puestoRaw = (List<Puesto>) getSesion().createSQLQuery(sql).list();
+            Iterator itr = puestoRaw.iterator();
+            
+            while(itr.hasNext()){
+            
+                Object[] obj = (Object[]) itr.next();
+                Puesto pst = new Puesto();
+                
+                pst.setId(Integer.parseInt(String.valueOf(obj[0])));
+                pst.setDescripcion(String.valueOf(obj[1]));
+                puestoFinal.add(pst);
+            }
+        } catch (HibernateException he) {
+            manejaExcepcion(he);
+            throw he;
+        }
+        finally{
+            getSesion().close();
+        }
+        return puestoFinal;
+    }
+    
     public List<Puesto> find(int id){
     List<Puesto> puestoRaw = null;
     List<Puesto> puestoFinal = new ArrayList<>();
